@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function MainPage() {
   return (
@@ -9,9 +10,10 @@ export default function MainPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>GraphQL Playground</h1>
-      </main>
+      <div>
+        <h1>GraphQL App</h1>
+        <Link href="/playground">Go to Playground page</Link>
+      </div>
     </>
   );
 }
