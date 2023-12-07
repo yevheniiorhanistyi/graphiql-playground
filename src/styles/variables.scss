@@ -1,0 +1,9 @@
+:root {
+  --bg-page: #f2f2f3;
+  --font-main-color: #000000;
+}
+
+:root[class='dark'] {
+  --bg-page: #454545;
+  --font-main-color: #f8f7f7;
+}
