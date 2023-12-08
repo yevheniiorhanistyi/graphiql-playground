@@ -6,11 +6,6 @@ import LangButton from '../LanguageButton/LanguageButton';
 import styles from './Nav.module.scss';
 import Link from 'next/link';
 
-const navLinks = [
-  { label: 'Sign In', href: '/' },
-  { label: 'Sign Out', href: '/' },
-];
-
 const Nav: FC = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
 
@@ -21,11 +16,12 @@ const Nav: FC = () => {
   return (
     <nav className={styles.nav}>
       <LangButton isPopoverOpen={isPopoverOpen} onClickLanguageBtn={onClickLanguageBtn} />
-      {navLinks.map((link) => (
-        <Link href={link.href} key={link.label} className={styles.link}>
-          <span className={styles.label}>{link.label}</span>
-        </Link>
-      ))}
+      <Link href="/" className={styles.item}>
+        <span className={styles.item_label}>Sign In</span>
+      </Link>
+      <button className={styles.item}>
+        <span className={styles.item_label}>Sign Out</span>
+      </button>
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
         onClick={() => setPopoverOpen(false)}
