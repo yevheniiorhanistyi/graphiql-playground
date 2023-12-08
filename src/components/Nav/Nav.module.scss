@@ -10,17 +10,17 @@
   }
 }
 
-.link {
+.item {
   text-align: center;
   width: 108px;
   height: 26px;
   padding: 2px 5px;
   background-color: var(--bg-button);
-}
 
-.label {
-  font-size: 1.4rem;
-  color: var(--font-accent-color);
+  &_label {
+    font-size: 1.4rem;
+    color: var(--font-accent-color);
+  }
 }
 
 .backdrop {
