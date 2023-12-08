@@ -9,10 +9,10 @@ type LangButtonProps = {
   onClickLanguageBtn: () => void;
 };
 
-interface LanguageItemProps {
+type LanguageItemProps = {
   flagSrc: string;
   languageText: string;
-}
+};
 
 const LanguageItem: FC<LanguageItemProps> = ({ flagSrc, languageText }) => {
   const onClickLanguageItem = (e: MouseEvent<HTMLLIElement>) => {
