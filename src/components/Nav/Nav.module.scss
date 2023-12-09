@@ -1,0 +1,41 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 280px;
+
+  @media (max-width: $mobile-screen) {
+    margin: 0 auto;
+  }
+}
+
+.item {
+  text-align: center;
+  width: 108px;
+  height: 26px;
+  padding: 2px 5px;
+  background-color: var(--bg-button);
+
+  &_label {
+    font-size: 1.4rem;
+    color: var(--font-accent-color);
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+
+  &_show {
+    opacity: 0.4;
+    visibility: visible;
+  }
+}
