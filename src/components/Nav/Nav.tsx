@@ -4,7 +4,8 @@ import cn from 'classnames';
 import LangButton from '../LanguageButton/LanguageButton';
 
 import styles from './Nav.module.scss';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Routes, URL_Queries } from '@/constants/enums';
 
 const Nav: FC = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -13,14 +14,20 @@ const Nav: FC = () => {
     setPopoverOpen(!isPopoverOpen);
   };
 
+  const router = useRouter();
+
+  const handleAuth = (value: string) => {
+    router.push({ pathname: Routes.AUTH_PAGE, query: { form: value } });
+  };
+
   return (
     <nav className={styles.nav}>
       <LangButton isPopoverOpen={isPopoverOpen} onClickLanguageBtn={onClickLanguageBtn} />
-      <Link href="/" className={styles.item}>
+      <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
         <span className={styles.item_label}>Sign In</span>
-      </Link>
-      <button className={styles.item}>
-        <span className={styles.item_label}>Sign Out</span>
+      </button>
+      <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
+        <span className={styles.item_label}>Sign Up</span>
       </button>
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
