@@ -65,7 +65,10 @@
   font-size: 1.4rem;
   font-weight: 500;
   color: var(--font-main-color);
-  margin: 10px 0;
+
+  @media (max-width: $laptop-screen) {
+    margin: 10px 0;
+  }
 }
 
 .logo {
