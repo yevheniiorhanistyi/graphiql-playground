@@ -5,9 +5,23 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from './index.module.scss';
 import Link from 'next/link';
+import { useAuthContext } from '@/context/AuthContext';
+import { useEffect } from 'react';
 
 export default function AuthPage() {
   const router = useRouter();
+
+  const user = useAuthContext();
+
+  useEffect(() => {
+    if (user) {
+      router.push({ pathname: Routes.WELCOME_PAGE });
+    }
+    if (!router.query.form) {
+      router.push({ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNIN } });
+    }
+  }, [router, user]);
+
   const query = router.query;
 
   return (
