@@ -1,4 +1,5 @@
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import styles from './Input.module.scss';
 
 type InputProps<T extends FieldValues> = {
   register: UseFormRegister<T>;
@@ -18,13 +19,21 @@ const Input = <T extends FieldValues>({
   errors,
 }: InputProps<T>) => {
   return (
-    <>
-      <div>
-        <label htmlFor={name}>{label}</label>
-        <input {...register(name as Path<T>)} type={type} name={name} security={security} />
+    <div className={styles.input_content}>
+      <div className={styles.input_content}>
+        <label htmlFor={name} className={styles.input_label}>
+          {label}
+        </label>
+        <input
+          {...register(name as Path<T>)}
+          className={styles.input_field}
+          type={type}
+          name={name}
+          security={security}
+        />
       </div>
-      <p>{errors}</p>
-    </>
+      {!!errors.length && <p className={styles.input_error}>{errors}</p>}
+    </div>
   );
 };
 

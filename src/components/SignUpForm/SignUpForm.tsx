@@ -7,13 +7,14 @@ import Input from '../Input/Input';
 import { useRouter } from 'next/router';
 import { Routes } from '@/constants/enums';
 import signUp from '@/utils/firebase/auth/signUp';
+import Button from '../Button/Button';
 
 const SignUpForm = () => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm({
     mode: 'onChange',
@@ -35,12 +36,12 @@ const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form_container" onSubmit={handleSubmit(onSubmit)}>
       <Input<signUpFormInterface>
         register={register}
         name="email"
         type="email"
-        label="Email"
+        label="Email: "
         errors={errors.email?.message || ''}
       />
 
@@ -48,7 +49,7 @@ const SignUpForm = () => {
         register={register}
         name="password"
         type="password"
-        label="Password"
+        label="Password: "
         security="true"
         errors={errors.password?.message || ''}
       />
@@ -57,12 +58,12 @@ const SignUpForm = () => {
         register={register}
         name="passwordConfirmation"
         type="password"
-        label="Password confirmation"
+        label="Confirm password: "
         security="true"
         errors={errors.passwordConfirmation?.message || ''}
       />
 
-      <button type="submit">Submit</button>
+      <Button text="Submit" type="submit" disabled={!isValid} />
     </form>
   );
 };

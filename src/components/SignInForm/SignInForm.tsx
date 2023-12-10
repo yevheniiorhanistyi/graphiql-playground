@@ -6,13 +6,14 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import signIn from '@/utils/firebase/auth/signIn';
+import Button from '../Button/Button';
 
 const SignInForm = () => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm<signInFormInterface>({
     mode: 'onChange',
@@ -34,12 +35,12 @@ const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form_container" onSubmit={handleSubmit(onSubmit)}>
       <Input<signInFormInterface>
         register={register}
         name="email"
         type="email"
-        label="Email"
+        label="Email:"
         errors={errors.email?.message || ''}
       />
 
@@ -47,12 +48,11 @@ const SignInForm = () => {
         register={register}
         name="password"
         type="password"
-        label="Password"
+        label="Password:"
         security="true"
         errors={errors.password?.message || ''}
       />
-
-      <button type="submit">Submit</button>
+      <Button text="Submit" type="submit" disabled={!isValid} />
     </form>
   );
 };
