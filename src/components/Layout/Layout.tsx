@@ -11,7 +11,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <AuthContextProvider>
       <Header />
-      <main>{children}</main>
+      <main className="wrapper">{children}</main>
       <Footer />
     </AuthContextProvider>
   );
