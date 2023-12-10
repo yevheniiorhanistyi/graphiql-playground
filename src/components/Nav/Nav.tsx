@@ -1,21 +1,25 @@
 import { FC, useState } from 'react';
+import Link from 'next/link';
 import cn from 'classnames';
 
 import LangButton from '../LanguageButton/LanguageButton';
 
 import styles from './Nav.module.scss';
-import Link from 'next/link';
 
 const Nav: FC = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
 
-  const onClickLanguageBtn = () => {
-    setPopoverOpen(!isPopoverOpen);
+  const handleOpen = () => {
+    setPopoverOpen(true);
+  };
+
+  const handleClose = () => {
+    setPopoverOpen(false);
   };
 
   return (
     <nav className={styles.nav}>
-      <LangButton isPopoverOpen={isPopoverOpen} onClickLanguageBtn={onClickLanguageBtn} />
+      <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
       <Link href="/" className={styles.item}>
         <span className={styles.item_label}>Sign In</span>
       </Link>
@@ -24,7 +28,7 @@ const Nav: FC = () => {
       </button>
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
-        onClick={() => setPopoverOpen(false)}
+        onClick={handleClose}
         role="button"
         tabIndex={0}
         data-testid="backdrop"
