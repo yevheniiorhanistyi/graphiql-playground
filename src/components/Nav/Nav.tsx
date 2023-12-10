@@ -10,8 +10,12 @@ import { Routes, URL_Queries } from '@/constants/enums';
 const Nav: FC = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
 
-  const onClickLanguageBtn = () => {
-    setPopoverOpen(!isPopoverOpen);
+  const handleOpen = () => {
+    setPopoverOpen(true);
+  };
+
+  const handleClose = () => {
+    setPopoverOpen(false);
   };
 
   const router = useRouter();
@@ -22,7 +26,7 @@ const Nav: FC = () => {
 
   return (
     <nav className={styles.nav}>
-      <LangButton isPopoverOpen={isPopoverOpen} onClickLanguageBtn={onClickLanguageBtn} />
+      <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
       <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
         <span className={styles.item_label}>Sign In</span>
       </button>
@@ -31,7 +35,7 @@ const Nav: FC = () => {
       </button>
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
-        onClick={() => setPopoverOpen(false)}
+        onClick={handleClose}
         role="button"
         tabIndex={0}
         data-testid="backdrop"

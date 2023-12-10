@@ -24,15 +24,21 @@ const Header = () => {
     };
   }, []);
 
-  const headerClasses = cn(styles.header_wrapper, { [styles.sticky]: isSticky });
-
   return (
-    <header className={headerClasses}>
-      <Link className={styles.logoLink} href="/">
-        <Image className={styles.appLogo} width={32} height={32} src={logoSrc} alt="Graphql logo" />
-        <h2 className={styles.appName}>GraphiQL</h2>
-      </Link>
-      <Nav />
+    <header className={cn(styles.header, { [styles.sticky]: isSticky })}>
+      <div className={cn(styles.header_wrapper, 'wrapper')}>
+        <Link className={styles.logoLink} href="/">
+          <Image
+            className={styles.appLogo}
+            width={32}
+            height={32}
+            src={logoSrc}
+            alt="Graphql logo"
+          />
+          <h2 className={styles.appName}>GraphiQL</h2>
+        </Link>
+        <Nav />
+      </div>
     </header>
   );
 };

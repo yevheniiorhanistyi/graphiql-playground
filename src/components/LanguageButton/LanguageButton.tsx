@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC, MouseEvent, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
 
@@ -6,37 +6,50 @@ import styles from './LanguageButton.module.scss';
 
 type LangButtonProps = {
   isPopoverOpen: boolean;
-  onClickLanguageBtn: () => void;
+  handleOpen: () => void;
+  handleClose: () => void;
 };
 
-type LanguageItemProps = {
-  flagSrc: string;
-  languageText: string;
-};
-
-const LanguageItem: FC<LanguageItemProps> = ({ flagSrc, languageText }) => {
-  const onClickLanguageItem = (e: MouseEvent<HTMLLIElement>) => {
-    e.stopPropagation();
-  };
-
-  return (
-    <li className={styles.langPopover_item} onClick={onClickLanguageItem}>
-      <Image className={styles.flagIcon} width={28} height={20} src={flagSrc} alt="Language" />
-      <span className={styles.languageText}>{languageText}</span>
-    </li>
-  );
-};
-
-const LangButton: FC<LangButtonProps> = ({ isPopoverOpen, onClickLanguageBtn }) => {
+const LangButton: FC<LangButtonProps> = ({ isPopoverOpen, handleOpen, handleClose }) => {
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
   const langEnSrc = '/en_flag.jpg';
   const langRuSrc = '/ru_flag.jpg';
 
+  const onItemClick = (e: MouseEvent<HTMLLIElement>, language: string) => {
+    e.stopPropagation();
+    setSelectedLanguage(language);
+    handleClose();
+  };
+
   return (
-    <button className={styles.langBtn} type="button" onClick={onClickLanguageBtn}>
-      <Image width={38} height={24} src={langEnSrc} alt="Language" />
+    <button className={styles.langBtn} type="button" onClick={handleOpen}>
+      <Image
+        width={38}
+        height={24}
+        src={selectedLanguage === 'English' ? langEnSrc : langRuSrc}
+        alt="Language"
+      />
       <ul className={cn(styles.langPopover, { [styles.openPopover]: isPopoverOpen })}>
-        <LanguageItem flagSrc={langEnSrc} languageText="English" />
-        <LanguageItem flagSrc={langRuSrc} languageText="Russian" />
+        <li className={styles.langPopover_item} onClick={(e) => onItemClick(e, 'English')}>
+          <Image
+            className={styles.flagIcon}
+            width={28}
+            height={20}
+            src={langEnSrc}
+            alt="Language"
+          />
+          <span className={styles.languageText}>English</span>
+        </li>
+        <li className={styles.langPopover_item} onClick={(e) => onItemClick(e, 'Russian')}>
+          <Image
+            className={styles.flagIcon}
+            width={28}
+            height={20}
+            src={langRuSrc}
+            alt="Language"
+          />
+          <span className={styles.languageText}>Russian</span>
+        </li>
       </ul>
     </button>
   );
