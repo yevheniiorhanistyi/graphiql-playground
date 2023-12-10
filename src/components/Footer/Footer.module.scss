@@ -10,6 +10,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: $mobile-screen) {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
 }
 
 .innerBox {
@@ -66,8 +71,8 @@
 .logo {
   display: flex;
   justify-content: center;
-  width: 80px;
-  height: 35px;
+  width: 100px;
+  height: 40px;
   margin: 10px 0;
 
   fill: var(--font-main-color);
