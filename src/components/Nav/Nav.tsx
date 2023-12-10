@@ -53,14 +53,14 @@ const Nav: FC = () => {
           </button>
         </>
       ) : (
-        <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
-          <span className={styles.item_label}>Sign In</span>
-        </button>
-      )}
-      {!user && (
-        <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
-          <span className={styles.item_label}>Sign Up</span>
-        </button>
+        <>
+          <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
+            <span className={styles.item_label}>Sign In</span>
+          </button>
+          <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
+            <span className={styles.item_label}>Sign Up</span>
+          </button>
+        </>
       )}
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
