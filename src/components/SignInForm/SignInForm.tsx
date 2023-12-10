@@ -1,28 +1,27 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
-import { signUpFormSchema } from '@/utils/FormsSchema';
-import { signUpFormInterface } from '@/interfaces/formInterfaces';
-import Input from '../Input/Input';
-import { useRouter } from 'next/router';
 import { Routes } from '@/constants/enums';
-import signUp from '@/utils/firebase/auth/signUp';
+import { signInFormInterface } from '@/interfaces/formInterfaces';
+import { signInFormSchema } from '@/utils/FormsSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import Input from '../Input/Input';
+import signIn from '@/utils/firebase/auth/signIn';
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<signInFormInterface>({
     mode: 'onChange',
-    resolver: yupResolver(signUpFormSchema),
+    resolver: yupResolver(signInFormSchema),
   });
 
-  const onSubmit = async (data: signUpFormInterface) => {
+  const onSubmit = async (data: signInFormInterface) => {
     console.log(data);
-    const { result, error } = await signUp(data.email, data.password);
+    const { result, error } = await signIn(data.email, data.password);
     console.log('result ', result, 'error ', error);
 
     if (!error) {
@@ -36,7 +35,7 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Input<signUpFormInterface>
+      <Input<signInFormInterface>
         register={register}
         name="email"
         type="email"
@@ -44,7 +43,7 @@ const SignUpForm = () => {
         errors={errors.email?.message || ''}
       />
 
-      <Input<signUpFormInterface>
+      <Input<signInFormInterface>
         register={register}
         name="password"
         type="password"
@@ -53,18 +52,9 @@ const SignUpForm = () => {
         errors={errors.password?.message || ''}
       />
 
-      <Input<signUpFormInterface>
-        register={register}
-        name="passwordConfirmation"
-        type="password"
-        label="Password confirmation"
-        security="true"
-        errors={errors.passwordConfirmation?.message || ''}
-      />
-
       <button type="submit">Submit</button>
     </form>
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
