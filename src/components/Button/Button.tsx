@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './Button.module.scss';
 
 type ButtonType = {
-  text: string;
+  text: string | ReactNode;
   type: 'submit' | 'reset' | 'button';
   disabled: boolean;
   action?: () => void;

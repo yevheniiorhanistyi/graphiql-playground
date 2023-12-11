@@ -7,9 +7,14 @@ import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import signIn from '@/utils/firebase/auth/signIn';
 import Button from '../Button/Button';
+import { useState } from 'react';
+import { Loader } from '../Loader/Loader';
 
 const SignInForm = () => {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -21,6 +26,8 @@ const SignInForm = () => {
   });
 
   const onSubmit = async (data: signInFormInterface) => {
+    setIsLoading(true);
+
     const { result, error } = await signIn(data.email, data.password);
     console.log('result ', result, 'error ', error);
 
@@ -29,6 +36,8 @@ const SignInForm = () => {
 
       reset();
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -49,7 +58,7 @@ const SignInForm = () => {
         security="true"
         errors={errors.password?.message || ''}
       />
-      <Button text="Submit" type="submit" disabled={!isValid} />
+      <Button text={isLoading ? <Loader /> : 'Submit'} type="submit" disabled={!isValid} />
     </form>
   );
 };

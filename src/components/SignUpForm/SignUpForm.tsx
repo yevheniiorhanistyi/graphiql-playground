@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useState } from 'react';
 import { signUpFormSchema } from '@/utils/FormsSchema';
 import { signUpFormInterface } from '@/interfaces/formInterfaces';
 import Input from '../Input/Input';
@@ -8,9 +8,13 @@ import { useRouter } from 'next/router';
 import { Routes } from '@/constants/enums';
 import signUp from '@/utils/firebase/auth/signUp';
 import Button from '../Button/Button';
+import { Loader } from '../Loader/Loader';
 
 const SignUpForm = () => {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -22,6 +26,8 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (data: signUpFormInterface) => {
+    setIsLoading(true);
+
     const { result, error } = await signUp(data.email, data.password);
     console.log('result ', result, 'error ', error);
 
@@ -30,6 +36,8 @@ const SignUpForm = () => {
 
       reset();
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -60,7 +68,7 @@ const SignUpForm = () => {
         errors={errors.passwordConfirmation?.message || ''}
       />
 
-      <Button text="Submit" type="submit" disabled={!isValid} />
+      <Button text={isLoading ? <Loader /> : 'Submit'} type="submit" disabled={!isValid} />
     </form>
   );
 };
