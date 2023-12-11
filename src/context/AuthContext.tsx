@@ -28,13 +28,11 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
       } else {
         setAuthUser(null);
       }
+      setIsLoading(false);
     });
-    setIsLoading(false);
 
     return () => unsubscribe();
   }, [auth]);
-
-  console.log('user from provider ', authUser);
 
   const authContextValue = {
     authUser,
@@ -43,7 +41,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      {isLoading ? null : children}
+      {isLoading ? <p>LOADING...</p> : children}
     </AuthContext.Provider>
   );
 };
