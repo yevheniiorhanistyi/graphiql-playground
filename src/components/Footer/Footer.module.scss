@@ -1,7 +1,7 @@
 @import '../../styles/keyframes/keyframes.scss';
 
 .footer {
-  padding: 7px 10px;
+  padding: 7px 1rem;
   border-top: 1px solid var(--border-color);
   background-color: var(--bg-page);
 }
@@ -67,16 +67,16 @@
   color: var(--font-main-color);
 
   @media (max-width: $laptop-screen) {
-    margin: 10px 0;
+    margin: 1rem 0;
   }
 }
 
 .logo {
   display: flex;
   justify-content: center;
-  width: 100px;
-  height: 40px;
-  margin: 10px 0;
+  width: 10rem;
+  height: 4rem;
+  margin: 1rem 0;
 
   fill: var(--font-main-color);
 
