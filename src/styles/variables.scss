@@ -1,6 +1,6 @@
 :root {
-  --bg-page: #FAFAFA;  //'основной цвет бэграунда, заднего фона
-  --bg-secondary-page: #EAEAEB;  //цвет фона второстепенный, используется с bg-page
+  --bg-page: #FAFAFA; //'основной цвет бэграунда, заднего фона
+  --bg-secondary-page: #EAEAEB; //цвет фона второстепенный, используется с bg-page
   --bg-modal: #FAFAFA; //бэграунд модальных окон;
   --font-modal: #D1D4D7;  //цвет шрифта модальных окон, цвет бордера модальных окон
   --border-color: #D1D4D7;  //цвет бордера между --bg-page и --bg-secondary-page
@@ -11,9 +11,10 @@
   --bg-hover: #DEDEE1;   //цвет фона при наведении на ссылки.кнопки (кроме bg-button)
   --bg-input: #F3F3F4;   //цвет фона инпута
   --bg-button: #A626A4;   //используется для бэграунда кнопок
-  --bg-button-hover: #9E60B1;   //используется для hover бэграунда кнопок
+  --bg-button-hover: #B650B5;   //используется для hover бэграунда кнопок
   --bg-button-disable: #4f4f4f;   //используется для бэграунда неактивныхкнопок
   --font-main-color: #444444;   //цвет основного шрифта
+  --font-main-color-hover: #2B2B2B; //цвет основного шрифта при наведении
   --font-accent-color: #FFFFFF;   //цвет для текста кнопок c bg-color
   --success-color: #0C5703;   //цвет текста ошибки
   --error-color: #CB0000;   //цвет текста ошибки
@@ -35,6 +36,7 @@
   --bg-button-hover: #A669BC;   //используется для hover бэграунда кнопок
   --bg-button-disable: #4f4f4f;   //используется для бэграунда неактивныхкнопок
   --font-main-color: #BBBBBB;   //цвет основного шрифта
+  --font-main-color-hover: #D5D5D5; //цвет основного шрифта при наведении
   --font-accent-color: #FFFFFF;   //цвет для текста кнопок c bg-color
   --success-color: #0C5703;
   --error-color: #CB0000;   //цвет текста ошибки

@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import cn from 'classnames';
 
 import LangButton from '../LanguageButton/LanguageButton';
+import BasicButton from '../common/BasicButton/BasicButton';
 
 import styles from './Nav.module.scss';
 import { useRouter } from 'next/router';
@@ -45,24 +46,32 @@ const Nav: FC = () => {
       {authUser ? (
         <>
           {router.pathname !== `/${Routes.PLAYGROUND_PAGE}` && (
-            <button className={styles.item} onClick={navToPlayground}>
-              <span className={styles.item_label}>Playground</span>
-            </button>
+            <BasicButton onClick={navToPlayground}>Playground</BasicButton>
+            // <button className={styles.item} onClick={navToPlayground}>
+            //   <span className={styles.item_label}>Playground</span>
+            // </button>
           )}
-          <button className={styles.item} onClick={handleSignOut}>
+          <BasicButton onClick={handleSignOut}>Sign Out</BasicButton>
+          {/* <button className={styles.item} onClick={handleSignOut}>
             <span className={styles.item_label}>Sign Out</span>
-          </button>
+          </button> */}
         </>
       ) : (
         <>
-          <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
+          <BasicButton onClick={() => handleAuth(URL_Queries.SIGNIN)}>Sign In</BasicButton>
+          {/* <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
             <span className={styles.item_label}>Sign In</span>
-          </button>
-          <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
+          </button> */}
+          <BasicButton onClick={() => handleAuth(URL_Queries.SIGNUP)}>Sign Up</BasicButton>
+          {/* <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
             <span className={styles.item_label}>Sign Up</span>
-          </button>
+          </button> */}
         </>
       )}
+      {/* <Link href="/" className={styles.link}>
+        <BasicButton>Sign In</BasicButton>
+      </Link>
+      <BasicButton>Sign Out</BasicButton> */}
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
         onClick={handleClose}

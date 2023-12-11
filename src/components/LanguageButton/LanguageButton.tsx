@@ -12,8 +12,8 @@ type LangButtonProps = {
 
 const LangButton: FC<LangButtonProps> = ({ isPopoverOpen, handleOpen, handleClose }) => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
-  const langEnSrc = '/en_flag.jpg';
-  const langRuSrc = '/ru_flag.jpg';
+  const langEnSrc = '/en_flag.svg';
+  const langRuSrc = '/ru_flag.svg';
 
   const onItemClick = (e: MouseEvent<HTMLLIElement>, language: string) => {
     e.stopPropagation();
