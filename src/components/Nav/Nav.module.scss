@@ -1,7 +1,7 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 
   @media (max-width: $mobile-screen) {
     margin: 0 auto;
@@ -14,8 +14,8 @@
 
 .item {
   text-align: center;
-  width: 108px;
-  height: 26px;
+  width: 10.8rem;
+  height: 2.6rem;
   padding: 2px 5px;
   background-color: var(--bg-button);
   transition: background-color .2s linear;
