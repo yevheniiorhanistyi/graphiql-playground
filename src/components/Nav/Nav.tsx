@@ -3,6 +3,7 @@ import Link from 'next/link';
 import cn from 'classnames';
 
 import LangButton from '../LanguageButton/LanguageButton';
+import BasicButton from '../common/BasicButton/BasicButton';
 
 import styles from './Nav.module.scss';
 
@@ -20,12 +21,10 @@ const Nav: FC = () => {
   return (
     <nav className={styles.nav}>
       <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
-      <Link href="/" className={styles.item}>
-        <span className={styles.item_label}>Sign In</span>
+      <Link href="/" className={styles.link}>
+        <BasicButton>Sign In</BasicButton>
       </Link>
-      <button className={styles.item}>
-        <span className={styles.item_label}>Sign Out</span>
-      </button>
+      <BasicButton>Sign Out</BasicButton>
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
         onClick={handleClose}
