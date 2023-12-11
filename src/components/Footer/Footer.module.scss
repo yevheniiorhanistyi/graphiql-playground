@@ -83,3 +83,7 @@
     animation-iteration-count: 1;
   }
 }
+
+:root[class='dark'] .logo {
+  filter: invert(1);
+}
