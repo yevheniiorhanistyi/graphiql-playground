@@ -1,9 +1,7 @@
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 280px;
+  gap: 10px;
 
   @media (max-width: $mobile-screen) {
     margin: 0 auto;
@@ -16,6 +14,11 @@
   height: 26px;
   padding: 2px 5px;
   background-color: var(--bg-button);
+  transition: background-color .2s linear;
+
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
 
   &_label {
     font-size: 1.4rem;
