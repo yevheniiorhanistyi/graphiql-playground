@@ -1,8 +1,9 @@
 .header_wrapper {
   display: flex;
   justify-content: center;
+  background-color: var(--bg-page);
 
   @media screen and (max-width: $extra-large-screen) {
-    background-color: red;
+    background-color: var(--bg-page);
   }
 }

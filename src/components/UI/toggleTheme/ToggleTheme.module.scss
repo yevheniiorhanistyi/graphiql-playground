@@ -1,0 +1,14 @@
+.toggleTheme {
+  margin: auto, 0;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0;
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--invert-bg-page);
+
+  svg {
+    display: block;
+    margin: auto;
+  }
+}
