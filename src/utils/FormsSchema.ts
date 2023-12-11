@@ -5,7 +5,10 @@ export const signInFormSchema = yup.object().shape({
     .string()
     .required('Please enter e-mail')
     .matches(/^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$/g, 'Please enter e-mail in valid format'),
-  password: yup.string().required('Please enter password'),
+  password: yup
+    .string()
+    .required('Please enter password')
+    .min(8, 'Password should be more than 8 characters'),
 });
 
 export const signUpFormSchema = signInFormSchema.shape({

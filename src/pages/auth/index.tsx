@@ -10,19 +10,23 @@ import { useEffect } from 'react';
 
 export default function AuthPage() {
   const router = useRouter();
+  const query = router.query;
 
-  const user = useAuthContext();
+  const { authUser, isLoading } = useAuthContext();
 
   useEffect(() => {
-    if (user) {
-      router.push({ pathname: Routes.WELCOME_PAGE });
+    console.log('auth use effect 1');
+    if (authUser) {
+      router.push({ pathname: Routes.PLAYGROUND_PAGE });
     }
-    if (!router.query.form) {
+  }, [authUser, router]);
+
+  useEffect(() => {
+    console.log('auth use effect 2');
+    if (!authUser && !isLoading && !query.form) {
       router.push({ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNIN } });
     }
-  }, [router, user]);
-
-  const query = router.query;
+  }, [authUser, isLoading, query.form, router]);
 
   return (
     <>
@@ -36,7 +40,7 @@ export default function AuthPage() {
         {query.form === URL_Queries.SIGNUP && (
           <>
             <div className={styles.form_content}>
-              <h3>Enter enter email and password to Sign In</h3>
+              <h3>Enter enter email and password to Sign Up</h3>
               <SignUpForm />
             </div>
             <p>
@@ -53,7 +57,7 @@ export default function AuthPage() {
         {query.form === URL_Queries.SIGNIN && (
           <>
             <div className={styles.form_content}>
-              <h3>Enter enter email and password to Sign Up</h3>
+              <h3>Enter enter email and password to Sign In</h3>
               <SignInForm />
             </div>
             <p>

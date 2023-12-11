@@ -22,7 +22,8 @@ const Nav: FC = () => {
 
   const router = useRouter();
 
-  const user = useAuthContext();
+  // console.log('context from nav');
+  const { authUser } = useAuthContext();
 
   const handleAuth = (value: string) => {
     router.push({ pathname: Routes.AUTH_PAGE, query: { form: value } });
@@ -41,7 +42,7 @@ const Nav: FC = () => {
   return (
     <nav className={styles.nav}>
       <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
-      {user ? (
+      {authUser ? (
         <>
           {router.pathname !== `/${Routes.PLAYGROUND_PAGE}` && (
             <button className={styles.item} onClick={navToPlayground}>
