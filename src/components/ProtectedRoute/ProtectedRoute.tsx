@@ -3,6 +3,7 @@ import { Routes, URL_Queries } from '@/constants/enums';
 import { useAuthContext } from '@/context/AuthContext';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import MainLoader from '../MainLoader/MainLoader';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     }
   }, [isLoading]);
 
-  return <div>{isLoading ? <p>LOADING...</p> : children}</div>;
+  return <div>{isLoading ? <MainLoader /> : children}</div>;
 };
 
 export default ProtectedRoute;

@@ -1,3 +1,4 @@
+import MainLoader from '@/components/MainLoader/MainLoader';
 import firebase_app from '@/utils/firebase/config';
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { FC, ReactNode, createContext, useContext, useEffect, useState } from 'react';
@@ -41,7 +42,13 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      {isLoading ? <p className="wrapper">LOADING...</p> : children}
+      {isLoading ? (
+        <div className="wrapper">
+          <MainLoader />
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };
