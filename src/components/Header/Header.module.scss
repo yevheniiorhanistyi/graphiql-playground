@@ -25,6 +25,15 @@
    display: flex;
    align-items: center;
 
+   &:hover {
+
+     .appLogo,
+     .appName {
+       color: var(--font-main-color-hover);
+       fill: var(--font-main-color-hover);
+     }
+   }
+
    @media (max-width: $mobile-screen) {
      flex-direction: column;
    }
@@ -33,9 +42,13 @@
      width: 32px;
      height: 32px;
      margin-right: 5px;
+
+     fill: var(--font-main-color);
+     transition: fill .2s linear;
    }
 
    .appName {
      color: var(--font-main-color);
+     transition: color .2s linear
    }
  }
