@@ -23,7 +23,7 @@ export default function AuthPage() {
         {query.form === URL_Queries.SIGNUP && (
           <>
             <div className={styles.form_content}>
-              <h3>Enter enter email and password to Sign Up</h3>
+              <h3>Enter email and password to Sign Up</h3>
               <SignUpForm />
             </div>
             <p>
@@ -40,7 +40,7 @@ export default function AuthPage() {
         {query.form === URL_Queries.SIGNIN && (
           <>
             <div className={styles.form_content}>
-              <h3>Enter enter email and password to Sign In</h3>
+              <h3>Enter email and password to Sign In</h3>
               <SignInForm />
             </div>
             <p>

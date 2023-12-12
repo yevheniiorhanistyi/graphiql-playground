@@ -7,8 +7,8 @@ import Input from '../Input/Input';
 import { useRouter } from 'next/router';
 import { Routes } from '@/constants/enums';
 import signUp from '@/utils/firebase/auth/signUp';
-import Button from '../Button/Button';
 import { Loader } from '../Loader/Loader';
+import BasicButton from '../common/BasicButton/BasicButton';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -68,7 +68,9 @@ const SignUpForm = () => {
         errors={errors.passwordConfirmation?.message || ''}
       />
 
-      <Button text={isLoading ? <Loader /> : 'Submit'} type="submit" disabled={!isValid} />
+      <BasicButton type="submit" disabled={!isValid}>
+        {isLoading ? <Loader /> : 'Submit'}
+      </BasicButton>
     </form>
   );
 };

@@ -23,7 +23,6 @@ const Nav: FC = () => {
 
   const router = useRouter();
 
-  // console.log('context from nav');
   const { authUser } = useAuthContext();
 
   const handleAuth = (value: string) => {
@@ -47,31 +46,18 @@ const Nav: FC = () => {
         <>
           {router.pathname !== `/${Routes.PLAYGROUND_PAGE}` && (
             <BasicButton onClick={navToPlayground}>Playground</BasicButton>
-            // <button className={styles.item} onClick={navToPlayground}>
-            //   <span className={styles.item_label}>Playground</span>
-            // </button>
           )}
+
           <BasicButton onClick={handleSignOut}>Sign Out</BasicButton>
-          {/* <button className={styles.item} onClick={handleSignOut}>
-            <span className={styles.item_label}>Sign Out</span>
-          </button> */}
         </>
       ) : (
         <>
           <BasicButton onClick={() => handleAuth(URL_Queries.SIGNIN)}>Sign In</BasicButton>
-          {/* <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
-            <span className={styles.item_label}>Sign In</span>
-          </button> */}
+
           <BasicButton onClick={() => handleAuth(URL_Queries.SIGNUP)}>Sign Up</BasicButton>
-          {/* <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
-            <span className={styles.item_label}>Sign Up</span>
-          </button> */}
         </>
       )}
-      {/* <Link href="/" className={styles.link}>
-        <BasicButton>Sign In</BasicButton>
-      </Link>
-      <BasicButton>Sign Out</BasicButton> */}
+
       <div
         className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
         onClick={handleClose}

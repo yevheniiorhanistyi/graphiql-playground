@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import signIn from '@/utils/firebase/auth/signIn';
-import Button from '../Button/Button';
 import { useState } from 'react';
 import { Loader } from '../Loader/Loader';
+import BasicButton from '../common/BasicButton/BasicButton';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -58,7 +58,10 @@ const SignInForm = () => {
         security="true"
         errors={errors.password?.message || ''}
       />
-      <Button text={isLoading ? <Loader /> : 'Submit'} type="submit" disabled={!isValid} />
+
+      <BasicButton type="submit" disabled={!isValid}>
+        {isLoading ? <Loader /> : 'Submit'}
+      </BasicButton>
     </form>
   );
 };
