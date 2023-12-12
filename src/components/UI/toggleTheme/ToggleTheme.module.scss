@@ -5,10 +5,14 @@
   padding: 0;
   margin: 0;
   background: var(--bg-page);
-  color: var(--invert-bg-page);
+  color: var(--font-main-color);
 
   svg {
     display: block;
     margin: auto;
+  }
+
+  &:hover {
+    color: var(--font-main-color-hover);
   }
 }

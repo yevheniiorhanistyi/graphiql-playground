@@ -4,7 +4,7 @@
   height: 2.6rem;
   padding: 2px 5px;
   background-color: var(--bg-button);
-  transition: background-color .2s linear;
+  transition: background-color 0.2s linear;
 
   &:hover {
     background-color: var(--bg-button-hover);
@@ -13,5 +13,9 @@
   &_label {
     font-size: 1.4rem;
     color: var(--font-accent-color);
+  }
+
+  @media (max-width: $tablet-screen) {
+    width: 7.8rem;
   }
 }

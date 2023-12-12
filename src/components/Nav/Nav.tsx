@@ -6,6 +6,7 @@ import LangButton from '../LanguageButton/LanguageButton';
 import BasicButton from '../common/BasicButton/BasicButton';
 
 import styles from './Nav.module.scss';
+import ToggleTheme from '../UI/toggleTheme/ToggleTheme';
 
 const Nav: FC = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -20,6 +21,7 @@ const Nav: FC = () => {
 
   return (
     <nav className={styles.nav}>
+      <ToggleTheme />
       <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
       <Link href="/" className={styles.link}>
         <BasicButton>Sign In</BasicButton>
