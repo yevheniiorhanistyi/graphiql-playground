@@ -1,10 +1,45 @@
+import Image from 'next/image';
 import styles from './Footer.module.scss';
 import cn from 'classnames';
 
 const Footer = () => {
+  const rs_schoolLogo = '/rs_school.svg';
   return (
-    <footer className={cn(styles.footer_wrapper, 'wrapper')}>
-      <h2>Footer</h2>
+    <footer className={styles.footer}>
+      <div className={cn(styles.footer_wrapper, 'wrapper')}>
+        <div className={styles.innerBox}>
+          <div className={styles.authors}>
+            <a
+              className={styles.authors_link}
+              href="https://github.com/vladimirm89"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Uladzimir Milasheuski
+            </a>
+            <a
+              className={styles.authors_link}
+              href="https://github.com/stanislavstranger"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Stanislav Goloborodov
+            </a>
+            <a
+              className={styles.authors_link}
+              href="https://github.com/yevheniiorhanistyi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Yevhenii Orhanistyi
+            </a>
+          </div>
+          <p className={styles.copyright}>2023 GraphiQL</p>
+        </div>
+        <a className={styles.logo} href="https://rs.school/react/" target="_blank" rel="noreferrer">
+          <Image width={100} height={40} src={rs_schoolLogo} alt="RSCHOOL" priority={true} />
+        </a>
+      </div>
     </footer>
   );
 };
