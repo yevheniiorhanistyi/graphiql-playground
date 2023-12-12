@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import Welcome from './welcome';
 
 export default function MainPage() {
   return (
@@ -11,8 +11,7 @@ export default function MainPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <h1>GraphQL App</h1>
-        <Link href="/playground">Go to Playground page</Link>
+        <Welcome />
       </div>
     </>
   );
