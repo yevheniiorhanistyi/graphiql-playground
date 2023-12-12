@@ -40,6 +40,7 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'no-console': 1,
+    'no-control-regex': 'off',
   },
   settings: {
     react: {

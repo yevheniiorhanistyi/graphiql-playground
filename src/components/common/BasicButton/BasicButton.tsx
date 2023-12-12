@@ -7,7 +7,11 @@ interface BasicButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const BasicButton: FC<BasicButtonProps> = ({ children, active, ...props }) => (
-  <button {...props} className={`${styles.button} ${active ? styles.active : ''}`}>
+  <button
+    {...props}
+    className={`${styles.button} ${active ? styles.active : ''}`}
+    type={props.type}
+  >
     <span className={styles.button_label}>{children}</span>
   </button>
 );

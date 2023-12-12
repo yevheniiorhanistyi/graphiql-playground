@@ -1,0 +1,17 @@
+.auth_container {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form_content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.link {
+  text-decoration: underline;
+}
