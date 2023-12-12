@@ -34,8 +34,8 @@ const Nav: FC = () => {
   };
 
   const handleSignOut = async () => {
-    const { result, error } = await signOut();
-    console.log('logout user ', result, 'logout error ', error);
+    await signOut();
+
     router.push({ pathname: Routes.WELCOME_PAGE });
   };
 

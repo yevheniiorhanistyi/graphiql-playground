@@ -28,8 +28,7 @@ const SignUpForm = () => {
   const onSubmit = async (data: signUpFormInterface) => {
     setIsLoading(true);
 
-    const { result, error } = await signUp(data.email, data.password);
-    console.log('result ', result, 'error ', error);
+    const { error } = await signUp(data.email, data.password);
 
     if (!error) {
       router.push({ pathname: Routes.PLAYGROUND_PAGE });
