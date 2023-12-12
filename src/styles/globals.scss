@@ -113,11 +113,11 @@ main {
 }
 
 .form_container {
-  width: 40rem;
+  width: 100%;
   padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 1rem;
 }

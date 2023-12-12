@@ -1,3 +1,11 @@
+.input_container {
+  height: 8.5rem;
+
+  @media  screen and (max-width: $tablet-screen) {
+    height: 10.5rem;
+  }
+}
+
 .input_content {
   display: flex;
   flex-direction: column;
