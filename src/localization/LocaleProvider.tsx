@@ -5,8 +5,8 @@ const LocaleProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [locale, setLocale] = useState<Locale>(Locale.EN);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem(LOCAL_STORAGE_LOCALE_KEY) as Locale;
-    setLocale(storedTheme || Locale.EN);
+    const storedLocale = localStorage.getItem(LOCAL_STORAGE_LOCALE_KEY) as Locale;
+    setLocale(storedLocale || Locale.EN);
   }, []);
 
   const defaultProps = useMemo(() => ({ locale, setLocale }), [locale]);
