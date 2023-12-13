@@ -1,3 +1,4 @@
+import InputEndpoint from '@/components/InputEndpoint/InputEndpoint';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import Head from 'next/head';
 
@@ -11,6 +12,7 @@ export default function Playground() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>GraphiQL Playground Page</div>
+      <InputEndpoint />
     </ProtectedRoute>
   );
 }
