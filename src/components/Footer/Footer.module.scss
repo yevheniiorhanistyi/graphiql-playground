@@ -40,7 +40,7 @@
     text-decoration: none;
     color: var(--font-main-color);
 
-    transition: color .2s linear;
+    transition: color 0.2s linear;
 
     &::after {
       content: '|';
@@ -72,18 +72,8 @@
 }
 
 .logo {
-  display: flex;
-  justify-content: center;
-  width: 10rem;
-  height: 4rem;
-  margin: 1rem 0;
-
   &:hover {
     animation: jerking 0.8s ease;
     animation-iteration-count: 1;
   }
-}
-
-:root[class='dark'] .logo {
-  filter: invert(1);
 }

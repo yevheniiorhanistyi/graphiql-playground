@@ -4,7 +4,7 @@
   height: 2.6rem;
   padding: 2px 5px;
   background-color: var(--bg-button);
-  transition: background-color .2s linear;
+  transition: background-color 0.2s linear;
 
   &:hover {
     background-color: var(--bg-button-hover);
@@ -12,6 +12,29 @@
 
   &_label {
     font-size: 1.4rem;
+    color: var(--font-accent-color);
+  }
+}
+
+.button_submit {
+  width: 50%;
+  height: 4rem;
+  padding: 0.5rem;
+  align-self: center;
+  background-color: var(--bg-button);
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+
+  &_text {
+    font-size: 1.8rem;
     color: var(--font-accent-color);
   }
 }

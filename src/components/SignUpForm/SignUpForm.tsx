@@ -7,8 +7,8 @@ import Input from '../Input/Input';
 import { useRouter } from 'next/router';
 import { Routes } from '@/constants/enums';
 import signUp from '@/utils/firebase/auth/signUp';
-import Button from '../Button/Button';
 import { Loader } from '../Loader/Loader';
+import BasicButton from '../common/BasicButton/BasicButton';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -28,8 +28,7 @@ const SignUpForm = () => {
   const onSubmit = async (data: signUpFormInterface) => {
     setIsLoading(true);
 
-    const { result, error } = await signUp(data.email, data.password);
-    console.log('result ', result, 'error ', error);
+    const { error } = await signUp(data.email, data.password);
 
     if (!error) {
       router.push({ pathname: Routes.PLAYGROUND_PAGE });
@@ -68,7 +67,9 @@ const SignUpForm = () => {
         errors={errors.passwordConfirmation?.message || ''}
       />
 
-      <Button text={isLoading ? <Loader /> : 'Submit'} type="submit" disabled={!isValid} />
+      <BasicButton type="submit" disabled={!isValid}>
+        {isLoading ? <Loader /> : 'Submit'}
+      </BasicButton>
     </form>
   );
 };

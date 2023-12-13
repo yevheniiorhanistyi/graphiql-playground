@@ -1,7 +1,5 @@
-import { FC, useState } from 'react';
-import cn from 'classnames';
+import { FC } from 'react';
 
-import LangButton from '../LanguageButton/LanguageButton';
 import BasicButton from '../common/BasicButton/BasicButton';
 
 import styles from './Nav.module.scss';
@@ -11,19 +9,8 @@ import { useAuthContext } from '@/context/AuthContext';
 import signOut from '../../utils/firebase/auth/signOut';
 
 const Nav: FC = () => {
-  const [isPopoverOpen, setPopoverOpen] = useState(false);
-
-  const handleOpen = () => {
-    setPopoverOpen(true);
-  };
-
-  const handleClose = () => {
-    setPopoverOpen(false);
-  };
-
   const router = useRouter();
 
-  // console.log('context from nav');
   const { authUser } = useAuthContext();
 
   const handleAuth = (value: string) => {
@@ -35,50 +22,28 @@ const Nav: FC = () => {
   };
 
   const handleSignOut = async () => {
-    const { result, error } = await signOut();
-    console.log('logout user ', result, 'logout error ', error);
+    await signOut();
+
     router.push({ pathname: Routes.WELCOME_PAGE });
   };
 
   return (
     <nav className={styles.nav}>
-      <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
       {authUser ? (
         <>
           {router.pathname !== `/${Routes.PLAYGROUND_PAGE}` && (
             <BasicButton onClick={navToPlayground}>Playground</BasicButton>
-            // <button className={styles.item} onClick={navToPlayground}>
-            //   <span className={styles.item_label}>Playground</span>
-            // </button>
           )}
+
           <BasicButton onClick={handleSignOut}>Sign Out</BasicButton>
-          {/* <button className={styles.item} onClick={handleSignOut}>
-            <span className={styles.item_label}>Sign Out</span>
-          </button> */}
         </>
       ) : (
         <>
           <BasicButton onClick={() => handleAuth(URL_Queries.SIGNIN)}>Sign In</BasicButton>
-          {/* <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNIN)}>
-            <span className={styles.item_label}>Sign In</span>
-          </button> */}
+
           <BasicButton onClick={() => handleAuth(URL_Queries.SIGNUP)}>Sign Up</BasicButton>
-          {/* <button className={styles.item} onClick={() => handleAuth(URL_Queries.SIGNUP)}>
-            <span className={styles.item_label}>Sign Up</span>
-          </button> */}
         </>
       )}
-      {/* <Link href="/" className={styles.link}>
-        <BasicButton>Sign In</BasicButton>
-      </Link>
-      <BasicButton>Sign Out</BasicButton> */}
-      <div
-        className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
-        onClick={handleClose}
-        role="button"
-        tabIndex={0}
-        data-testid="backdrop"
-      />
     </nav>
   );
 };

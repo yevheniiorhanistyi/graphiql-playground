@@ -1,3 +1,11 @@
+.input_container {
+  height: 8.5rem;
+
+  @media  screen and (max-width: $tablet-screen) {
+    height: 10.5rem;
+  }
+}
+
 .input_content {
   display: flex;
   flex-direction: column;
@@ -15,6 +23,7 @@
   border: 1px solid var(--border-input);
   border-radius: 0.5rem;
   background-color: var(--bg-input);
+  color: var(--font-main-color);
 
   &:focus {
     background-color: inherit;

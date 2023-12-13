@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import styles from './Footer.module.scss';
 import cn from 'classnames';
+import LogoRsSchool from '../UI/LogoRsSchool/LogoRsSchool';
 
 const Footer = () => {
-  const rs_schoolLogo = '/rs_school.svg';
   return (
     <footer className={styles.footer}>
       <div className={cn(styles.footer_wrapper, 'wrapper')}>
@@ -37,7 +36,7 @@ const Footer = () => {
           <p className={styles.copyright}>2023 GraphiQL</p>
         </div>
         <a className={styles.logo} href="https://rs.school/react/" target="_blank" rel="noreferrer">
-          <Image width={100} height={40} src={rs_schoolLogo} alt="RSCHOOL" priority={true} />
+          <LogoRsSchool />
         </a>
       </div>
     </footer>

@@ -19,7 +19,7 @@ const Input = <T extends FieldValues>({
   errors,
 }: InputProps<T>) => {
   return (
-    <div className={styles.input_content}>
+    <div className={styles.input_container}>
       <div className={styles.input_content}>
         <label htmlFor={name} className={styles.input_label}>
           {label}

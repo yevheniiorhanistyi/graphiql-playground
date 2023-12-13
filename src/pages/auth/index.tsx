@@ -22,36 +22,46 @@ export default function AuthPage() {
       <div className={styles.auth_container}>
         {query.form === URL_Queries.SIGNUP && (
           <>
-            <div className={styles.form_content}>
-              <h3>Enter enter email and password to Sign Up</h3>
-              <SignUpForm />
+            <div className={styles.form_container}>
+              <h3 className={styles.description_text}>Enter email and password to Sign Up</h3>
+              <div className={styles.form_content}>
+                <SignUpForm />
+                <p className={styles.description_text}>
+                  <span className={styles.link_text}>Are you already rigistered?</span>
+                  <span className={styles.link_text}>
+                    Please&nbsp;
+                    <Link
+                      className={(styles.link, styles.link_text)}
+                      href={{ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNIN } }}
+                    >
+                      Sign in
+                    </Link>
+                  </span>
+                </p>
+              </div>
             </div>
-            <p>
-              Are you already rigistered? Please{' '}
-              <Link
-                className={styles.link}
-                href={{ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNIN } }}
-              >
-                Sign in
-              </Link>
-            </p>
           </>
         )}
         {query.form === URL_Queries.SIGNIN && (
           <>
-            <div className={styles.form_content}>
-              <h3>Enter enter email and password to Sign In</h3>
-              <SignInForm />
+            <div className={styles.form_container}>
+              <h3 className={styles.description_text}>Enter email and password to Sign In</h3>
+              <div className={styles.form_content}>
+                <SignInForm />
+                <p className={styles.description_text}>
+                  <span className={styles.link_text}>Are you not rigistered?</span>
+                  <span className={styles.link_text}>
+                    Please&nbsp;
+                    <Link
+                      className={(styles.link, styles.link_text)}
+                      href={{ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNUP } }}
+                    >
+                      Sign up
+                    </Link>
+                  </span>
+                </p>
+              </div>
             </div>
-            <p>
-              Are you not rigistered? Please{' '}
-              <Link
-                className={styles.link}
-                href={{ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNUP } }}
-              >
-                Sign up
-              </Link>
-            </p>
           </>
         )}
       </div>
