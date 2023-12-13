@@ -15,3 +15,26 @@
     color: var(--font-accent-color);
   }
 }
+
+.button_submit {
+  width: 50%;
+  height: 4rem;
+  padding: 0.5rem;
+  align-self: center;
+  background-color: var(--bg-button);
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+
+  &_text {
+    font-size: 1.8rem;
+    color: var(--font-accent-color);
+  }
+}
