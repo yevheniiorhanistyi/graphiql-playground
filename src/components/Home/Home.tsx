@@ -22,7 +22,7 @@ const Home: FC = () => {
           the responses - all in one place. Maximize this space for developing and fine-tuning your
           queries.
         </p>
-        <BasicButton customStyles={{ width: '23rem', height: '5rem', borderRadius: '0.5rem' }}>
+        <BasicButton customStyles={{ width: '20rem', height: '5rem', borderRadius: '0.5rem' }}>
           <Link
             className={styles.home_link}
             href={authUser ? Routes.PLAYGROUND_PAGE : Routes.AUTH_PAGE}
@@ -173,50 +173,6 @@ const Home: FC = () => {
           <circle cx="220" cy="63" r="43" fill="url(#paint5_radial_25:218)" />
           <defs>
             <linearGradient
-              id="paint0_linear_25:218"
-              x1="184.389"
-              y1="69.2405"
-              x2="184.389"
-              y2="212.24"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="var(--bg-svg-elements)" stopOpacity="0" />
-              <stop offset="1" stopColor="var(--bg-svg-elements)" />
-            </linearGradient>
-            <linearGradient
-              id="paint1_linear_25:218"
-              x1="156.389"
-              y1="69.2405"
-              x2="156.389"
-              y2="212.24"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="var(--bg-svg-elements)" stopOpacity="0" />
-              <stop offset="1" stopColor="var(--bg-svg-elements)" />
-            </linearGradient>
-            <linearGradient
-              id="paint2_linear_25:218"
-              x1="125.389"
-              y1="69.2405"
-              x2="125.389"
-              y2="212.24"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="var(--bg-svg-elements)" stopOpacity="0" />
-              <stop offset="1" stopColor="var(--bg-svg-elements)" />
-            </linearGradient>
-            <linearGradient
-              id="paint3_linear_25:218"
-              x1="93.8507"
-              y1="67.2674"
-              x2="89.9278"
-              y2="210.214"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="var(--bg-svg-elements)" stopOpacity="0" />
-              <stop offset="1" stopColor="var(--bg-svg-elements)" />
-            </linearGradient>
-            <linearGradient
               id="paint4_linear_25:218"
               x1="214.505"
               y1="10.2849"
@@ -227,17 +183,6 @@ const Home: FC = () => {
               <stop stopColor="var(--bg-svg-elements)" />
               <stop offset="1" stopColor="var(--bg-svg-elements)" stopOpacity="0" />
             </linearGradient>
-            <radialGradient
-              id="paint5_radial_25:218"
-              cx="0"
-              cy="0"
-              r="1"
-              gradientUnits="userSpaceOnUse"
-              gradientTransform="translate(220 63) rotate(90) scale(43)"
-            >
-              <stop offset="0.145833" stopColor="white" stopOpacity="0" />
-              <stop offset="1" stopColor="white" stopOpacity="0.08" />
-            </radialGradient>
           </defs>
         </svg>
       </div>
