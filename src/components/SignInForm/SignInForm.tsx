@@ -1,6 +1,6 @@
 import { Routes } from '@/constants/enums';
 import { signInFormInterface } from '@/interfaces/formInterfaces';
-import { signInFormSchema } from '@/utils/FormsSchema';
+import useYupTranslations from '@/utils/FormsSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -9,8 +9,11 @@ import signIn from '@/utils/firebase/auth/signIn';
 import { useState } from 'react';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
+import useTranslation from '@/localization/useTranslation';
 
 const SignInForm = () => {
+  const t = useTranslation();
+  const { signInFormSchema } = useYupTranslations();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,7 +48,7 @@ const SignInForm = () => {
         register={register}
         name="email"
         type="email"
-        label="Email:"
+        label={t['Email:']}
         errors={errors.email?.message || ''}
       />
 
@@ -53,13 +56,13 @@ const SignInForm = () => {
         register={register}
         name="password"
         type="password"
-        label="Password:"
+        label={t['Password:']}
         security="true"
         errors={errors.password?.message || ''}
       />
 
       <BasicButton type="submit" disabled={!isValid}>
-        {isLoading ? <Loader /> : 'Submit'}
+        {isLoading ? <Loader /> : `${t['Submit']}`}
       </BasicButton>
     </form>
   );

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
-import { signUpFormSchema } from '@/utils/FormsSchema';
+import useYupTranslations from '@/utils/FormsSchema';
 import { signUpFormInterface } from '@/interfaces/formInterfaces';
 import Input from '../Input/Input';
 import { useRouter } from 'next/router';
@@ -9,8 +9,11 @@ import { Routes } from '@/constants/enums';
 import signUp from '@/utils/firebase/auth/signUp';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
+import useTranslation from '@/localization/useTranslation';
 
 const SignUpForm = () => {
+  const t = useTranslation();
+  const { signUpFormSchema } = useYupTranslations();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,7 +48,7 @@ const SignUpForm = () => {
         register={register}
         name="email"
         type="email"
-        label="Email: "
+        label={t['Email:']}
         errors={errors.email?.message || ''}
       />
 
@@ -53,7 +56,7 @@ const SignUpForm = () => {
         register={register}
         name="password"
         type="password"
-        label="Password: "
+        label={t['Password:']}
         security="true"
         errors={errors.password?.message || ''}
       />
@@ -62,13 +65,13 @@ const SignUpForm = () => {
         register={register}
         name="passwordConfirmation"
         type="password"
-        label="Confirm password: "
+        label={t['Confirm Password:']}
         security="true"
         errors={errors.passwordConfirmation?.message || ''}
       />
 
       <BasicButton type="submit" disabled={!isValid}>
-        {isLoading ? <Loader /> : 'Submit'}
+        {isLoading ? <Loader /> : `${t['Submit']}`}
       </BasicButton>
     </form>
   );
