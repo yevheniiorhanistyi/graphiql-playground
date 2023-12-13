@@ -13,7 +13,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className={cn('app', theme)}>
       <Header />
-      <main>{children}</main>
+      <main className="wrapper">{children}</main>
       <Footer />
     </div>
   );
