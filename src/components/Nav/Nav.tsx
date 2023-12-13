@@ -1,7 +1,5 @@
-import { FC, useState } from 'react';
-import cn from 'classnames';
+import { FC } from 'react';
 
-import LangButton from '../LanguageButton/LanguageButton';
 import BasicButton from '../common/BasicButton/BasicButton';
 
 import styles from './Nav.module.scss';
@@ -11,16 +9,6 @@ import { useAuthContext } from '@/context/AuthContext';
 import signOut from '../../utils/firebase/auth/signOut';
 
 const Nav: FC = () => {
-  const [isPopoverOpen, setPopoverOpen] = useState(false);
-
-  const handleOpen = () => {
-    setPopoverOpen(true);
-  };
-
-  const handleClose = () => {
-    setPopoverOpen(false);
-  };
-
   const router = useRouter();
 
   const { authUser } = useAuthContext();
@@ -41,7 +29,6 @@ const Nav: FC = () => {
 
   return (
     <nav className={styles.nav}>
-      <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
       {authUser ? (
         <>
           {router.pathname !== `/${Routes.PLAYGROUND_PAGE}` && (
@@ -57,14 +44,6 @@ const Nav: FC = () => {
           <BasicButton onClick={() => handleAuth(URL_Queries.SIGNUP)}>Sign Up</BasicButton>
         </>
       )}
-
-      <div
-        className={cn(styles.backdrop, { [styles.backdrop_show]: isPopoverOpen })}
-        onClick={handleClose}
-        role="button"
-        tabIndex={0}
-        data-testid="backdrop"
-      />
     </nav>
   );
 };

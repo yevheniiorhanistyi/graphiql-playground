@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Nav from '../Nav/Nav';
 import cn from 'classnames';
 import styles from './Header.module.scss';
+import ConfiguratorPanel from '../UI/ConfiguratorPanel/ConfiguratorPanel';
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -41,6 +42,7 @@ const Header = () => {
           </svg>
           <h2 className={styles.appName}>GraphiQL</h2>
         </Link>
+        <ConfiguratorPanel />
         <Nav />
       </div>
     </header>
