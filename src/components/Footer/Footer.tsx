@@ -1,8 +1,11 @@
 import styles from './Footer.module.scss';
 import cn from 'classnames';
 import LogoRsSchool from '../UI/LogoRsSchool/LogoRsSchool';
+import useTranslation from '@/localization/useTranslation';
 
 const Footer = () => {
+  const t = useTranslation();
+
   return (
     <footer className={styles.footer}>
       <div className={cn(styles.footer_wrapper, 'wrapper')}>
@@ -14,7 +17,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Uladzimir Milasheuski
+              {t['Uladzimir Milasheuski']}
             </a>
             <a
               className={styles.authors_link}
@@ -22,7 +25,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Stanislav Goloborodov
+              {t['Stanislav Goloborodov']}
             </a>
             <a
               className={styles.authors_link}
@@ -30,7 +33,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Yevhenii Orhanistyi
+              {t['Yevhenii Orhanistyi']}
             </a>
           </div>
           <p className={styles.copyright}>2023 GraphiQL</p>

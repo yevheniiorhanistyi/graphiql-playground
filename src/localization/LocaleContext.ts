@@ -8,11 +8,11 @@ export enum Locale {
 }
 
 export interface LocaleContextProps {
-  locale: string;
+  locale: Locale;
   // eslint-disable-next-line no-unused-vars
   setLocale: (locale: Locale) => void;
 }
 
 export const LocaleContext = createContext<LocaleContextProps>({} as LocaleContextProps);
 
-export const LOCAL_STORAGE_LOCALE_KEY = 'en';
+export const LOCAL_STORAGE_LOCALE_KEY = 'locale';

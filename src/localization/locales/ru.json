@@ -1,6 +1,7 @@
 {
   "Sign in": "Войти",
   "Sign up": "Зарегистрироваться",
+  "Sign out": "Выйти",
   "Email": "Электронная почта",
   "Password": "Пароль",
   "Confirm Password": "Подтвердить пароль",
@@ -9,5 +10,8 @@
   "Enter you email and password to Sing Up": "Введите свой адрес электронной почты и пароль, чтобы зарегистрироваться",
   "Uladzimir Milasheuski": "Владимир Милашевский",
   "Yevhenii Orhanistyi": "Евгений Орханистый",
-  "Stanislav Goloborodov": "Станислав Голобородов"
+  "Stanislav Goloborodov": "Станислав Голобородов",
+  "Language": "Язык",
+  "en": "English",
+  "ru": "Русский"
 }

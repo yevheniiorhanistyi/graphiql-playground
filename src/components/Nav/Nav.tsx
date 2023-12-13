@@ -4,14 +4,17 @@ import Link from 'next/link';
 import BasicButton from '../common/BasicButton/BasicButton';
 
 import styles from './Nav.module.scss';
+import useTranslation from '@/localization/useTranslation';
 
 const Nav: FC = () => {
+  const t = useTranslation();
+
   return (
     <nav className={styles.nav}>
       <Link href="/" className={styles.link}>
-        <BasicButton>Sign In</BasicButton>
+        <BasicButton>{t['Sign in']}</BasicButton>
       </Link>
-      <BasicButton>Sign Out</BasicButton>
+      <BasicButton>{t['Sign out']}</BasicButton>
     </nav>
   );
 };
