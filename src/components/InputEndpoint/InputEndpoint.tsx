@@ -8,7 +8,6 @@ const InputEndpoint = () => {
   const { register, handleSubmit } = useForm<endpointFormType>();
 
   const handleChangeEnpoint = (data: endpointFormType) => {
-    console.log('URL: ', data.endpoint);
     initialGraphQLRequest(data.endpoint);
   };
 

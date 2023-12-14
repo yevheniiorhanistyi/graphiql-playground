@@ -1,3 +1,4 @@
+import { dataInterface } from '@/interfaces/schemaInterface';
 import querySchema from '../../constants/querySchema';
 
 export const initialGraphQLRequest = async (endpoint: string) => {
@@ -11,7 +12,7 @@ export const initialGraphQLRequest = async (endpoint: string) => {
     body: JSON.stringify({ query }),
   });
 
-  const data = await response.json();
+  const data: dataInterface = await response.json();
 
-  console.log(data);
+  console.log(data.data.__schema.types.filter((type) => !type.name?.includes('__')));
 };
