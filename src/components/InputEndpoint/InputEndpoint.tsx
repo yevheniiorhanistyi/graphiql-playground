@@ -1,14 +1,19 @@
+/* eslint-disable no-unused-vars */
 import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
-import { initialGraphQLRequest } from '@/utils/graphQL_API/initialGraphQLRequest';
 import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
+import { FC } from 'react';
 
-const InputEndpoint = () => {
+type InputEndpointType = {
+  getEndpoint: (endpoint: string) => void;
+};
+
+const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
   const { register, handleSubmit } = useForm<endpointFormType>();
 
-  const handleChangeEnpoint = (data: endpointFormType) => {
-    initialGraphQLRequest(data.endpoint);
+  const handleChangeEnpoint = (data: endpointFormType): void => {
+    getEndpoint(data.endpoint);
   };
 
   return (

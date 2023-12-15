@@ -1,16 +1,32 @@
 import InputEndpoint from '@/components/InputEndpoint/InputEndpoint';
-import MainLoader from '@/components/MainLoader/MainLoader';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
+import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
+import { __Schema } from '@/interfaces/schemaInterface';
+import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
 import Head from 'next/head';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 
 export default function Playground() {
-  const [isDocsDispayed, setIsDocsDispayed] = useState(false);
+  const Docs = lazy(() => import('../../components/Docs/Docs'));
+
+  const [isDocsDispayed, setIsDocsDispayed] = useState<boolean>(false);
+  const [endpoint, setEnpont] = useState<string>(INITIAL_ENDPOINT);
+  const [schema, setSchema] = useState<__Schema | null>(null);
+
+  useEffect(() => {
+    console.log('new endpoint: ', endpoint);
+    getSchema(endpoint);
+  }, [endpoint]);
+
+  const getSchema = async (endpoint: string) => {
+    const response = await getGraphQLSchema(endpoint);
+    setSchema(response);
+  };
 
   const toggleDocsDyspalyed = () => {
     setIsDocsDispayed((prev) => !prev);
   };
-  const Docs = lazy(() => import('../../components/Docs/Docs'));
+
   return (
     <ProtectedRoute>
       <Head>
@@ -20,11 +36,14 @@ export default function Playground() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>GraphiQL Playground Page</div>
-      <InputEndpoint />
+
+      <InputEndpoint getEndpoint={setEnpont} />
+
       <button onClick={toggleDocsDyspalyed}>Show Docs</button>
-      {isDocsDispayed && (
-        <Suspense fallback={<MainLoader />}>
-          <Docs />
+
+      {isDocsDispayed && schema && (
+        <Suspense fallback={<p>No schema</p>}>
+          <Docs schema={schema} />
         </Suspense>
       )}
     </ProtectedRoute>

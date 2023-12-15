@@ -7,7 +7,7 @@ interface DataSchemaInterface {
   __schema: __Schema;
 }
 
-interface __Schema {
+export interface __Schema {
   description: string | null;
   types: [__Type];
   queryType: TypeInterface;
