@@ -4,14 +4,15 @@ export interface dataInterface {
 }
 
 interface DataSchemaInterface {
-  __schema: SchemaInterface;
+  __schema: __Schema;
 }
 
-interface SchemaInterface {
+interface __Schema {
+  description: string | null;
+  types: [__Type];
   queryType: TypeInterface;
   mutationType: TypeInterface | null;
   subscriptionType: TypeInterface | null;
-  types: [__Type];
   directives: [__Directive];
 }
 
@@ -20,19 +21,19 @@ interface TypeInterface {
 }
 
 interface __Type {
-  description: string | null;
-  enumValues: [EnumValue] | null;
-  fields: [FieldType] | null;
-  inputFields: [InputFieldType] | null;
-  interfaces: [] | null;
-  kind: KindEnum;
+  kind: __TypeKind;
   name: string | null;
-  possibleTypes: null;
+  description: string | null;
+  fields: [__Field] | null;
+  interfaces: [__Type] | null;
+  possibleTypes: [__Type] | null;
+  enumValues: [__EnumValue] | null;
+  inputFields: [__InputValue] | null;
   ofType: __Type | null;
   specifiedByURL: string | null;
 }
 
-export enum KindEnum {
+export enum __TypeKind {
   SCALAR,
   INPUT_OBJECT,
   OBJECT,
@@ -43,54 +44,54 @@ export enum KindEnum {
   NON_NULL,
 }
 
-interface InputFieldType {
-  defaultValue: string | null;
-  description: string | null;
+interface __InputValue {
   name: string;
+  description: string | null;
   type: [__Type];
+  defaultValue: string | null;
 }
 
-interface FieldType {
-  args: [InputFieldType];
-  deprecationReason: string | null;
-  description: string | null;
-  isDeprecated: boolean;
+interface __Field {
   name: string;
+  description: string | null;
+  args: [__InputValue];
   type: __Type;
+  isDeprecated: boolean;
+  deprecationReason: string | null;
 }
 
-interface EnumValue {
-  deprecationReason: null;
+interface __EnumValue {
+  name: string;
   description: string | null;
   isDeprecated: boolean;
-  name: string;
+  deprecationReason: string | null;
 }
 
 interface __Directive {
-  args: [InputFieldType];
-  description: string | null;
-  locations: [DirectiveEnum];
   name: string;
+  description: string | null;
+  locations: [__DirectiveLocation];
+  args: [__InputValue];
 }
 
-enum DirectiveEnum {
-  FIELD,
-  FRAGMENT_SPREAD,
-  INLINE_FRAGMENT,
-  SCALAR,
-  ARGUMENT_DEFINITION,
-  ENUM_VALUE,
-  FIELD_DEFINITION,
-  INPUT_FIELD_DEFINITION,
-  OBJECT,
-  INTERFACE,
+enum __DirectiveLocation {
   QUERY,
-  SCHEMA,
-  UNION,
-  ENUM,
-  INPUT_OBJECT,
   MUTATION,
   SUBSCRIPTION,
-  VARIABLE_DEFINITION,
+  FIELD,
   FRAGMENT_DEFINITION,
+  FRAGMENT_SPREAD,
+  INLINE_FRAGMENT,
+  VARIABLE_DEFINITION,
+  SCHEMA,
+  SCALAR,
+  OBJECT,
+  FIELD_DEFINITION,
+  ARGUMENT_DEFINITION,
+  INTERFACE,
+  UNION,
+  ENUM,
+  ENUM_VALUE,
+  INPUT_OBJECT,
+  INPUT_FIELD_DEFINITION,
 }
