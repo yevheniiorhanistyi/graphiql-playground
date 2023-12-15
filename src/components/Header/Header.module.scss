@@ -1,5 +1,5 @@
 .header {
-  padding: 7px 1rem;
+  padding: 7px 0;
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-page);
   position: sticky;
@@ -15,10 +15,6 @@
     justify-content: space-between;
     column-gap: 1rem;
     row-gap: 1rem;
-
-    @media (max-width: $mobile-screen) {
-      flex-direction: column;
-    }
   }
 }
 
@@ -32,10 +28,6 @@
       color: var(--font-main-color-hover);
       fill: var(--font-main-color-hover);
     }
-  }
-
-  @media (max-width: $mobile-screen) {
-    flex-direction: column;
   }
 
   .appLogo {

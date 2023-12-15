@@ -89,12 +89,12 @@ label {
 
 body {
   @include font-main();
-  background: var(--bg-page);
-  color: var(--font-main-color);
   overflow-y: scroll;
 }
 
 .app {
+  background: var(--bg-page);
+  color: var(--font-main-color);
   scroll-behavior: smooth;
   min-height: 100vh;
   @include flex-column($gap: 2rem);
