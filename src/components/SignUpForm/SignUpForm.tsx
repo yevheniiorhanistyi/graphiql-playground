@@ -69,8 +69,7 @@ const SignUpForm = () => {
         security="true"
         errors={errors.passwordConfirmation?.message || ''}
       />
-
-      <BasicButton type="submit" disabled={!isValid}>
+      <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
         {isLoading ? <Loader /> : `${t['Submit']}`}
       </BasicButton>
     </form>

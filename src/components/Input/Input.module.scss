@@ -1,8 +1,8 @@
 .input_container {
-  height: 8.5rem;
+  height: 10.5rem;
 
   @media screen and (max-width: $tablet-screen) {
-    height: 10.5rem;
+    height: 10rem;
   }
 }
 
@@ -14,6 +14,7 @@
 
 .input_label {
   font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 .input_field {
@@ -35,4 +36,12 @@
   text-align: center;
   color: var(--error-color);
   font-size: 1.4rem;
+
+  &:before {
+    content: '⚠ ';
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    font-size: 1.1rem;
+  }
 }

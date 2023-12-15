@@ -61,7 +61,7 @@ const SignInForm = () => {
         errors={errors.password?.message || ''}
       />
 
-      <BasicButton type="submit" disabled={!isValid}>
+      <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
         {isLoading ? <Loader /> : `${t['Submit']}`}
       </BasicButton>
     </form>
