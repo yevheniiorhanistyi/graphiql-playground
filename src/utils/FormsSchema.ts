@@ -32,7 +32,7 @@ const useYupTranslations = () => {
     passwordConfirmation: yup
       .string()
       .required(`${t['Please repeat the password']}`)
-      .oneOf([yup.ref(`${t['Password']}`)], `${t['Passwords do not match. Please try again']}`),
+      .oneOf([yup.ref('password')], `${t['Passwords do not match. Please try again']}`),
   });
 
   return { signInFormSchema, signUpFormSchema };
