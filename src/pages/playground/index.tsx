@@ -1,6 +1,5 @@
 import InputEndpoint from '@/components/InputEndpoint/InputEndpoint';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
-import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
 import { __Schema } from '@/interfaces/schemaInterface';
 import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
 import Head from 'next/head';
@@ -10,12 +9,14 @@ export default function Playground() {
   const Docs = lazy(() => import('../../components/Docs/Docs'));
 
   const [isDocsDispayed, setIsDocsDispayed] = useState<boolean>(false);
-  const [endpoint, setEnpont] = useState<string>(INITIAL_ENDPOINT);
+  const [endpoint, setEnpont] = useState<string | null>(null);
   const [schema, setSchema] = useState<__Schema | null>(null);
 
   useEffect(() => {
     console.log('new endpoint: ', endpoint);
-    getSchema(endpoint);
+    if (endpoint) {
+      getSchema(endpoint);
+    }
   }, [endpoint]);
 
   const getSchema = async (endpoint: string) => {

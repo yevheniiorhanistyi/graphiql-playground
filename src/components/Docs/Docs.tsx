@@ -20,8 +20,6 @@ const Docs: FC<DocsType> = ({ schema }) => {
     const mutations = schema.types.filter((type) => type.name === mutationName);
 
     console.log('Mutations: ', mutations[0].fields);
-  } else {
-    console.log('No mutations for this API');
   }
 
   if (schema.subscriptionType) {
@@ -30,8 +28,6 @@ const Docs: FC<DocsType> = ({ schema }) => {
     const subscriptions = schema.types.filter((type) => type.name === subscriptionName);
 
     console.log('Subscriptions: ', subscriptions[0].fields);
-  } else {
-    console.log('No subscriptions for this API');
   }
 
   return (

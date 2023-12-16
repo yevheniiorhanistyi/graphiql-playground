@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
 import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string) => void;
@@ -11,6 +11,10 @@ type InputEndpointType = {
 
 const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
   const { register, handleSubmit } = useForm<endpointFormType>();
+
+  useEffect(() => {
+    getEndpoint(INITIAL_ENDPOINT);
+  }, []);
 
   const handleChangeEnpoint = (data: endpointFormType): void => {
     getEndpoint(data.endpoint);
