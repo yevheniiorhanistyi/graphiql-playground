@@ -16,7 +16,7 @@ export interface __Schema {
   directives: [__Directive];
 }
 
-interface TypeInterface {
+export interface TypeInterface {
   name: 'string';
 }
 

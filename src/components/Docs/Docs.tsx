@@ -1,11 +1,13 @@
 import { __Schema } from '@/interfaces/schemaInterface';
 import { FC } from 'react';
+import DocsHeader from './DocsHeader/DocsHeader';
+import DocsType from './DocsType/DocsType';
 
-type DocsType = {
+type DocsTypeType = {
   schema: __Schema;
 };
 
-const Docs: FC<DocsType> = ({ schema }) => {
+const Docs: FC<DocsTypeType> = ({ schema }) => {
   console.log('Full schema: ', schema);
 
   const queryName = schema.queryType.name;
@@ -32,30 +34,9 @@ const Docs: FC<DocsType> = ({ schema }) => {
 
   return (
     <>
-      <h3>GraphQL Docs</h3>
+      <DocsHeader />
 
-      <div>
-        <h6>Type Query</h6>
-        {queries[0].fields?.map((query) => <p key={query.name}>{query.name}</p>)}
-      </div>
-
-      {schema.mutationType && (
-        <div>
-          <h6>Type Mutaion</h6>
-          {schema.types
-            .filter((type) => type.name === schema.mutationType?.name)[0]
-            .fields?.map((mutation) => <p key={mutation.name}>{mutation.name}</p>)}
-        </div>
-      )}
-
-      {schema.subscriptionType && (
-        <div>
-          <h6>Type Subscription</h6>
-          {schema.types
-            .filter((type) => type.name === schema.subscriptionType?.name)[0]
-            .fields?.map((subscription) => <p key={subscription.name}>{subscription.name}</p>)}
-        </div>
-      )}
+      <DocsType schema={schema} />
     </>
   );
 };
