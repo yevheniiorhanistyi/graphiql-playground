@@ -7,6 +7,9 @@ const nextConfig = {
     includePaths: [path.join('./src/', 'styles')],
     prependData: `@import "breakpoints.scss";`,
   },
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
 };
 
 export default nextConfig;
