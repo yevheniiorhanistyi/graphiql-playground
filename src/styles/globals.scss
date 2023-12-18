@@ -73,6 +73,7 @@ ol {
 a {
   text-decoration: none;
   color: var(--color-link);
+
   &:hover {
     cursor: pointer;
   }
@@ -83,6 +84,7 @@ input,
 label {
   border: none;
   outline: none;
+
   &:hover {
     cursor: pointer;
   }
@@ -94,12 +96,12 @@ body {
 }
 
 .app {
-  background: var(--bg-page);
   color: var(--font-main-color);
   scroll-behavior: smooth;
   min-height: 100vh;
   @include flex-column($gap: 2rem);
   margin: 0 auto;
+  background: var(--bg-page);
 }
 
 header,
