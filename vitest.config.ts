@@ -8,8 +8,16 @@ export default defineConfig({
   test: {
     watch: false,
     globals: true,
+    setupFiles: 'tests/setup.ts',
     environment: 'jsdom',
     css: true,
+    coverage: {
+      enabled: true,
+      all: true,
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: ['types/*.ts', '.next/*', 'next.config.js', 'src/constants/*', 'src/interfaces/*'],
+    },
   },
   resolve: {
     alias: [{ find: '@', replacement: resolve(__dirname, './src') }],
