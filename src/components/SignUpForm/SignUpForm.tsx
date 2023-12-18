@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useYupTranslations from '@/utils/FormsSchema';
 import { signUpFormInterface } from '@/interfaces/formInterfaces';
 import Input from '../Input/Input';
@@ -10,13 +10,20 @@ import signUp from '@/utils/firebase/auth/signUp';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
 import useTranslation from '@/localization/useTranslation';
+import useLocale from '@/localization/useLocale';
 
 const SignUpForm = () => {
   const t = useTranslation();
+  const { locale } = useLocale();
   const { signUpFormSchema } = useYupTranslations();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
 
   const {
     register,
