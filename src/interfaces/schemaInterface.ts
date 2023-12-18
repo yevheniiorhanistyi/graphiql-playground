@@ -20,7 +20,7 @@ export interface TypeInterface {
   name: 'string';
 }
 
-interface __Type {
+export interface __Type {
   kind: __TypeKind;
   name: string | null;
   description: string | null;
@@ -34,24 +34,24 @@ interface __Type {
 }
 
 export enum __TypeKind {
-  SCALAR,
-  INPUT_OBJECT,
-  OBJECT,
-  ENUM,
-  UNION,
-  INTERFACE,
-  LIST,
-  NON_NULL,
+  SCALAR = 'SCALAR',
+  OBJECT = 'OBJECT',
+  INTERFACE = 'INTERFACE',
+  UNION = 'UNION',
+  ENUM = 'ENUM',
+  INPUT_OBJECT = 'INPUT_OBJECT',
+  LIST = 'LIST',
+  NON_NULL = 'NON_NULL',
 }
 
-interface __InputValue {
+export interface __InputValue {
   name: string;
   description: string | null;
-  type: [__Type];
+  type: __Type;
   defaultValue: string | null;
 }
 
-interface __Field {
+export interface __Field {
   name: string;
   description: string | null;
   args: [__InputValue];

@@ -43,8 +43,8 @@ export default function Playground() {
       <button onClick={toggleDocsDyspalyed}>Show Docs</button>
 
       {isDocsDispayed && schema && (
-        <Suspense fallback={<p>No schema</p>}>
-          <Docs schema={schema} />
+        <Suspense fallback={<p>No GraphQL schema</p>}>
+          <Docs schema={schema} handleClose={toggleDocsDyspalyed} />
         </Suspense>
       )}
     </ProtectedRoute>
