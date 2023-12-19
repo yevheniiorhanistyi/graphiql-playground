@@ -16,7 +16,7 @@ export default defineConfig({
       all: true,
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['types/*.ts', '.next/*', 'next.config.js', 'src/constants/*', 'src/interfaces/*'],
+      exclude: ['.next/*', 'next.config.js', 'src/constants/*', 'src/interfaces/*', 'src/types/*'],
     },
   },
   resolve: {
