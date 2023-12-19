@@ -17,6 +17,7 @@ const SignInForm = () => {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string>('');
 
   const {
     register,
@@ -31,15 +32,20 @@ const SignInForm = () => {
   const onSubmit = async (data: signInFormInterface) => {
     setIsLoading(true);
 
-    const { error } = await signIn(data.email, data.password);
+    try {
+      const { error } = await signIn(data.email, data.password);
 
-    if (!error) {
-      router.push({ pathname: Routes.PLAYGROUND_PAGE });
-
-      reset();
+      if (error) {
+        setSubmitError(`${error}`);
+      } else {
+        router.push({ pathname: Routes.PLAYGROUND_PAGE });
+        reset();
+      }
+    } catch (err) {
+      setSubmitError('An error occurred while processing your request.');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -60,6 +66,8 @@ const SignInForm = () => {
         security="true"
         errors={t[String(errors.password?.message)] || ''}
       />
+
+      {submitError && <p style={{ color: 'red' }}>{submitError}</p>}
 
       <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
         {isLoading ? <Loader /> : `${t['Submit']}`}

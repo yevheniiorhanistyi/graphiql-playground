@@ -31,7 +31,7 @@ const Router = () => {
       {authUser ? (
         <>
           {router.pathname !== `/${Routes.PLAYGROUND_PAGE}` && (
-            <BasicButton onClick={navToPlayground}>Playground</BasicButton>
+            <BasicButton onClick={navToPlayground}>{t['Playground']}</BasicButton>
           )}
 
           <BasicButton onClick={handleSignOut}>{t['Sign Out']}</BasicButton>
