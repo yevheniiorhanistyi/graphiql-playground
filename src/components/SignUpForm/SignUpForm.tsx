@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useYupTranslations from '@/utils/FormsSchema';
 import { signUpFormInterface } from '@/interfaces/formInterfaces';
 import Input from '../Input/Input';
@@ -10,20 +10,13 @@ import signUp from '@/utils/firebase/auth/signUp';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
 import useTranslation from '@/localization/useTranslation';
-import useLocale from '@/localization/useLocale';
 
 const SignUpForm = () => {
   const t = useTranslation();
-  const { locale } = useLocale();
   const { signUpFormSchema } = useYupTranslations();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    reset();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locale]);
 
   const {
     register,
@@ -56,7 +49,7 @@ const SignUpForm = () => {
         name="email"
         type="email"
         label={t['Email:']}
-        errors={errors.email?.message || ''}
+        errors={t[String(errors.email?.message)] || ''}
       />
 
       <Input<signUpFormInterface>
@@ -65,7 +58,7 @@ const SignUpForm = () => {
         type="password"
         label={t['Password:']}
         security="true"
-        errors={errors.password?.message || ''}
+        errors={t[String(errors.password?.message)] || ''}
       />
 
       <Input<signUpFormInterface>
@@ -74,7 +67,7 @@ const SignUpForm = () => {
         type="password"
         label={t['Confirm Password:']}
         security="true"
-        errors={errors.passwordConfirmation?.message || ''}
+        errors={t[String(errors.passwordConfirmation?.message)] || ''}
       />
       <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
         {isLoading ? <Loader /> : `${t['Submit']}`}
