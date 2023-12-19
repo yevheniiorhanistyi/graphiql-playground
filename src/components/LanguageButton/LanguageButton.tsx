@@ -22,7 +22,12 @@ const LangButton: FC<LangButtonProps> = ({ isPopoverOpen, handleOpen, handleClos
   };
 
   return (
-    <button className={styles.langBtn} type="button" onClick={handleOpen}>
+    <button
+      className={styles.langBtn}
+      type="button"
+      onClick={handleOpen}
+      data-testid="language-button"
+    >
       <Image
         width={38}
         height={24}

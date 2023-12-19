@@ -16,7 +16,7 @@ const ConfiguratorPanel = () => {
   };
 
   return (
-    <div className={styles.configuratorPanel}>
+    <div className={styles.configuratorPanel} data-testid="configurator-panel">
       <ToggleTheme />
       <LangButton isPopoverOpen={isPopoverOpen} handleOpen={handleOpen} handleClose={handleClose} />
       <div
