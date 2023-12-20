@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
-import useYupTranslations from '@/utils/FormsSchema';
+import { signUpFormSchema } from '@/utils/FormsSchema';
 import { signUpFormInterface } from '@/interfaces/formInterfaces';
 import Input from '../Input/Input';
 import { useRouter } from 'next/router';
@@ -13,7 +13,6 @@ import useTranslation from '@/localization/useTranslation';
 
 const SignUpForm = () => {
   const t = useTranslation();
-  const { signUpFormSchema } = useYupTranslations();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);

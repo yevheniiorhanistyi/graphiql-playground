@@ -1,6 +1,6 @@
 import { Routes } from '@/constants/enums';
 import { signInFormInterface } from '@/interfaces/formInterfaces';
-import useYupTranslations from '@/utils/FormsSchema';
+import { signInFormSchema } from '@/utils/FormsSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,6 @@ import useTranslation from '@/localization/useTranslation';
 
 const SignInForm = () => {
   const t = useTranslation();
-  const { signInFormSchema } = useYupTranslations();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);

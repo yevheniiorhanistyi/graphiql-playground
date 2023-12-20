@@ -1,8 +1,5 @@
-export type signInFormInterface = {
-  email: string;
-  password: string;
-};
+import { signInFormSchema, signUpFormSchema } from '@/utils/FormsSchema';
+import * as yup from 'yup';
 
-export type signUpFormInterface = signInFormInterface & {
-  passwordConfirmation: string;
-};
+export type signInFormInterface = yup.InferType<typeof signInFormSchema>;
+export type signUpFormInterface = yup.InferType<typeof signUpFormSchema>;
