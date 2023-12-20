@@ -4,6 +4,7 @@ import { TypeInterface, __Field, __Schema, __Type, __TypeKind } from '@/interfac
 import { FC, useState } from 'react';
 import DocsFields from '../DocsFields/DocsFields';
 import DocsField from '../DocsField/DocsField';
+import findGraphQLType from '@/utils/graphQL_API/findGraphQLType';
 
 type DocsSchemaType = {
   schema: __Schema;
@@ -36,9 +37,8 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
   const handleClickValue = (value: __Type) => {
     console.log('value: ', value);
     const typeName = value.name;
-    const type = schema.types.find((type) => type.name === typeName);
+    const type = findGraphQLType(schema, typeName);
     if (type) {
-      // console.log(type);
       setDocsStack([...docsStack, type]);
     }
   };

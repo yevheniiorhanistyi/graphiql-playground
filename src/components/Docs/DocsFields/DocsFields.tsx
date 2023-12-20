@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { __Field, __Type } from '@/interfaces/schemaInterface';
+import { __Field, __Type, __TypeKind } from '@/interfaces/schemaInterface';
 import { FC } from 'react';
 
 type DocsFieldsType = {
@@ -9,6 +9,34 @@ type DocsFieldsType = {
 };
 
 const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue }) => {
+  const getNestedType = (type: __Type, value: string = ''): string | null => {
+    console.log('nested Type: ', type);
+
+    let name = value;
+
+    console.log('name: ', name);
+
+    if (type.ofType) {
+      return getNestedType(type.ofType, name);
+    }
+
+    if (!type.ofType && type.name) {
+      if (type.kind === __TypeKind.OBJECT) {
+        name = type.name;
+      }
+      if (type.kind === __TypeKind.LIST) {
+        name = `[${name}]`;
+      }
+      if (type.kind === __TypeKind.NON_NULL) {
+        name = `${name}!`;
+      }
+
+      return name;
+    }
+
+    return name;
+  };
+
   return (
     <ul>
       <div>{type.description ? type.description : 'No description'}</div>
@@ -24,7 +52,9 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
                 className="property_name docs-link"
                 onClick={() => handleClickValue(field.type)}
               >
-                {field.type.name}
+                {field.type.kind === __TypeKind.OBJECT
+                  ? field.type.name
+                  : getNestedType(field.type)}
               </span>
             </p>
           </div>
