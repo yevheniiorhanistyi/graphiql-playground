@@ -7,7 +7,8 @@ type InputProps<T extends FieldValues> = {
   name: string;
   type: string;
   security?: string;
-  errors: string;
+  defaultValue?: string;
+  errors?: string;
 };
 
 const Input = <T extends FieldValues>({
@@ -17,6 +18,7 @@ const Input = <T extends FieldValues>({
   type,
   security,
   errors,
+  defaultValue,
 }: InputProps<T>) => {
   return (
     <div className={styles.input_container}>
@@ -30,9 +32,10 @@ const Input = <T extends FieldValues>({
           type={type}
           name={name}
           security={security}
+          defaultValue={defaultValue}
         />
       </div>
-      {!!errors.length && <p className={styles.input_error}>{errors}</p>}
+      {!!errors?.length && <p className={styles.input_error}>{errors}</p>}
     </div>
   );
 };

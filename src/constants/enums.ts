@@ -9,3 +9,9 @@ export enum URL_Queries {
   SIGNIN = 'signIn',
   SIGNUP = 'signUp',
 }
+
+export enum SchemaTypes {
+  QUERY_TYPE = 'queryType',
+  MUTATION_TYPE = 'mutationType',
+  SUBSCRIPTION_TYPE = 'subscriptionType',
+}
