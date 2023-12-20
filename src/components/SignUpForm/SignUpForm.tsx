@@ -9,11 +9,14 @@ import { Routes } from '@/constants/enums';
 import signUp from '@/utils/firebase/auth/signUp';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
+import useTranslation from '@/localization/useTranslation';
 
 const SignUpForm = () => {
+  const t = useTranslation();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string>('');
 
   const {
     register,
@@ -28,15 +31,20 @@ const SignUpForm = () => {
   const onSubmit = async (data: signUpFormInterface) => {
     setIsLoading(true);
 
-    const { error } = await signUp(data.email, data.password);
+    try {
+      const { error } = await signUp(data.email, data.password);
 
-    if (!error) {
-      router.push({ pathname: Routes.PLAYGROUND_PAGE });
-
-      reset();
+      if (error) {
+        setSubmitError(`${error}`);
+      } else {
+        router.push({ pathname: Routes.PLAYGROUND_PAGE });
+        reset();
+      }
+    } catch (err) {
+      setSubmitError('An error occurred while processing your request.');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -45,30 +53,32 @@ const SignUpForm = () => {
         register={register}
         name="email"
         type="email"
-        label="Email: "
-        errors={errors.email?.message || ''}
+        label={t['Email:']}
+        errors={t[String(errors.email?.message)] || ''}
       />
 
       <Input<signUpFormInterface>
         register={register}
         name="password"
         type="password"
-        label="Password: "
+        label={t['Password:']}
         security="true"
-        errors={errors.password?.message || ''}
+        errors={t[String(errors.password?.message)] || ''}
       />
 
       <Input<signUpFormInterface>
         register={register}
         name="passwordConfirmation"
         type="password"
-        label="Confirm password: "
+        label={t['Confirm Password:']}
         security="true"
-        errors={errors.passwordConfirmation?.message || ''}
+        errors={t[String(errors.passwordConfirmation?.message)] || ''}
       />
 
-      <BasicButton type="submit" disabled={!isValid}>
-        {isLoading ? <Loader /> : 'Submit'}
+      {submitError && <p style={{ color: 'red' }}>{submitError}</p>}
+
+      <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
+        {isLoading ? <Loader /> : `${t['Submit']}`}
       </BasicButton>
     </form>
   );

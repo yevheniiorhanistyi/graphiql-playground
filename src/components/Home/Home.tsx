@@ -6,21 +6,24 @@ import cn from 'classnames';
 import BasicButton from '@/components/common/BasicButton/BasicButton';
 
 import styles from './Home.module.scss';
+import useTranslation from '@/localization/useTranslation';
 
 const Home: FC = () => {
+  const t = useTranslation();
   const { authUser } = useAuthContext();
 
-  const linkText = authUser ? 'Go to Playground page' : 'Go to Auth page';
+  const linkText = authUser ? `${t['Go to Playground page']}` : `${t['Go to Auth page']}`;
 
   return (
     <section className={styles.section}>
       <div className={cn(styles.home, 'wrapper')}>
-        <h1 className={styles.home_title}>Welcome to GraphiQL Playground!</h1>
+        <h1 className={styles.home_title}>{t['Welcome to GraphiQL Playground!']}</h1>
         <p className={styles.home_subtitle}>
-          Discover the features of our platform, a robust tool crafted for executing and refining
-          your GraphQL queries. Easily interact with your GraphQL API, create queries, and analyze
-          the responses - all in one place. Maximize this space for developing and fine-tuning your
-          queries.
+          {
+            t[
+              'Discover the features of our platform, a robust tool crafted for executing and refining your GraphQL queries. Easily interact with your GraphQL API, create queries, and analyzethe responses - all in one place. Maximize this space for developing and fine-tuning your queries.'
+            ]
+          }
         </p>
         <BasicButton customStyles={{ width: '20rem', height: '5rem', borderRadius: '0.5rem' }}>
           <Link

@@ -6,8 +6,10 @@ import { useRouter } from 'next/router';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
+import useTranslation from '@/localization/useTranslation';
 
 export default function AuthPage() {
+  const t = useTranslation();
   const router = useRouter();
   const query = router.query;
 
@@ -23,18 +25,20 @@ export default function AuthPage() {
         {query.form === URL_Queries.SIGNUP && (
           <>
             <div className={styles.form_container}>
-              <h3 className={styles.description_text}>Enter email and password to Sign Up</h3>
+              <h3 className={styles.description_text}>
+                {t['Enter email and password to Sign Up']}
+              </h3>
               <div className={styles.form_content}>
                 <SignUpForm />
                 <p className={styles.description_text}>
-                  <span className={styles.link_text}>Are you already rigistered?</span>
+                  <span className={styles.link_text}>{t['You are already registered?']}</span>
                   <span className={styles.link_text}>
-                    Please&nbsp;
+                    {t['Please']}&nbsp;
                     <Link
                       className={(styles.link, styles.link_text)}
                       href={{ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNIN } }}
                     >
-                      Sign in
+                      {t['Sign in']}
                     </Link>
                   </span>
                 </p>
@@ -45,18 +49,20 @@ export default function AuthPage() {
         {query.form === URL_Queries.SIGNIN && (
           <>
             <div className={styles.form_container}>
-              <h3 className={styles.description_text}>Enter email and password to Sign In</h3>
+              <h3 className={styles.description_text}>
+                {t['Enter email and password to Sign In']}
+              </h3>
               <div className={styles.form_content}>
                 <SignInForm />
                 <p className={styles.description_text}>
-                  <span className={styles.link_text}>Are you not rigistered?</span>
+                  <span className={styles.link_text}>{t['You are already registered?']}</span>
                   <span className={styles.link_text}>
-                    Please&nbsp;
+                    {t['Please']}&nbsp;
                     <Link
                       className={(styles.link, styles.link_text)}
                       href={{ pathname: Routes.AUTH_PAGE, query: { form: URL_Queries.SIGNUP } }}
                     >
-                      Sign up
+                      {t['Sign up']}
                     </Link>
                   </span>
                 </p>

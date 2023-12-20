@@ -9,11 +9,14 @@ import signIn from '@/utils/firebase/auth/signIn';
 import { useState } from 'react';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
+import useTranslation from '@/localization/useTranslation';
 
 const SignInForm = () => {
+  const t = useTranslation();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string>('');
 
   const {
     register,
@@ -28,15 +31,20 @@ const SignInForm = () => {
   const onSubmit = async (data: signInFormInterface) => {
     setIsLoading(true);
 
-    const { error } = await signIn(data.email, data.password);
+    try {
+      const { error } = await signIn(data.email, data.password);
 
-    if (!error) {
-      router.push({ pathname: Routes.PLAYGROUND_PAGE });
-
-      reset();
+      if (error) {
+        setSubmitError(`${error}`);
+      } else {
+        router.push({ pathname: Routes.PLAYGROUND_PAGE });
+        reset();
+      }
+    } catch (err) {
+      setSubmitError('An error occurred while processing your request.');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -45,21 +53,23 @@ const SignInForm = () => {
         register={register}
         name="email"
         type="email"
-        label="Email:"
-        errors={errors.email?.message || ''}
+        label={t['Email:']}
+        errors={t[String(errors.email?.message)] || ''}
       />
 
       <Input<signInFormInterface>
         register={register}
         name="password"
         type="password"
-        label="Password:"
+        label={t['Password:']}
         security="true"
-        errors={errors.password?.message || ''}
+        errors={t[String(errors.password?.message)] || ''}
       />
 
-      <BasicButton type="submit" disabled={!isValid}>
-        {isLoading ? <Loader /> : 'Submit'}
+      {submitError && <p style={{ color: 'red' }}>{submitError}</p>}
+
+      <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
+        {isLoading ? <Loader /> : `${t['Submit']}`}
       </BasicButton>
     </form>
   );

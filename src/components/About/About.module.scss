@@ -11,6 +11,7 @@
 
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
   column-gap: 6rem;
   row-gap: 3.2rem;
 
@@ -82,7 +83,6 @@
         font-size: 1.4rem;
       }
     }
-
   }
 }
 
