@@ -9,32 +9,27 @@ type DocsFieldsType = {
 };
 
 const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue }) => {
-  const getNestedType = (type: __Type, value: string = ''): string | null => {
-    console.log('nested Type: ', type);
+  const getTypeName = (type: __Type, arrayKind: Array<string> = []): string | null => {
+    if (type.ofType && !type.name) {
+      arrayKind.push(type.kind);
+      return getTypeName(type.ofType, arrayKind);
+    } else if (!type.ofType && type.name) {
+      let name = type.name;
 
-    let name = value;
+      arrayKind.reverse().forEach((item) => {
+        if (item === __TypeKind.NON_NULL) {
+          name = `${name}!`;
+        }
 
-    console.log('name: ', name);
-
-    if (type.ofType) {
-      return getNestedType(type.ofType, name);
-    }
-
-    if (!type.ofType && type.name) {
-      if (type.kind === __TypeKind.OBJECT) {
-        name = type.name;
-      }
-      if (type.kind === __TypeKind.LIST) {
-        name = `[${name}]`;
-      }
-      if (type.kind === __TypeKind.NON_NULL) {
-        name = `${name}!`;
-      }
+        if (item === __TypeKind.LIST) {
+          name = `[${name}]`;
+        }
+      });
 
       return name;
     }
 
-    return name;
+    return null;
   };
 
   return (
@@ -52,9 +47,7 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
                 className="property_name docs-link"
                 onClick={() => handleClickValue(field.type)}
               >
-                {field.type.kind === __TypeKind.OBJECT
-                  ? field.type.name
-                  : getNestedType(field.type)}
+                {getTypeName(field.type)}
               </span>
             </p>
           </div>
