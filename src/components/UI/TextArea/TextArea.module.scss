@@ -1,0 +1,42 @@
+.textareaContainer {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  margin: 10px;
+  width: 50vw;
+}
+
+.textarea {
+  flex-grow: 1;
+  height: 300px;
+  padding-top: 4px;
+  padding-left: 40px;
+  color: inherit;
+  border: 1px solid var(--border-input);
+  border-radius: 0.5rem;
+  background-color: var(--bg-input);
+  color: var(--font-main-color);
+  font-size: 1.6rem;
+}
+
+.textarea::before {
+  content: attr(data-line-number);
+  counter-increment: lineNumber;
+  position: relative;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  display: block;
+  padding: 0 10px;
+}
+
+.lineNumbers {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 30px;
+  text-align: center;
+  background-color: var(--bg-input-count);
+  border-radius: 0.5rem;
+}
