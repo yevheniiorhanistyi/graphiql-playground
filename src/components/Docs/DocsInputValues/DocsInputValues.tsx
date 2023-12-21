@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import FieldsIcon from '@/components/UI/FieldsIcon/FieldsIcon';
 import { __Field, __InputValue, __Type } from '@/interfaces/schemaInterface';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import { FC } from 'react';
@@ -13,6 +14,7 @@ const DocsInputValues: FC<DocsInputValuesType> = ({ type, handleClickKey, handle
   return (
     <div>
       <div>{type.description ? type.description : 'No description'}</div>
+      <FieldsIcon />
       <p>Fields</p>
       {type.inputFields ? (
         type.inputFields.map((inputField) => {

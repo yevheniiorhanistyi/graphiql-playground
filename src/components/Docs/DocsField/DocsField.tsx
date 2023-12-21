@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import TypeIcon from '@/components/UI/TypeIcon/TypeIcon';
 import { __Field, __Type } from '@/interfaces/schemaInterface';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import { FC } from 'react';
@@ -16,6 +17,7 @@ const DocsField: FC<DocsFieldType> = ({ field, handleClickValue }) => {
       <div>
         <div>
           <p>
+            <TypeIcon />
             <b>Type</b>
           </p>
           <p className="property_name docs_link" onClick={() => handleClickValue(field.type)}>

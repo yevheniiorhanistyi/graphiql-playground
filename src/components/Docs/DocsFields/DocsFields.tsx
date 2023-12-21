@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import FieldsIcon from '@/components/UI/FieldsIcon/FieldsIcon';
 import { __Field, __Type, __TypeKind } from '@/interfaces/schemaInterface';
 import { FC } from 'react';
 
@@ -34,9 +35,13 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
 
   return (
     <div>
+      <p>
+        <b>{type.name}</b>
+      </p>
       <div>{type.description ? type.description : 'No description FIELDS'}</div>
       {type.fields && (
         <>
+          <FieldsIcon />
           <b>Fields</b>
           <ul>
             {type.fields.map((field) => {

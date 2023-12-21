@@ -15,6 +15,7 @@ import findGraphQLType from '@/utils/graphQL_API/findGraphQLType';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import DocsInputValues from '../DocsInputValues/DocsInputValues';
 import DocsInputValue from '../DocsInputValue/DocsInputValue';
+import RootIcon from '@/components/UI/RootIcon/RootIcon';
 
 type DocsSchemaType = {
   schema: __Schema;
@@ -76,6 +77,7 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
       }
       return (
         <div key={schemaKey}>
+          <RootIcon />
           <p>{(schema[schemaKey as keyof __Schema] as TypeInterface).name}</p>
           <li>
             <span className="key_name_title">Type: </span>
