@@ -1,15 +1,25 @@
 /* eslint-disable no-unused-vars */
 import { SchemaTypes } from '@/constants/enums';
-import { TypeInterface, __Field, __Schema, __Type, __TypeKind } from '@/interfaces/schemaInterface';
+import {
+  TypeInterface,
+  __Field,
+  __InputValue,
+  __Schema,
+  __Type,
+  __TypeKind,
+} from '@/interfaces/schemaInterface';
 import { FC, useState } from 'react';
 import DocsFields from '../DocsFields/DocsFields';
 import DocsField from '../DocsField/DocsField';
 import findGraphQLType from '@/utils/graphQL_API/findGraphQLType';
+import getTypeName from '@/utils/graphQL_API/getTypeName';
+import DocsInputValues from '../DocsInputValues/DocsInputValues';
+import DocsInputValue from '../DocsInputValue/DocsInputValue';
 
 type DocsSchemaType = {
   schema: __Schema;
-  docsStack: Array<__Type | __Field>;
-  setDocsStack: (value: Array<__Type | __Field>) => void;
+  docsStack: Array<__Type | __Field | __InputValue>;
+  setDocsStack: (value: Array<__Type | __Field | __InputValue>) => void;
 };
 
 const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => {
@@ -29,17 +39,21 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
     }
   };
 
-  const handleClickKey = (key: __Field) => {
-    console.log('key: ', key);
+  const handleClickKey = (key: __Field | __InputValue) => {
+    // console.log('key: ', key);
     setDocsStack([...docsStack, key]);
+    // console.log([...docsStack, key]);
   };
 
   const handleClickValue = (value: __Type) => {
-    console.log('value: ', value);
-    const typeName = value.name;
-    const type = findGraphQLType(schema, typeName);
-    if (type) {
-      setDocsStack([...docsStack, type]);
+    const { name } = getTypeName(value);
+
+    if (name) {
+      const type = findGraphQLType(schema, name);
+
+      if (type) {
+        setDocsStack([...docsStack, type]);
+      }
     }
   };
 
@@ -86,17 +100,44 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
   return (
     <div>
       {docsStack.length === 1 && <ul>{typeList}</ul>}
-      {docsStack.length > 1 && !('args' in docsStack[docsStack.length - 1]) && (
-        <DocsFields
-          type={docsStack[docsStack.length - 1] as __Type}
-          handleClickKey={handleClickKey}
-          handleClickValue={handleClickValue}
-        />
-      )}
+
+      {docsStack.length > 1 &&
+        !('args' in docsStack[docsStack.length - 1]) &&
+        'kind' in docsStack[docsStack.length - 1] &&
+        (docsStack[docsStack.length - 1] as __Type).kind !== __TypeKind.INPUT_OBJECT && (
+          <DocsFields
+            type={docsStack[docsStack.length - 1] as __Type}
+            handleClickKey={handleClickKey}
+            handleClickValue={handleClickValue}
+          />
+        )}
+
       {docsStack.length > 1 &&
         !('kind' in docsStack[docsStack.length - 1]) &&
-        (docsStack[docsStack.length - 1] as __Field).type.kind === __TypeKind.OBJECT && (
-          <DocsField field={docsStack[docsStack.length - 1] as __Field} />
+        (docsStack[docsStack.length - 1] as __Field) &&
+        (docsStack[docsStack.length - 1] as __Field).args && ( //
+          <DocsField
+            field={docsStack[docsStack.length - 1] as __Field}
+            handleClickValue={handleClickValue}
+          />
+        )}
+
+      {docsStack.length > 1 &&
+        (docsStack[docsStack.length - 1] as __Type).kind === __TypeKind.INPUT_OBJECT && (
+          <DocsInputValues
+            type={docsStack[docsStack.length - 1] as __Type}
+            handleClickValue={handleClickValue}
+            handleClickKey={handleClickKey}
+          />
+        )}
+
+      {docsStack.length > 1 &&
+        !('kind' in docsStack[docsStack.length - 1]) &&
+        !('args' in (docsStack[docsStack.length - 1] as __InputValue)) && (
+          <DocsInputValue
+            inputValue={docsStack[docsStack.length - 1] as __InputValue}
+            handleClickValue={handleClickValue}
+          />
         )}
     </div>
   );

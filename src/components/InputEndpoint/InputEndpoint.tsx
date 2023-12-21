@@ -31,7 +31,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
             label="Endpoint: "
             name="endpoint"
             type="text"
-            defaultValue={endpoint}
+            placeholder={endpoint}
           />
           <button type="submit">submit</button>
         </form>

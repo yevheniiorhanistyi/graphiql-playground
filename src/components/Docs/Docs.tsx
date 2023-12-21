@@ -1,4 +1,4 @@
-import { __Field, __Schema, __Type } from '@/interfaces/schemaInterface';
+import { __Field, __InputValue, __Schema, __Type } from '@/interfaces/schemaInterface';
 import { FC, useEffect, useState } from 'react';
 import DocsHeader from './DocsHeader/DocsHeader';
 import DocsContent from './DocsContent/DocsContent';
@@ -11,7 +11,7 @@ type DocsType = {
 
 const Docs: FC<DocsType> = ({ schema, handleClose }) => {
   const [headerPrevTitle, setHeaderPrevTitle] = useState<string>('');
-  const [docsStack, setDocsStack] = useState<Array<__Type | __Field>>([]);
+  const [docsStack, setDocsStack] = useState<Array<__Type | __Field | __InputValue>>([]);
 
   useEffect(() => {
     console.log('Full schema: ', schema);

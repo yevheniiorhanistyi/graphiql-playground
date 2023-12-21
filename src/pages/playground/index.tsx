@@ -13,7 +13,6 @@ export default function Playground() {
   const [schema, setSchema] = useState<__Schema | null>(null);
 
   useEffect(() => {
-    console.log('new endpoint: ', endpoint);
     if (endpoint) {
       getSchema(endpoint);
     }

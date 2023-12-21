@@ -33,27 +33,34 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
   };
 
   return (
-    <ul>
-      <div>{type.description ? type.description : 'No description'}</div>
-      {type.fields?.map((field) => {
-        return (
-          <div key={field.name}>
-            <p>
-              <span className="key_name docs-link" onClick={() => handleClickKey(field)}>
-                {field.name}
-              </span>
-              <span>( arguments ): </span>
-              <span
-                className="property_name docs-link"
-                onClick={() => handleClickValue(field.type)}
-              >
-                {getTypeName(field.type)}
-              </span>
-            </p>
-          </div>
-        );
-      })}
-    </ul>
+    <div>
+      <div>{type.description ? type.description : 'No description FIELDS'}</div>
+      {type.fields && (
+        <>
+          <b>Fields</b>
+          <ul>
+            {type.fields.map((field) => {
+              return (
+                <li key={field.name}>
+                  <p>
+                    <span className="key_name docs-link" onClick={() => handleClickKey(field)}>
+                      {field.name}
+                    </span>
+                    <span>( arguments ): </span>
+                    <span
+                      className="property_name docs-link"
+                      onClick={() => handleClickValue(field.type)}
+                    >
+                      {getTypeName(field.type)}
+                    </span>
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </div>
   );
 };
 
