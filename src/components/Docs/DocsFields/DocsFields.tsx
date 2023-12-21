@@ -2,6 +2,7 @@
 import FieldsIcon from '@/components/UI/FieldsIcon/FieldsIcon';
 import { __Field, __Type, __TypeKind } from '@/interfaces/schemaInterface';
 import { FC } from 'react';
+import DocsArguments from '../DocsArguments/DocsArguments';
 
 type DocsFieldsType = {
   type: __Type;
@@ -51,7 +52,9 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
                     <span className="key_name docs-link" onClick={() => handleClickKey(field)}>
                       {field.name}
                     </span>
-                    <span>( arguments ): </span>
+                    <span>
+                      <DocsArguments field={field} handleClickValue={handleClickValue} />:{' '}
+                    </span>
                     <span
                       className="property_name docs-link"
                       onClick={() => handleClickValue(field.type)}

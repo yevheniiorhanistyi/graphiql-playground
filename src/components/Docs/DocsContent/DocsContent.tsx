@@ -41,9 +41,7 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
   };
 
   const handleClickKey = (key: __Field | __InputValue) => {
-    // console.log('key: ', key);
     setDocsStack([...docsStack, key]);
-    // console.log([...docsStack, key]);
   };
 
   const handleClickValue = (value: __Type) => {
