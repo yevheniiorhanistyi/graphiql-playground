@@ -4,10 +4,14 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding-top: 1rem;
+  }
 }
 
 .form_container {
-  width: 41rem;
+  width: 45rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -18,7 +22,7 @@
   }
 
   @media screen and (max-width: $mobile-screen) {
-    width: 27rem;
+    width: 85vw;
   }
 }
 

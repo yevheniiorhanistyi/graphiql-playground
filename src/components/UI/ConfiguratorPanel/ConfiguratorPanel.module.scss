@@ -6,10 +6,6 @@
   justify-content: center;
   gap: 1rem;
   margin-left: auto;
-
-  @media (max-width: $mobile-screen) {
-    margin: 0 auto;
-  }
 }
 
 .backdrop {
