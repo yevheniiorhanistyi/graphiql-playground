@@ -1,0 +1,102 @@
+.section {
+  margin-bottom: -2rem;
+  position: relative;
+}
+
+.about {
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+  position: relative;
+  z-index: 10;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  column-gap: 6rem;
+  row-gap: 3.2rem;
+
+  @media (max-width: $large-screen) {
+    grid-template-columns: 1fr;
+  }
+
+  &_image {
+    width: 100%;
+    max-width: 52rem;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  &_content {
+    max-width: 52rem;
+    padding: 0 1rem;
+    margin: 0 auto;
+  }
+
+  &_title {
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 2rem;
+
+    @media (max-width: $large-screen) {
+      text-align: center;
+    }
+
+    @media (max-width: $laptop-screen) {
+      font-size: 3.6rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: $mobile-screen) {
+      font-size: 3rem;
+    }
+  }
+
+  &_description {
+    margin-bottom: 2rem;
+  }
+
+  &_subtitle {
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+}
+
+.list {
+  padding: 0 1.5rem;
+
+  @media (max-width: $mobile-screen) {
+    padding: 0;
+  }
+
+  &_item {
+    display: flex;
+
+    img {
+      margin-right: 1rem;
+    }
+
+    p {
+      @media (max-width: $mobile-screen) {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+.svg {
+  position: absolute;
+  z-index: 0;
+
+  &_1 {
+    top: 0;
+    right: 0;
+  }
+
+  &_2 {
+    bottom: 0;
+    left: 0;
+  }
+}
