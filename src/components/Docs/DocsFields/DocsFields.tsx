@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import FieldsIcon from '@/components/UI/FieldsIcon/FieldsIcon';
-import { __Field, __Type, __TypeKind } from '@/interfaces/schemaInterface';
+import { __Field, __Type } from '@/interfaces/schemaInterface';
 import { FC } from 'react';
 import DocsArguments from '../DocsArguments/DocsArguments';
+import useTranslation from '@/localization/useTranslation';
+import getTypeName from '@/utils/graphQL_API/getTypeName';
 
 type DocsFieldsType = {
   type: __Type;
@@ -11,41 +13,21 @@ type DocsFieldsType = {
 };
 
 const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue }) => {
-  const getTypeName = (type: __Type, arrayKind: Array<string> = []): string | null => {
-    if (type.ofType && !type.name) {
-      arrayKind.push(type.kind);
-      return getTypeName(type.ofType, arrayKind);
-    } else if (!type.ofType && type.name) {
-      let name = type.name;
-
-      arrayKind.reverse().forEach((item) => {
-        if (item === __TypeKind.NON_NULL) {
-          name = `${name}!`;
-        }
-
-        if (item === __TypeKind.LIST) {
-          name = `[${name}]`;
-        }
-      });
-
-      return name;
-    }
-
-    return null;
-  };
+  const t = useTranslation();
 
   return (
     <div>
       <p>
         <b>{type.name}</b>
       </p>
-      <div>{type.description ? type.description : 'No description FIELDS'}</div>
+      <div>{type.description ? type.description : t['No description']}</div>
       {type.fields && (
         <>
           <FieldsIcon />
-          <b>Fields</b>
+          <b>{t['Fields']}</b>
           <ul>
             {type.fields.map((field) => {
+              const { typeName } = getTypeName(field.type);
               return (
                 <li key={field.name}>
                   <p>
@@ -59,7 +41,7 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
                       className="property_name docs-link"
                       onClick={() => handleClickValue(field.type)}
                     >
-                      {getTypeName(field.type)}
+                      {typeName}
                     </span>
                   </p>
                 </li>

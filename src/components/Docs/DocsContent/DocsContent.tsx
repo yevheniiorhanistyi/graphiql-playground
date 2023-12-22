@@ -16,6 +16,7 @@ import getTypeName from '@/utils/graphQL_API/getTypeName';
 import DocsInputValues from '../DocsInputValues/DocsInputValues';
 import DocsInputValue from '../DocsInputValue/DocsInputValue';
 import RootIcon from '@/components/UI/RootIcon/RootIcon';
+import useTranslation from '@/localization/useTranslation';
 
 type DocsSchemaType = {
   schema: __Schema;
@@ -27,6 +28,8 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
   const [isQueryTypeDisplayed, setIsQueryTypeDisplayed] = useState<boolean>(false);
   const [isMutationDisplayed, setIsMutationDisplayed] = useState<boolean>(false);
   const [isSubscriptionDisplayed, setIsSubscriptionDisplayed] = useState<boolean>(false);
+
+  const t = useTranslation();
 
   const handleTypeClick = (value: string) => {
     if (value === SchemaTypes.QUERY_TYPE) {
@@ -78,7 +81,7 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
           <RootIcon />
           <p>{(schema[schemaKey as keyof __Schema] as TypeInterface).name}</p>
           <li>
-            <span className="key_name_title">Type: </span>
+            <span className="key_name_title">{t['Type']}: </span>
             <span onClick={() => handleTypeClick(schemaKey)} className="property_name docs-link">
               {(schema[schemaKey as keyof __Schema] as TypeInterface).name}
             </span>

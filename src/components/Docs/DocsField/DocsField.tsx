@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import TypeIcon from '@/components/UI/TypeIcon/TypeIcon';
 import { __Field, __Type } from '@/interfaces/schemaInterface';
+import useTranslation from '@/localization/useTranslation';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import { FC } from 'react';
+import ArgumentsIcon from '@/components/UI/ArgumentsIcon/ArgumentsIcon';
 
 type DocsFieldType = {
   field: __Field;
@@ -10,6 +12,8 @@ type DocsFieldType = {
 };
 
 const DocsField: FC<DocsFieldType> = ({ field, handleClickValue }) => {
+  const t = useTranslation();
+
   const { typeName } = getTypeName(field.type);
   return (
     <div>
@@ -18,7 +22,7 @@ const DocsField: FC<DocsFieldType> = ({ field, handleClickValue }) => {
         <div>
           <p>
             <TypeIcon />
-            <b>Type</b>
+            <b>{t['Type']}</b>
           </p>
           <p className="property_name docs_link" onClick={() => handleClickValue(field.type)}>
             {typeName}
@@ -26,7 +30,8 @@ const DocsField: FC<DocsFieldType> = ({ field, handleClickValue }) => {
         </div>
         {field.args.length > 0 && (
           <div>
-            <b>Arguments</b>
+            <ArgumentsIcon />
+            <b>{t['Arguments']}</b>
             {field.args.map((arg) => {
               const { typeName } = getTypeName(arg.type);
               return (

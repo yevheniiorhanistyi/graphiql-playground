@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import FieldsIcon from '@/components/UI/FieldsIcon/FieldsIcon';
 import { __Field, __InputValue, __Type } from '@/interfaces/schemaInterface';
+import useTranslation from '@/localization/useTranslation';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import { FC } from 'react';
 
@@ -11,11 +12,13 @@ type DocsInputValuesType = {
 };
 
 const DocsInputValues: FC<DocsInputValuesType> = ({ type, handleClickKey, handleClickValue }) => {
+  const t = useTranslation();
+
   return (
     <div>
-      <div>{type.description ? type.description : 'No description'}</div>
+      <div>{type.description ? type.description : t['No description']}</div>
       <FieldsIcon />
-      <p>Fields</p>
+      <p>{t['Fields']}</p>
       {type.inputFields ? (
         type.inputFields.map((inputField) => {
           const { typeName } = getTypeName(inputField.type);
@@ -34,7 +37,7 @@ const DocsInputValues: FC<DocsInputValuesType> = ({ type, handleClickKey, handle
           );
         })
       ) : (
-        <p>No fields</p>
+        <p>{t['No fields']}</p>
       )}
     </div>
   );

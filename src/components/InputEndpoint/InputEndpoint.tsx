@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
 import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
 import { FC, useEffect, useState } from 'react';
+import useTranslation from '@/localization/useTranslation';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string) => void;
@@ -12,6 +13,8 @@ type InputEndpointType = {
 const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
   const [endpoint, setEndpoint] = useState<string>(INITIAL_ENDPOINT);
   const { register, handleSubmit } = useForm<endpointFormType>();
+
+  const t = useTranslation();
 
   useEffect(() => {
     getEndpoint(INITIAL_ENDPOINT);
@@ -28,17 +31,17 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
         <form action="submit" onSubmit={handleSubmit(handleChangeEnpoint)}>
           <Input<endpointFormType>
             register={register}
-            label="Endpoint: "
+            label={`${t['Endpoint']}: `}
             name="endpoint"
             type="text"
             placeholder={endpoint}
           />
-          <button type="submit">submit</button>
+          <button type="submit">{t['Submit']}</button>
         </form>
       </div>
 
       <p>
-        <span>Endpoint: </span>
+        <span>{t['Endpoint']}: </span>
         <span>{endpoint}</span>
       </p>
     </div>
