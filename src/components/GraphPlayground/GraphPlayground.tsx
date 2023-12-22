@@ -1,5 +1,4 @@
 import BasicButton from '@/components/common/BasicButton/BasicButton';
-import React, { ChangeEvent } from 'react';
 import styles from './GraphPlayground.module.scss';
 import InputEndpoint from '../InputEndpoint/InputEndpoint';
 
@@ -7,81 +6,21 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import { __Schema } from '@/interfaces/schemaInterface';
 import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
 import TextArea from '../UI/TextArea/TextArea';
+import useTranslation from '@/localization/useTranslation';
 
 const GraphiQLPage = () => {
+  const t = useTranslation();
   const [query, setQuery] = useState('');
-  const [variables, setVariables] = useState('');
-  const [headers, setHeaders] = useState({});
-  const [schemaLoaded, setSchemaLoaded] = useState(false);
   const [response, setResponse] = useState('');
 
   const Docs = lazy(() => import('../../components/Docs/Docs'));
 
-  const [isDocsDispayed, setIsDocsDispayed] = useState<boolean>(false);
-  const [endpoint, setEnpont] = useState<string | null>(null);
+  const [isDocsDisplayed, setIsDocsDisplayed] = useState<boolean>(false);
+  const [endpoint, setEndpoint] = useState<string | null>(null);
   const [schema, setSchema] = useState<__Schema | null>(null);
 
-  useEffect(() => {
-    fetchSchema();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endpoint]);
-
-  const fetchSchema = async () => {
-    try {
-      const response = await fetch(`${endpoint}?query={
-        __schema {
-          types {
-            name
-            description
-            kind
-            fields {
-              name
-              description
-              type {
-                name
-                kind
-              }
-            }
-          }
-        }
-      }`);
-      const result = await response.json();
-
-      setSchema(result.data);
-      setSchemaLoaded(!!result.data);
-    } catch (error) {
-      console.error('Error fetching schema:', error);
-    }
-  };
-
-  const handleQueryChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setQuery(event.target.value);
-  };
-
-  const handleVariablesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setVariables(event.target.value);
-  };
-
-  const handleHeaderChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setHeaders({ ...headers, [name]: value });
-  };
-
-  const handleExecuteQuery = async () => {
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...headers,
-        },
-        body: JSON.stringify({ query, variables }),
-      });
-      const result = await response.json();
-      setResponse(JSON.stringify(result, null, 2));
-    } catch (error) {
-      console.error('Error executing query:', error);
-    }
+  const handleQueryChange = (value: string) => {
+    setQuery(value);
   };
 
   useEffect(() => {
@@ -96,27 +35,55 @@ const GraphiQLPage = () => {
     setSchema(response);
   };
 
-  const toggleDocsDyspalyed = () => {
-    setIsDocsDispayed((prev) => !prev);
+  const toggleDocsDisplayed = () => {
+    setIsDocsDisplayed((prev) => !prev);
+  };
+
+  const handleExecuteQuery = async () => {
+    try {
+      if (!endpoint) {
+        console.error('Endpoint is not set');
+        return;
+      }
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setResponse(JSON.stringify(result, null, 2));
+    } catch (error) {
+      console.error('Error executing query:', error);
+    }
   };
 
   return (
     <div>
-      <InputEndpoint getEndpoint={setEnpont} />
+      <InputEndpoint getEndpoint={setEndpoint} />
 
-      {isDocsDispayed && schema && (
+      {isDocsDisplayed && schema && (
         <Suspense fallback={<p>No GraphQL schema</p>}>
-          <Docs schema={schema} handleClose={toggleDocsDyspalyed} />
+          <Docs schema={schema} handleClose={toggleDocsDisplayed} />
         </Suspense>
       )}
 
       <div className={styles.flex}>
         <TextArea value={query} onChange={handleQueryChange} />
 
-        <TextArea value={response} readOnly />
+        <TextArea value={response} readOnly={true} />
       </div>
       <br />
-      <BasicButton onClick={toggleDocsDyspalyed}>Show Docs</BasicButton>
+      <BasicButton onClick={handleExecuteQuery}>{t['Send']}</BasicButton>
+      <br />
+      <BasicButton onClick={toggleDocsDisplayed}>Show Docs</BasicButton>
     </div>
   );
 };
