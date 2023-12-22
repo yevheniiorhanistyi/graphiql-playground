@@ -115,6 +115,7 @@ const GraphiQLPage = () => {
 
         <TextArea value={response} readOnly />
       </div>
+      <br />
       <BasicButton onClick={toggleDocsDyspalyed}>Show Docs</BasicButton>
     </div>
   );

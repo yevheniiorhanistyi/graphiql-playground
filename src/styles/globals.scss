@@ -168,4 +168,16 @@ main {
   @include docs_link(var(--font-property-link-color));
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
 
+::-webkit-scrollbar-thumb {
+  background-color: var(--font-main-color);
+  border-radius: 4px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-input-count);
+}

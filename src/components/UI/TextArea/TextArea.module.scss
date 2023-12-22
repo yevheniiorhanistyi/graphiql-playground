@@ -1,42 +1,56 @@
-.textareaContainer {
+.text_editor {
   display: flex;
-  align-items: flex-start;
-  position: relative;
-  margin: 10px;
+  height: 50vh;
   width: 50vw;
+  margin-left: -3.5rem;
 }
 
-.textarea {
-  flex-grow: 1;
-  height: 300px;
-  padding-top: 4px;
-  padding-left: 40px;
-  color: inherit;
-  border: 1px solid var(--border-input);
-  border-radius: 0.5rem;
-  background-color: var(--bg-input);
+.line_counter {
+  position: relative;
+  top: 0.2rem;
+  left: 3.5rem;
+  text-align: right;
+  border: none;
+  width: 3.5rem;
+  overflow-y: hidden;
+  background-color: var(--bg-input-count);
   color: var(--font-main-color);
   font-size: 1.6rem;
+  line-height: 140%;
+  font-family: 'Roboto', sans-serif;
+  padding-right: 0.5rem;
+  margin-bottom: 0.4rem;
+  outline: none;
+  resize: none;
 }
 
-.textarea::before {
-  content: attr(data-line-number);
-  counter-increment: lineNumber;
-  position: relative;
-  left: 10px;
-  top: 0;
-  bottom: 0;
-  right: 10px;
-  display: block;
-  padding: 0 10px;
+.code_editor {
+  width: 100%;
+  border: 1px solid var(--border-input);
+  background-color: var(--bg-input);
+  color: var(--color-link);
+  font-size: 1.6rem;
+  line-height: 140%;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 4.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--font-main-color) var(--bg-input-count);
+  &:focus {
+    background-color: inherit;
+    border: 2px solid var(--border-input-focus);
+  }
 }
 
-.lineNumbers {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 30px;
-  text-align: center;
+.code_editor::-webkit-scrollbar {
+  width: 5px;
+}
+
+.code_editor::-webkit-scrollbar-thumb {
+  background-color: var(--font-main-color);
+  border-radius: 0.4rem;
+  width: 0.6rem;
+}
+
+.code_editor::-webkit-scrollbar-track {
   background-color: var(--bg-input-count);
-  border-radius: 0.5rem;
 }
