@@ -4,12 +4,15 @@ import userEvent from '@testing-library/user-event';
 
 import ThemeProvider from '@/theme/ThemeProvider';
 import ConfiguratorPanel from '@/components/UI/ConfiguratorPanel/ConfiguratorPanel';
+import LocaleProvider from '@/localization/LocaleProvider';
 
 describe('ConfiguratorPanel Component', () => {
   test('renders without errors', () => {
     render(
       <ThemeProvider>
-        <ConfiguratorPanel />
+        <LocaleProvider>
+          <ConfiguratorPanel />
+        </LocaleProvider>
       </ThemeProvider>
     );
 
