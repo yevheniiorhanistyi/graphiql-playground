@@ -16,7 +16,16 @@ export default defineConfig({
       all: true,
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['.next/*', 'next.config.js', 'src/constants/*', 'src/interfaces/*', 'src/types/*'],
+      exclude: [
+        '.next/*',
+        'next.config.js',
+        'src/constants/*',
+        'src/interfaces/*',
+        'src/types/*',
+        '.eslintrc.cjs',
+        '.prettierrc.cjs',
+        'next-env.d.ts',
+      ],
     },
   },
   resolve: {
