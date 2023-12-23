@@ -24,7 +24,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={cn(styles.header, { [styles.sticky]: isSticky })}>
+    <header className={cn(styles.header, { [styles.sticky]: isSticky })} data-testid="header">
       <div className={cn(styles.header_wrapper, 'wrapper')}>
         <Link className={styles.logoLink} href="/">
           <svg
