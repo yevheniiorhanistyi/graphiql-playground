@@ -1,0 +1,16 @@
+.back_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: var(--font-main-color);
+  
+    &:hover {
+      width: 2rem;
+      height: 3.6rem;
+      cursor: pointer;
+      fill: var(--font-main-color-hover);
+      transition: 0.3s width ease-in-out;
+      animation: jerking 0.8s ease;
+      animation-iteration-count: 1;
+    }
+}

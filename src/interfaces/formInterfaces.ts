@@ -3,3 +3,7 @@ import * as yup from 'yup';
 
 export type signInFormInterface = yup.InferType<typeof signInFormSchema>;
 export type signUpFormInterface = yup.InferType<typeof signUpFormSchema>;
+
+export type endpointFormType = {
+  endpoint: string;
+};
