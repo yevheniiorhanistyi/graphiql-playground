@@ -1,22 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { SchemaTypes } from '@/constants/enums';
-import {
-  TypeInterface,
-  __Field,
-  __InputValue,
-  __Schema,
-  __Type,
-  __TypeKind,
-} from '@/interfaces/schemaInterface';
-import { FC, useState } from 'react';
+import { __Field, __InputValue, __Schema, __Type, __TypeKind } from '@/interfaces/schemaInterface';
+import { FC } from 'react';
 import DocsFields from '../DocsFields/DocsFields';
 import DocsField from '../DocsField/DocsField';
 import findGraphQLType from '@/utils/graphQL_API/findGraphQLType';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import DocsInputValues from '../DocsInputValues/DocsInputValues';
 import DocsInputValue from '../DocsInputValue/DocsInputValue';
-import RootIcon from '@/components/UI/RootIcon/RootIcon';
-import useTranslation from '@/localization/useTranslation';
+import DocsRoot from '../DocsRoot/DocsRoot';
 
 type DocsSchemaType = {
   schema: __Schema;
@@ -25,24 +16,6 @@ type DocsSchemaType = {
 };
 
 const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => {
-  const [isQueryTypeDisplayed, setIsQueryTypeDisplayed] = useState<boolean>(false);
-  const [isMutationDisplayed, setIsMutationDisplayed] = useState<boolean>(false);
-  const [isSubscriptionDisplayed, setIsSubscriptionDisplayed] = useState<boolean>(false);
-
-  const t = useTranslation();
-
-  const handleTypeClick = (value: string) => {
-    if (value === SchemaTypes.QUERY_TYPE) {
-      setIsQueryTypeDisplayed((prev) => !prev);
-    }
-    if (value === SchemaTypes.MUTATION_TYPE) {
-      setIsMutationDisplayed((prev) => !prev);
-    }
-    if (value === SchemaTypes.SUBSCRIPTION_TYPE) {
-      setIsSubscriptionDisplayed((prev) => !prev);
-    }
-  };
-
   const handleClickKey = (key: __Field | __InputValue) => {
     setDocsStack([...docsStack, key]);
   };
@@ -59,50 +32,15 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
     }
   };
 
-  const typeList = Object.keys(schema).map((schemaKey) => {
-    if (
-      schema[schemaKey as keyof __Schema] !== null &&
-      (schemaKey === SchemaTypes.QUERY_TYPE ||
-        schemaKey === SchemaTypes.MUTATION_TYPE ||
-        schemaKey === SchemaTypes.SUBSCRIPTION_TYPE)
-    ) {
-      let isDisplay = null;
-      if (schemaKey === SchemaTypes.QUERY_TYPE) {
-        isDisplay = isQueryTypeDisplayed;
-      }
-      if (schemaKey === SchemaTypes.MUTATION_TYPE) {
-        isDisplay = isMutationDisplayed;
-      }
-      if (schemaKey === SchemaTypes.SUBSCRIPTION_TYPE) {
-        isDisplay = isSubscriptionDisplayed;
-      }
-      return (
-        <div key={schemaKey}>
-          <RootIcon />
-          <p>{(schema[schemaKey as keyof __Schema] as TypeInterface).name}</p>
-          <li>
-            <span className="key_name_title">{t['Type']}: </span>
-            <span onClick={() => handleTypeClick(schemaKey)} className="property_name docs-link">
-              {(schema[schemaKey as keyof __Schema] as TypeInterface).name}
-            </span>
-          </li>
-          {isDisplay && (
-            <div>
-              <DocsFields
-                type={schema.types.find((type) => type.name === schema[schemaKey]?.name)!}
-                handleClickKey={handleClickKey}
-                handleClickValue={handleClickValue}
-              />
-            </div>
-          )}
-        </div>
-      );
-    }
-  });
-
   return (
-    <div>
-      {docsStack.length === 1 && <ul>{typeList}</ul>}
+    <>
+      {docsStack.length === 1 && (
+        <DocsRoot
+          schema={schema}
+          handleClickKey={handleClickKey}
+          handleClickValue={handleClickValue}
+        />
+      )}
 
       {docsStack.length > 1 &&
         !('args' in docsStack[docsStack.length - 1]) &&
@@ -142,7 +80,7 @@ const DocsSchema: FC<DocsSchemaType> = ({ schema, docsStack, setDocsStack }) => 
             handleClickValue={handleClickValue}
           />
         )}
-    </div>
+    </>
   );
 };
 

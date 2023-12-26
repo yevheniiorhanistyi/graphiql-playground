@@ -5,6 +5,8 @@ import useTranslation from '@/localization/useTranslation';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import { FC } from 'react';
 import ArgumentsIcon from '@/components/UI/ArgumentsIcon/ArgumentsIcon';
+import cn from 'classnames';
+import styles from './DocsField.module.scss';
 
 type DocsFieldType = {
   field: __Field;
@@ -16,22 +18,23 @@ const DocsField: FC<DocsFieldType> = ({ field, handleClickValue }) => {
 
   const { typeName } = getTypeName(field.type);
   return (
-    <div>
+    <div className={styles.field_container}>
       <p>{field.description}</p>
-      <div>
-        <div>
-          <p>
-            <TypeIcon />
-            <b>{t['Type']}</b>
-          </p>
-          <p className="property_name docs_link" onClick={() => handleClickValue(field.type)}>
-            {typeName}
-          </p>
-        </div>
+      <div className={styles.field_container}>
+        <p className={cn(styles.title_name, 'section_underline')}>
+          <TypeIcon />
+          {t['Type']}
+        </p>
+        <p className="property_name docs_link" onClick={() => handleClickValue(field.type)}>
+          {typeName}
+        </p>
+
         {field.args.length > 0 && (
-          <div>
-            <ArgumentsIcon />
-            <b>{t['Arguments']}</b>
+          <div className={styles.field_container}>
+            <p className={cn(styles.title_name, 'section_underline')}>
+              <ArgumentsIcon />
+              {t['Arguments']}
+            </p>
             {field.args.map((arg) => {
               const { typeName } = getTypeName(arg.type);
               return (

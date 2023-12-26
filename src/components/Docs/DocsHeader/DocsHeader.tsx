@@ -18,7 +18,7 @@ const DocsHeader: FC<DocsHeaderType> = ({ titlePrevType, handleClose, handleBack
           <div className={styles.back_btn} onClick={handleBack}>
             {isRoot && <BackIconButton />}
           </div>
-          <b>{titlePrevType}</b>
+          <p className={styles.title}>{titlePrevType}</p>
         </div>
         <div onClick={handleClose}>
           <CloseIconButton />
