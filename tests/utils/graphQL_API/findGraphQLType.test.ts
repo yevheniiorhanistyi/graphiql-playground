@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { __TypeKind } from '@/interfaces/schemaInterface';
 import findGraphQLType from '@/utils/graphQL_API/findGraphQLType';
-import { createMockSchemaObject, createMockSchemaString } from './mockSchema/mockSchema';
+import { createMockSchemaObject, createMockSchemaString } from '../../mockSchema';
 
 describe('findGraphQLType function', () => {
   test('returns null for non-existing type', () => {
@@ -35,10 +35,10 @@ describe('findGraphQLType function', () => {
 
   test('returns type for existing object type', () => {
     const schema = createMockSchemaObject();
-    const result = findGraphQLType(schema, 'User');
+    const result = findGraphQLType(schema, 'string');
     expect(result).toEqual({
       kind: __TypeKind.OBJECT,
-      name: 'User',
+      name: 'string',
       description: 'User type',
       fields: [
         {

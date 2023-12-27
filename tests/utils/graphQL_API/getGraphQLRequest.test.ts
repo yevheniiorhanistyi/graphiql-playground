@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
-import { createMockSchemaString } from './mockSchema/mockSchema';
+import { createMockSchemaString } from '../../mockSchema';
 
 describe('getGraphQLSchema', () => {
   test('fetches and returns the GraphQL schema', async () => {
