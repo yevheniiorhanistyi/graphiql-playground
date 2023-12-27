@@ -17,7 +17,7 @@
   color: var(--font-main-color);
   font-size: 1.6rem;
   line-height: 140%;
-  font-family: 'Roboto', sans-serif;
+  font-family: monospace, sans-serif;
   padding-right: 0.5rem;
   margin-bottom: 0.4rem;
   outline: none;
@@ -31,7 +31,7 @@
   color: var(--color-link);
   font-size: 1.6rem;
   line-height: 140%;
-  font-family: 'Roboto', sans-serif;
+  font-family: monospace, sans-serif;
   padding-left: 4.5rem;
   scrollbar-width: thin;
   scrollbar-color: var(--font-main-color) var(--bg-input-count);
@@ -43,6 +43,7 @@
 
 .code_editor::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 .code_editor::-webkit-scrollbar-thumb {
@@ -53,4 +54,9 @@
 
 .code_editor::-webkit-scrollbar-track {
   background-color: var(--bg-input-count);
+}
+
+.info_line {
+  font-size: 1.2rem;
+  text-align: right;
 }

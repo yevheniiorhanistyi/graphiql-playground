@@ -24,7 +24,6 @@ const GraphiQLPage = () => {
   };
 
   useEffect(() => {
-    console.log('new endpoint: ', endpoint);
     if (endpoint) {
       getSchema(endpoint);
     }

@@ -2,8 +2,8 @@ import { Dispatch, KeyboardEvent, RefObject, SetStateAction } from 'react';
 
 export const handleTab = (
   event: KeyboardEvent<HTMLTextAreaElement>,
-  code: string,
-  setCode: Dispatch<SetStateAction<string>>,
+  text: string,
+  setText: Dispatch<SetStateAction<string>>,
   codeEditorRef: RefObject<HTMLTextAreaElement>
 ) => {
   event.preventDefault();
@@ -12,7 +12,7 @@ export const handleTab = (
   const value = event.currentTarget.value;
   const newValue = value.substring(0, selectionStart) + '  ' + value.substring(selectionEnd);
 
-  setCode(newValue);
+  setText(newValue);
 
   const newCursorPosition = selectionStart + 2;
   setTimeout(() => {
