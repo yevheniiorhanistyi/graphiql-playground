@@ -77,6 +77,13 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
     }
   };
 
+  const handleClear = () => {
+    setText('');
+    if (onChange) {
+      onChange('');
+    }
+  };
+
   return (
     <div>
       <div>
@@ -108,20 +115,24 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
           <div>
             {matches.length !== 0 && matches[0] !== '' && (
               <select
+                multiple
+                size={2}
                 style={{
                   position: 'absolute',
                   top: cursorPosition.top,
                   left: cursorPosition.left,
                 }}
-                onChange={(e) =>
+                onChange={(e) => {
                   setValueInTextArea(
                     text,
                     cursorCount.row - 1,
-                    cursorCount.col - inputValueRef.current.length - 1,
+                    cursorCount.col - inputValueRef.current.length,
+                    inputValueRef,
                     e.target.value,
                     setText
-                  )
-                }
+                  );
+                  matches.length = 0;
+                }}
                 className={styles.snippetList}
               >
                 {matches.map((match, index) => (
@@ -139,6 +150,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
           >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${text.length}`}</p>
         )}
       </div>
+      <button onClick={handleClear}>Очистить</button>
     </div>
   );
 };

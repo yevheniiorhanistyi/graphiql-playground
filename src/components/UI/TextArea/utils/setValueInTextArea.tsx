@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 
 const setValueInTextArea = (
   text: string,
   rowToInsert: number,
   columnToInsert: number,
+  inputValueRef: MutableRefObject<string>,
   valueToInsert: string,
   setText: Dispatch<SetStateAction<string>>
 ) => {
@@ -11,9 +12,10 @@ const setValueInTextArea = (
   if (lines.length > rowToInsert) {
     const line = lines[rowToInsert];
     if (line.length >= columnToInsert) {
-      const start = line.substring(0, columnToInsert);
-      const end = line.substring(columnToInsert);
-      lines[rowToInsert] = start + valueToInsert + end;
+      const start = line.substring(0, columnToInsert - inputValueRef.current.length);
+
+      const end = line.substring(columnToInsert + inputValueRef.current.length);
+      lines[rowToInsert] = start + valueToInsert + ' ' + end;
     } else {
       const spacesToAdd = columnToInsert - line.length;
       for (let i = 0; i < spacesToAdd; i++) {
