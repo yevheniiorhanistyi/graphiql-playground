@@ -113,6 +113,7 @@ footer {
 main {
   flex: 1 0 auto;
   width: 100%;
+  position: relative;
 }
 
 .form_container {
@@ -130,3 +131,49 @@ main {
   padding: 0 2rem;
   margin: 0 auto;
 }
+
+@mixin docs_link($color) {
+  width: max-content;
+  display: inline-block;
+  position: relative;
+  color: $color;
+  cursor: pointer;
+
+  &::after {
+    width: max-content;
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $color;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+.key_name {
+  @include docs_link(var(--font-key-link-color));
+
+  &_title {
+    color: var(--font-key-link-color);
+  }
+}
+
+.property_name {
+  @include docs_link(var(--font-property-link-color));
+}
+
+.section_underline {
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+

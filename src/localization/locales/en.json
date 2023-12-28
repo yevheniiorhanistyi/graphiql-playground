@@ -54,5 +54,17 @@
   "Frontend Developer": "Frontend Developer",
   "Stanislav, an excellent example of a team player, but is also capable of working alone. He is detail-oriented, very hard-working and has extensive technical knowledge, while always being open to learning new tools and technologies.": "Stanislav, an excellent example of a team player, but is also capable of working alone. He is detail-oriented, very hard-working and has extensive technical knowledge, while always being open to learning new tools and technologies.",
   "Uladzimir is web developer with excellent communication skills  shows an outstanding ability to adapt to new technologies, which makes it an ideal candidate for projects that require implementation of new solutions.": "Uladzimir is web developer with excellent communication skills  shows an outstanding ability to adapt to new technologies, which makes it an ideal candidate for projects that require implementation of new solutions.",
-  "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.": "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team."
+  "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.": "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.",
+  "GraphQL Docs": "GraphQL Docs",
+  "No type name found": "No type name found",
+  "No GraphQL schema": "No GraphQL schema",
+  "No description": "No description",
+  "Fields": "Fields",
+  "No fields":"No fields",
+  "Type": "Type",
+  "Arguments": "Arguments",
+  "Endpoint": "Endpoint",
+  "Section": "Section",
+  "Schema description": "GraphQL Docs is a tool that generates comprehensive documentation for GraphQL APIs. It automatically generates documentation from GraphQL schemas, offering insights into available queries, mutations, types, and their relationships.",
+  "Root Types": "Root Types"
 }

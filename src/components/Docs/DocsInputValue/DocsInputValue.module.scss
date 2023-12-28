@@ -1,0 +1,16 @@
+.input_value_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title_name {
+  display: flex;
+  gap: 1rem;
+  font-weight: 500;
+
+  &_main {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}
