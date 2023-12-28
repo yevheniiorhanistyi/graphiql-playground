@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { __Field, __Type, __TypeKind } from '@/interfaces/schemaInterface';
+import FieldsIcon from '@/components/UI/FieldsIcon/FieldsIcon';
+import { __Field, __Type } from '@/interfaces/schemaInterface';
 import { FC } from 'react';
+import DocsArguments from '../DocsArguments/DocsArguments';
+import useTranslation from '@/localization/useTranslation';
+import getTypeName from '@/utils/graphQL_API/getTypeName';
+import cn from 'classnames';
+import styles from './DocsFields.module.scss';
 
 type DocsFieldsType = {
   type: __Type;
@@ -9,58 +15,44 @@ type DocsFieldsType = {
 };
 
 const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue }) => {
-  const getNestedType = (type: __Type, value: string = ''): string | null => {
-    console.log('nested Type: ', type);
-
-    let name = value;
-
-    console.log('name: ', name);
-
-    if (type.ofType) {
-      return getNestedType(type.ofType, name);
-    }
-
-    if (!type.ofType && type.name) {
-      if (type.kind === __TypeKind.OBJECT) {
-        name = type.name;
-      }
-      if (type.kind === __TypeKind.LIST) {
-        name = `[${name}]`;
-      }
-      if (type.kind === __TypeKind.NON_NULL) {
-        name = `${name}!`;
-      }
-
-      return name;
-    }
-
-    return name;
-  };
+  const t = useTranslation();
 
   return (
-    <ul>
-      <div>{type.description ? type.description : 'No description'}</div>
-      {type.fields?.map((field) => {
-        return (
-          <div key={field.name}>
-            <p>
-              <span className="key_name docs-link" onClick={() => handleClickKey(field)}>
-                {field.name}
-              </span>
-              <span>( arguments ): </span>
-              <span
-                className="property_name docs-link"
-                onClick={() => handleClickValue(field.type)}
-              >
-                {field.type.kind === __TypeKind.OBJECT
-                  ? field.type.name
-                  : getNestedType(field.type)}
-              </span>
-            </p>
+    <div className={styles.fields_container}>
+      <p className={styles.title_name_main}>{type.name}</p>
+      <div>{type.description ? type.description : t['No description']}</div>
+      {type.fields && (
+        <>
+          <div className={cn(styles.title_name, 'section_underline')}>
+            <FieldsIcon />
+            {t['Fields']}
           </div>
-        );
-      })}
-    </ul>
+          <ul>
+            {type.fields.map((field) => {
+              const { typeName } = getTypeName(field.type);
+              return (
+                <li key={field.name}>
+                  <p>
+                    <span className="key_name docs-link" onClick={() => handleClickKey(field)}>
+                      {field.name}
+                    </span>
+                    <span>
+                      <DocsArguments field={field} handleClickValue={handleClickValue} />:{' '}
+                    </span>
+                    <span
+                      className="property_name docs-link"
+                      onClick={() => handleClickValue(field.type)}
+                    >
+                      {typeName}
+                    </span>
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </div>
   );
 };
 

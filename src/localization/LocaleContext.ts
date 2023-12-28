@@ -1,15 +1,12 @@
+/* eslint-disable no-unused-vars */
 import { createContext } from 'react';
 
 export enum Locale {
-  // eslint-disable-next-line no-unused-vars
   EN = 'en',
-  // eslint-disable-next-line no-unused-vars
   RU = 'ru',
 }
-
 export interface LocaleContextProps {
   locale: Locale;
-  // eslint-disable-next-line no-unused-vars
   setLocale: (locale: Locale) => void;
 }
 
