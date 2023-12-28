@@ -59,7 +59,7 @@ describe('DocsArguments component', () => {
     expect(screen.getByText('page')).toBeInTheDocument();
   });
 
-  test('renders DocsArguments component with mock field', () => {
+  test('renders DocsArguments component without args', () => {
     render(<DocsArguments field={mockFieldWithoutArgs} handleClickValue={handleClickValueMock} />);
 
     expect(screen.queryByText(/(\w+: \w+,?)+/)).toBeNull();
