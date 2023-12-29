@@ -58,6 +58,8 @@ const GraphiQLPage = () => {
       });
 
       if (!response.ok) {
+        const result = await response.json();
+        setResponse(JSON.stringify(result, null, 2));
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 

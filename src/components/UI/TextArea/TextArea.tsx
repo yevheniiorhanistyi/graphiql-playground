@@ -61,6 +61,12 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
     }
   }, [code]);
 
+  useEffect(() => {
+    if (value) {
+      setCode(value);
+    }
+  }, [value]);
+
   const handleKeyDownEvent = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     const { value, selectionPoint } = handleKeyDown(event, inputValueRef, setMatches);
     if (value === null) return;
@@ -115,7 +121,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
             id="codeEditor"
             ref={codeEditorRef}
             wrap="off"
-            value={code || value}
+            value={code}
             onChange={handleOnChange}
             onScroll={handleScroll}
             onKeyDown={handleKeyDownEvent}
