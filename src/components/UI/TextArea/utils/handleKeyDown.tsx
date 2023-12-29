@@ -1,26 +1,41 @@
-import { Dispatch, KeyboardEvent, MutableRefObject, RefObject, SetStateAction } from 'react';
-import { handleTab } from './handleTab';
-/* import { Key } from '../constants/keyDown'; */
+import { Dispatch, KeyboardEvent, MutableRefObject, SetStateAction } from 'react';
+import { Key, TAB_SPACES } from '../constants/keyDown';
+import { changeCode } from './changeCode';
+import snippets from '../data/snippets';
 
 export const handleKeyDown = (
   event: KeyboardEvent<HTMLTextAreaElement>,
-  text: string,
-  setText: Dispatch<SetStateAction<string>>,
-  codeEditorRef: RefObject<HTMLTextAreaElement>,
-  snippets: string[],
   inputValueRef: MutableRefObject<string>,
   setMatches: Dispatch<SetStateAction<string[]>>
 ) => {
-  if (event.key === 'Tab') {
-    const tabHandled = handleTab(event, text, setText, codeEditorRef);
-    if (tabHandled) return;
-  }
+  const key = event.key;
 
-  /* if (event.ctrlKey && event.code === Key.SPACE) {
-    
-  } */
+  const target = event.target as HTMLTextAreaElement;
+  const code = target.value;
+  const beforeChangedCode = target.selectionStart;
+  const afterChangedCode = target.selectionEnd;
+  const isNotSelected = beforeChangedCode === afterChangedCode;
+  const hasSpacesToDelete =
+    code.slice(beforeChangedCode - TAB_SPACES, beforeChangedCode) === ' '.repeat(TAB_SPACES);
 
-  inputValueRef.current = event.key;
+  let changedCode = null;
+  let selectionPoint = null;
+
+  inputValueRef.current = key;
   const found = snippets.filter((snippet) => snippet.startsWith(event.key));
   setMatches(found);
+
+  if (
+    key === Key.ENTER ||
+    key === Key.TAB ||
+    key === Key.OPEN_CURLY_BRACE ||
+    (key === Key.BACKSPACE && isNotSelected && hasSpacesToDelete)
+  ) {
+    event.preventDefault();
+    [changedCode, selectionPoint] = changeCode(code, beforeChangedCode, afterChangedCode, key);
+  }
+  return {
+    value: changedCode,
+    selectionPoint,
+  };
 };

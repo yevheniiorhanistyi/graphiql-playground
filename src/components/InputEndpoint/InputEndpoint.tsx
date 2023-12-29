@@ -5,6 +5,8 @@ import { endpointFormType } from '@/interfaces/formInterfaces';
 import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
 import { FC, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
+import BasicButton from '../common/BasicButton/BasicButton';
+import styles from './InputEndpoint.module.scss';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string) => void;
@@ -26,25 +28,29 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
   };
 
   return (
-    <div style={{ width: '40rem' }}>
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        <form action="submit" onSubmit={handleSubmit(handleChangeEnpoint)}>
-          <Input<endpointFormType>
-            register={register}
-            label={`${t['Endpoint']}: `}
-            name="endpoint"
-            type="text"
-            placeholder={endpoint}
-          />
-          <button type="submit">{t['Submit']}</button>
-        </form>
-      </div>
+    <>
+      <form
+        action="submit"
+        onSubmit={handleSubmit(handleChangeEnpoint)}
+        className={styles.form_container}
+      >
+        <Input<endpointFormType>
+          className={styles.input}
+          register={register}
+          name="endpoint"
+          type="text"
+          defaultValue={endpoint}
+          containerClassName={styles.input_container}
+          fieldClassName={styles.input_field}
+        />
+        <BasicButton className={styles.button}>{t['Send']}</BasicButton>
+      </form>
 
       <p>
         <span>{t['Endpoint']}: </span>
         <span>{endpoint}</span>
       </p>
-    </div>
+    </>
   );
 };
 

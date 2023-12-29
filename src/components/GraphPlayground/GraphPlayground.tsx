@@ -7,6 +7,7 @@ import { __Schema } from '@/interfaces/schemaInterface';
 import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
 import TextArea from '../UI/TextArea/TextArea';
 import useTranslation from '@/localization/useTranslation';
+import { Loader } from '../Loader/Loader';
 
 const GraphiQLPage = () => {
   const t = useTranslation();
@@ -69,7 +70,7 @@ const GraphiQLPage = () => {
       <InputEndpoint getEndpoint={setEndpoint} />
 
       {isDocsDisplayed && schema && (
-        <Suspense fallback={<p>No GraphQL schema</p>}>
+        <Suspense fallback={<Loader />}>
           <Docs schema={schema} handleClose={toggleDocsDisplayed} />
         </Suspense>
       )}

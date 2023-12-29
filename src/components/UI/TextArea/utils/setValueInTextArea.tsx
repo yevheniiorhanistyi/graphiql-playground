@@ -1,14 +1,14 @@
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 
 const setValueInTextArea = (
-  text: string,
+  code: string,
   rowToInsert: number,
   columnToInsert: number,
   inputValueRef: MutableRefObject<string>,
   valueToInsert: string,
-  setText: Dispatch<SetStateAction<string>>
+  setCode: Dispatch<SetStateAction<string>>
 ) => {
-  const lines = text.split('\n');
+  const lines = code.split('\n');
   if (lines.length > rowToInsert) {
     const line = lines[rowToInsert];
     if (line.length >= columnToInsert) {
@@ -34,7 +34,7 @@ const setValueInTextArea = (
     newRow += valueToInsert;
     lines.push(newRow);
   }
-  setText(lines.join('\n'));
+  setCode(lines.join('\n'));
 };
 
 export default setValueInTextArea;

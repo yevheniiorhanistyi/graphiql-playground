@@ -6,12 +6,11 @@ import {
   FormEvent,
   TextareaHTMLAttributes,
   FC,
+  ChangeEvent,
 } from 'react';
 import styles from './TextArea.module.scss';
 import useTranslation from '@/localization/useTranslation';
 import { handleKeyDown } from './utils/handleKeyDown';
-import snippets from './data/snippets';
-import { handleCodeChange } from './utils/handleCodeChange';
 import handleCursorPosition from './utils/handleCursorPosition';
 import { TAB_SPACES } from './constants/keyDown';
 import setValueInTextArea from './utils/setValueInTextArea';
@@ -24,7 +23,8 @@ interface TextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>
 
 const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
   const t = useTranslation();
-  const [text, setText] = useState<string>('');
+  const [code, setCode] = useState<string>('');
+  const [codeSelectionPoint, setCodeSelectionPoint] = useState<null | number>(null);
 
   const codeEditorRef = useRef<HTMLTextAreaElement>(null);
   const lineCounterRef = useRef<HTMLTextAreaElement>(null);
@@ -49,7 +49,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
   };
 
   useEffect(() => {
-    const lineCount = text.split('\n').length;
+    const lineCount = code.split('\n').length;
     let lines = '';
     for (let x = 0; x < lineCount; x++) {
       lines += `${x + 1}\n`;
@@ -57,17 +57,14 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
     if (lineCounterRef.current) {
       lineCounterRef.current.value = lines;
     }
-  }, [text]);
+  }, [code]);
 
   const handleKeyDownEvent = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    handleKeyDown(event, text, setText, codeEditorRef, snippets, inputValueRef, setMatches);
-  };
+    const { value, selectionPoint } = handleKeyDown(event, inputValueRef, setMatches);
+    if (value === null) return;
 
-  const handleCodeChangeEvent = (event: FormEvent<HTMLTextAreaElement>) => {
-    handleCodeChange(event, setText);
-    if (onChange) {
-      onChange(event.currentTarget.value);
-    }
+    setCode(value);
+    setCodeSelectionPoint(selectionPoint);
   };
 
   const handleCursorPositionEvent = (event: FormEvent<HTMLTextAreaElement>) => {
@@ -78,10 +75,26 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
   };
 
   const handleClear = () => {
-    setText('');
+    setCode('');
     if (onChange) {
       onChange('');
     }
+  };
+
+  useEffect(() => {
+    if (codeSelectionPoint === null || !codeEditorRef) return;
+
+    codeEditorRef.current!.selectionStart = codeSelectionPoint;
+    codeEditorRef.current!.selectionEnd = codeSelectionPoint;
+  }, [codeEditorRef, code, codeSelectionPoint]);
+
+  const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    if (codeSelectionPoint !== null) {
+      setCodeSelectionPoint(null);
+    }
+
+    setCode(event.target.value);
+    handleCursorPositionEvent(event);
   };
 
   return (
@@ -100,16 +113,13 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
             id="codeEditor"
             ref={codeEditorRef}
             wrap="off"
-            value={text || value}
-            onInput={(event) => {
-              handleCodeChangeEvent(event);
-              handleCursorPositionEvent(event);
-            }}
+            value={code || value}
+            onChange={handleOnChange}
             onScroll={handleScroll}
             onKeyDown={handleKeyDownEvent}
             onClick={handleCursorPositionEvent}
             className={styles.code_editor}
-            placeholder={!readOnly ? t['Enter text here...'] : ''}
+            placeholder={!readOnly ? t['Enter code here...'] : ''}
             readOnly={readOnly}
           />
           <div>
@@ -124,12 +134,12 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
                 }}
                 onChange={(e) => {
                   setValueInTextArea(
-                    text,
+                    code,
                     cursorCount.row - 1,
                     cursorCount.col - inputValueRef.current.length,
                     inputValueRef,
                     e.target.value,
-                    setText
+                    setCode
                   );
                   matches.length = 0;
                 }}
@@ -147,10 +157,10 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
         {!readOnly && (
           <p
             className={styles.info_line}
-          >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${text.length}`}</p>
+          >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${code.length}`}</p>
         )}
       </div>
-      <button onClick={handleClear}>Очистить</button>
+      {!readOnly && <button onClick={handleClear}>Очистить</button>}
     </div>
   );
 };
