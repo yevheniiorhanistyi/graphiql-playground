@@ -14,6 +14,8 @@ import { handleKeyDown } from './utils/handleKeyDown';
 import handleCursorPosition from './utils/handleCursorPosition';
 import { TAB_SPACES } from './constants/keyDown';
 import setValueInTextArea from './utils/setValueInTextArea';
+import { handleCopy } from './utils/handleCopy';
+import { handlePaste } from './utils/handlePaste';
 
 interface TextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
   // eslint-disable-next-line no-unused-vars
@@ -161,6 +163,12 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
         )}
       </div>
       {!readOnly && <button onClick={handleClear}>Очистить</button>}
+      <br />
+      {!readOnly && <button onClick={() => handleCopy(code)}>Copy Text</button>}
+      <br />
+      {!readOnly && (
+        <button onClick={() => handlePaste(code, setCode, codeEditorRef)}>Paste Text</button>
+      )}
     </div>
   );
 };
