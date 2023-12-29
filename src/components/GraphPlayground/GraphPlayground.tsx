@@ -8,6 +8,7 @@ import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
 import TextArea from '../UI/TextArea/TextArea';
 import useTranslation from '@/localization/useTranslation';
 import { Loader } from '../Loader/Loader';
+import { prepareQuery } from './utils/prepareQuery';
 
 const GraphiQLPage = () => {
   const t = useTranslation();
@@ -46,12 +47,14 @@ const GraphiQLPage = () => {
         return;
       }
 
+      const preparedQuery = prepareQuery(query);
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query: preparedQuery }),
       });
 
       if (!response.ok) {
