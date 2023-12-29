@@ -123,6 +123,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
             wrap="off"
             value={code}
             onChange={handleOnChange}
+            onBlur={handleOnChange}
             onScroll={handleScroll}
             onKeyDown={handleKeyDownEvent}
             onClick={handleCursorPositionEvent}
