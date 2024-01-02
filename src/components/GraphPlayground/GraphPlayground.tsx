@@ -81,7 +81,7 @@ const GraphiQLPage = () => {
       )}
 
       <div className={styles.flex}>
-        <TextArea value={query} onChange={handleQueryChange} />
+        <TextArea value={query} onChange={handleQueryChange} schema={schema} />
 
         <TextArea value={response} readOnly={true} />
       </div>

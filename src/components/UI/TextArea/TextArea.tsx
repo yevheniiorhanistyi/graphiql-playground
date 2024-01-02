@@ -13,17 +13,19 @@ import useTranslation from '@/localization/useTranslation';
 import { handleKeyDown } from './utils/handleKeyDown';
 import handleCursorPosition from './utils/handleCursorPosition';
 import { TAB_SPACES } from './constants/keyDown';
-import setValueInTextArea from './utils/setValueInTextArea';
 import { handleCopy } from './utils/handleCopy';
 import { handlePaste } from './utils/handlePaste';
+import { __Schema } from '@/interfaces/schemaInterface';
+import SelectSnippet from './components/SelectSnippet';
 
 interface TextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
   // eslint-disable-next-line no-unused-vars
   onChange?: (value: string) => void;
   value?: string;
+  schema?: __Schema | null;
 }
 
-const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
+const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value, schema }) => {
   const t = useTranslation();
   const [code, setCode] = useState<string>('');
   const [codeSelectionPoint, setCodeSelectionPoint] = useState<null | number>(null);
@@ -68,7 +70,14 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
   }, [value]);
 
   const handleKeyDownEvent = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    const { value, selectionPoint } = handleKeyDown(event, inputValueRef, setMatches);
+    const { value, selectionPoint } = handleKeyDown(
+      event,
+      inputValueRef,
+      setMatches,
+      setCursorPosition,
+      setCursorCount,
+      schema
+    );
     if (value === null) return;
 
     setCode(value);
@@ -86,6 +95,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
     setCode('');
     if (onChange) {
       onChange('');
+      setCursorCount({ row: 0, col: 0 });
     }
   };
 
@@ -131,37 +141,17 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
             placeholder={!readOnly ? t['Enter code here...'] : ''}
             readOnly={readOnly}
           />
-          <div>
-            {matches.length !== 0 && matches[0] !== '' && (
-              <select
-                multiple
-                size={2}
-                style={{
-                  position: 'absolute',
-                  top: cursorPosition.top,
-                  left: cursorPosition.left,
-                }}
-                onChange={(e) => {
-                  setValueInTextArea(
-                    code,
-                    cursorCount.row - 1,
-                    cursorCount.col - inputValueRef.current.length,
-                    inputValueRef,
-                    e.target.value,
-                    setCode
-                  );
-                  matches.length = 0;
-                }}
-                className={styles.snippetList}
-              >
-                {matches.map((match, index) => (
-                  <option key={index} value={match}>
-                    {match}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
+          {matches.length !== 0 && matches[0] !== '' && (
+            <SelectSnippet
+              matches={matches}
+              setMatches={setMatches}
+              cursorPosition={cursorPosition}
+              code={code}
+              setCode={setCode}
+              cursorCount={cursorCount}
+              inputValueRef={inputValueRef}
+            />
+          )}
         </div>
         {!readOnly && (
           <p
@@ -169,7 +159,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value }) => {
           >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${code.length}`}</p>
         )}
       </div>
-      {!readOnly && <button onClick={handleClear}>Очистить</button>}
+      {!readOnly && <button onClick={handleClear}>Clear</button>}
       <br />
       {!readOnly && <button onClick={() => handleCopy(code)}>Copy Text</button>}
       <br />

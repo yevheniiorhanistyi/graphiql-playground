@@ -23,7 +23,7 @@ const handleCursorPosition = (
   const charWidth = getCharWidth();
 
   const cursorLeft = rect.left + window.pageXOffset + currentColumn * charWidth + 40;
-  const cursorTop = rect.top + window.pageYOffset + currentRow * lineHeight + 5;
+  const cursorTop = rect.top + window.pageYOffset + currentRow * lineHeight - 62;
 
   setCursorPosition({ top: cursorTop, left: cursorLeft });
   setCursorCount({ row: currentRow + 1, col: currentColumn });
