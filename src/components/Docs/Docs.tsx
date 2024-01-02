@@ -17,7 +17,6 @@ const Docs: FC<DocsType> = ({ schema, handleClose }) => {
   const t = useTranslation();
 
   useEffect(() => {
-    console.log('Full schema: ', schema);
     const queryName = schema.queryType.name;
     const query = schema.types.find((type) => type.name === queryName);
     if (query) {

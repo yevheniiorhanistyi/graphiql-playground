@@ -4,6 +4,8 @@ import { __InputValue, __Type } from '@/interfaces/schemaInterface';
 import useTranslation from '@/localization/useTranslation';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
 import { FC } from 'react';
+import cn from 'classnames';
+import styles from './DocsInputValue.module.scss';
 
 type DocsInputValueType = {
   inputValue: __InputValue;
@@ -16,14 +18,12 @@ const DocsInputValue: FC<DocsInputValueType> = ({ inputValue, handleClickValue }
   const t = useTranslation();
 
   return (
-    <div>
-      <p>
-        <b>{inputValue.name}</b>
-      </p>
-      <p>
+    <div className={styles.input_value_container}>
+      <p className={styles.title_name_main}>{inputValue.name}</p>
+      <div className={cn(styles.title_name, 'section_underline')}>
         <TypeIcon />
-        <b>{t['Type']}</b>
-      </p>
+        {t['Type']}
+      </div>
       <p className="property_name docs_link" onClick={() => handleClickValue(inputValue.type)}>
         {typeName}
       </p>

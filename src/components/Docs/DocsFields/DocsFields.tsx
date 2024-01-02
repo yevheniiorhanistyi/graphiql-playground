@@ -5,6 +5,8 @@ import { FC } from 'react';
 import DocsArguments from '../DocsArguments/DocsArguments';
 import useTranslation from '@/localization/useTranslation';
 import getTypeName from '@/utils/graphQL_API/getTypeName';
+import cn from 'classnames';
+import styles from './DocsFields.module.scss';
 
 type DocsFieldsType = {
   type: __Type;
@@ -16,15 +18,15 @@ const DocsFields: FC<DocsFieldsType> = ({ type, handleClickKey, handleClickValue
   const t = useTranslation();
 
   return (
-    <div>
-      <p>
-        <b>{type.name}</b>
-      </p>
+    <div className={styles.fields_container}>
+      <p className={styles.title_name_main}>{type.name}</p>
       <div>{type.description ? type.description : t['No description']}</div>
       {type.fields && (
         <>
-          <FieldsIcon />
-          <b>{t['Fields']}</b>
+          <div className={cn(styles.title_name, 'section_underline')}>
+            <FieldsIcon />
+            {t['Fields']}
+          </div>
           <ul>
             {type.fields.map((field) => {
               const { typeName } = getTypeName(field.type);

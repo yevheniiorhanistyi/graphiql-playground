@@ -1,4 +1,5 @@
 import InputEndpoint from '@/components/InputEndpoint/InputEndpoint';
+import { Loader } from '@/components/Loader/Loader';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import { __Schema } from '@/interfaces/schemaInterface';
 import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
@@ -42,7 +43,7 @@ export default function Playground() {
       <button onClick={toggleDocsDyspalyed}>Show Docs</button>
 
       {isDocsDispayed && schema && (
-        <Suspense fallback={<p>No GraphQL schema</p>}>
+        <Suspense fallback={<Loader />}>
           <Docs schema={schema} handleClose={toggleDocsDyspalyed} />
         </Suspense>
       )}

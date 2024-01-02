@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    fill: var(--font-main-color);
+    stroke: var(--font-main-color);
   
     &:hover {
-      width: 2rem;
-      height: 3.6rem;
+      width: 1.4rem;
+      height: 2.7rem;
       cursor: pointer;
-      fill: var(--font-main-color-hover);
+      stroke: var(--font-main-color-hover);
       transition: 0.3s width ease-in-out;
       animation: jerking 0.8s ease;
       animation-iteration-count: 1;
