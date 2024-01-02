@@ -68,6 +68,7 @@
   "Section": "Section",
   "Schema description": "GraphQL Docs is a tool that generates comprehensive documentation for GraphQL APIs. It automatically generates documentation from GraphQL schemas, offering insights into available queries, mutations, types, and their relationships.",
   "Root Types": "Root Types",
+  "invalid endpoint": "Invalid endpoint",
   "auth/app-not-authorized":
   "This app, identified by the domain where it's hosted, is not authorized to use Firebase Authentication with the provided API key. Review your key configuration in the Google API console.",
 "auth/credential-already-in-use":
