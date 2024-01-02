@@ -1,3 +1,4 @@
+import { SMTH_WENT_WRONG } from '@/constants/stringConstants';
 import { FC, useEffect, useState } from 'react';
 
 export const ErrorButton: FC = () => {
@@ -5,7 +6,7 @@ export const ErrorButton: FC = () => {
 
   useEffect(() => {
     if (hasError) {
-      throw new Error('Error from error btn!!!');
+      throw new Error(SMTH_WENT_WRONG);
     }
   }, [hasError]);
 
