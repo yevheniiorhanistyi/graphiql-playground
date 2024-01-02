@@ -6,7 +6,7 @@ const NotFoundPage: FC = () => {
     <div>
       <p>This page not found</p>
       <p>
-        Go to <Link href="/">amain page</Link>
+        Go to a <Link href="/">main page</Link>
       </p>
     </div>
   );
