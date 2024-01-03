@@ -43,7 +43,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
             label={`${t['Endpoint']}: `}
             name="endpoint"
             type="text"
-            placeholder={endpoint ? endpoint : ''}
+            defaultValue={endpoint ? endpoint : ''}
           />
           <button type="submit">{t['Submit']}</button>
         </form>
