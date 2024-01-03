@@ -35,7 +35,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
   };
 
   return (
-    <div style={{ width: '40rem' }}>
+    <div style={{ width: '25rem' }}>
       <div style={{ display: 'flex', gap: '1rem' }}>
         <form action="submit" onSubmit={handleSubmit(handleChangeEndpoint)}>
           <Input<endpointFormType>

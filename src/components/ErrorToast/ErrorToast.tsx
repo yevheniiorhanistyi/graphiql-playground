@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import styles from './ErrorToast.module.scss';
 import ErrorIcon from '../UI/ErrorIcon/ErrorIcon';
 import cn from 'classnames';
+import { TOAST_TIMER } from '@/constants/stringConstants';
 
 type ErrorToastType = {
   errorDescription: string | null;
@@ -13,7 +14,7 @@ const ErrorToast: FC<ErrorToastType> = ({ errorDescription, setErrorMessage, err
   useEffect(() => {
     setTimeout(() => {
       setErrorMessage(null);
-    }, 3000);
+    }, TOAST_TIMER);
   }, [errorMessage, setErrorMessage]);
 
   const handleClose = () => {

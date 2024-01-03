@@ -41,7 +41,6 @@ export default function Playground() {
         setIsEndpointCorrect(false);
         setErrorMessage(error.message);
       });
-    // setSchema(response);
   };
 
   const toggleDocsDisplayed = () => {

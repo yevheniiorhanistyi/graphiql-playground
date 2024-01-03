@@ -3,7 +3,7 @@
   padding: 1rem;
   display: flex;
   position: fixed;
-  left: 50%;
+  left: calc(50% - 12.5rem);
   z-index: 150;
   background: var(--bg-toast-error);
   border-radius: 0.5rem;
@@ -38,6 +38,5 @@
 }
 
 .error_toast_text {
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.8rem;
 }
