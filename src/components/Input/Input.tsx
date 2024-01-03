@@ -14,6 +14,7 @@ type InputProps<T extends FieldValues> = {
   errors?: string;
   containerClassName?: string;
   fieldClassName?: string;
+  focus?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Input = <T extends FieldValues>({
@@ -27,6 +28,7 @@ const Input = <T extends FieldValues>({
   containerClassName,
   fieldClassName,
   placeholder,
+  focus,
 }: InputProps<T>) => {
   return (
     <div className={cn(styles.input_container, containerClassName)}>
@@ -44,6 +46,11 @@ const Input = <T extends FieldValues>({
           security={security}
           defaultValue={defaultValue}
           placeholder={placeholder}
+          onFocus={(e) => {
+            if (focus) {
+              e.target.select();
+            }
+          }}
         />
       </div>
       {!!errors?.length && <p className={styles.input_error}>{errors}</p>}

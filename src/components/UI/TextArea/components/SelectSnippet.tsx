@@ -62,8 +62,6 @@ const SelectSnippet: FC<SelectSnippetProps> = ({
       );
       setMatches([]);
 
-      console.log(inputValueRef.current.length);
-
       if (codeEditorRef.current) {
         setTimeout(() => {
           if (codeEditorRef.current) {

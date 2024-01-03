@@ -6,6 +6,8 @@ import { graphQLTypes } from '../constants/graphQLTypes';
 const isInsideArgs = /\([^)]*$/;
 const getAllFields = /\w+(?=\s*(\(.*\))?\s*{)/g;
 const getPairedParenthesis = /\{[^{}]*\}/;
+let currentType: string = '';
+let savedType: string = '';
 
 const getSnippet = (event: KeyboardEvent<HTMLTextAreaElement>, schema: __Schema) => {
   const target = event.target as HTMLTextAreaElement;
@@ -14,13 +16,43 @@ const getSnippet = (event: KeyboardEvent<HTMLTextAreaElement>, schema: __Schema)
   const firstPart = removePairedParentheses(code.slice(0, beforeChangedCode));
   const wordPart = (firstPart.match(/\w+$/) || [])[0];
 
+  const allGraphQLTypes = [graphQLTypes.QUERY];
+
+  if (schema.mutationType !== null) {
+    allGraphQLTypes.push(graphQLTypes.MUTATION);
+  }
+
+  if (schema.subscriptionType !== null) {
+    allGraphQLTypes.push(graphQLTypes.SUBSCRIPTION);
+  }
+
   let openCurlyBracesCount =
     (firstPart.match(/{/g) || []).length - (firstPart.match(/}/g) || []).length;
   openCurlyBracesCount = openCurlyBracesCount < 0 ? 0 : openCurlyBracesCount;
-  if (!openCurlyBracesCount) return [graphQLTypes.QUERY];
+  if (!openCurlyBracesCount) return allGraphQLTypes;
   const graphQLStack = (firstPart.match(getAllFields) || []).reverse();
 
-  let currentType: string = schema.queryType.name;
+  switch (graphQLStack[0]) {
+    case graphQLTypes.QUERY:
+      currentType = schema.queryType.name;
+      savedType = schema.queryType.name;
+      break;
+    case graphQLTypes.MUTATION:
+      if (schema.mutationType !== null) {
+        currentType = schema.mutationType?.name;
+        savedType = schema.queryType.name;
+      }
+      break;
+    case graphQLTypes.SUBSCRIPTION:
+      if (schema.subscriptionType !== null) {
+        currentType = schema.subscriptionType?.name;
+        savedType = schema.queryType.name;
+      }
+      break;
+    default:
+      currentType = savedType;
+  }
+
   if (!currentType) return null;
 
   let fieldsOfType = getFields(schema, currentType);
@@ -29,10 +61,13 @@ const getSnippet = (event: KeyboardEvent<HTMLTextAreaElement>, schema: __Schema)
   while (openCurlyBracesCount > 0 && graphQLStack.length) {
     openCurlyBracesCount--;
     const currentField = graphQLStack.pop();
-    if (currentField === graphQLTypes.MUTATION || currentField === graphQLTypes.SUBSCRIPTION)
-      return null;
-
-    if (currentField === graphQLTypes.QUERY) continue;
+    if (
+      currentField === graphQLTypes.QUERY ||
+      currentField === graphQLTypes.MUTATION ||
+      currentField === graphQLTypes.SUBSCRIPTION
+    ) {
+      continue;
+    }
 
     const fields = getFields(schema, currentType);
     const fieldType = fields?.find(

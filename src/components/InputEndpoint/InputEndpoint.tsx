@@ -3,28 +3,31 @@ import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
 import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
-import { FC, useEffect, useState } from 'react';
+import { FC, InputHTMLAttributes, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
 import BasicButton from '../common/BasicButton/BasicButton';
 import styles from './InputEndpoint.module.scss';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string) => void;
-};
+} & InputHTMLAttributes<HTMLInputElement>;
 
 const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
-  const [endpoint, setEndpoint] = useState<string>(INITIAL_ENDPOINT);
+  const storedEndpoint = localStorage.getItem('endpoint') || INITIAL_ENDPOINT;
+  const [endpoint, setEndpoint] = useState<string>(storedEndpoint);
   const { register, handleSubmit } = useForm<endpointFormType>();
 
   const t = useTranslation();
 
   useEffect(() => {
-    getEndpoint(INITIAL_ENDPOINT);
-  }, [getEndpoint]);
+    getEndpoint(storedEndpoint);
+  }, [getEndpoint, storedEndpoint]);
 
   const handleChangeEnpoint = (data: endpointFormType): void => {
-    setEndpoint(data.endpoint);
-    getEndpoint(data.endpoint);
+    const newEndpoint = data.endpoint;
+    setEndpoint(newEndpoint);
+    localStorage.setItem('endpoint', newEndpoint);
+    getEndpoint(newEndpoint);
   };
 
   return (
@@ -42,6 +45,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
           defaultValue={endpoint}
           containerClassName={styles.input_container}
           fieldClassName={styles.input_field}
+          focus={true}
         />
         <BasicButton className={styles.button}>{t['Send']}</BasicButton>
       </form>
