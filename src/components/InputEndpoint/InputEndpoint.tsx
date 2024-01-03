@@ -10,9 +10,10 @@ import styles from './InputEndpoint.module.scss';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string | null) => void;
+  error: boolean;
 };
 
-const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
+const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
   const [endpoint, setEndpoint] = useState<string | null>(INITIAL_ENDPOINT);
   const { register, handleSubmit } = useForm<endpointFormType>();
 
@@ -51,7 +52,10 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
       <p>
         <span>{t['Endpoint']}: </span>
         <span
-          className={cn(styles.endpoint_text, endpoint ? styles.valid_color : styles.invalid_color)}
+          className={cn(
+            styles.endpoint_text,
+            endpoint && error ? styles.valid_color : styles.invalid_color
+          )}
         >
           {endpoint ? endpoint : t['invalid endpoint']}
         </span>
