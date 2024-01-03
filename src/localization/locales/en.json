@@ -66,5 +66,7 @@
   "Endpoint": "Endpoint",
   "Section": "Section",
   "Schema description": "GraphQL Docs is a tool that generates comprehensive documentation for GraphQL APIs. It automatically generates documentation from GraphQL schemas, offering insights into available queries, mutations, types, and their relationships.",
-  "Root Types": "Root Types"
+  "Root Types": "Root Types",
+  "This page not found": "This page not found",
+  "Home": "Home"
 }

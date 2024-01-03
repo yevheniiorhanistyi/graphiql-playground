@@ -1,14 +1,17 @@
-import { FC } from 'react';
-import Link from 'next/link';
+import NotFound from '@/components/NotFound/NotFound';
+import Head from 'next/head';
 
-const NotFoundPage: FC = () => {
+const NotFoundPage = () => {
   return (
-    <div>
-      <p>This page not found</p>
-      <p>
-        Go to <Link href="/">amain page</Link>
-      </p>
-    </div>
+    <>
+      <Head>
+        <title>GraphQL Playground</title>
+        <meta name="description" content="GraphQL Playground" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <NotFound />
+    </>
   );
 };
 
