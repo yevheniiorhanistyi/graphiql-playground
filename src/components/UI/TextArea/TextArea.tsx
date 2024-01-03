@@ -9,7 +9,6 @@ import {
   ChangeEvent,
 } from 'react';
 import styles from './TextArea.module.scss';
-import useTranslation from '@/localization/useTranslation';
 import { handleKeyDown } from './utils/handleKeyDown';
 import handleCursorPosition from './utils/handleCursorPosition';
 import { TAB_SPACES } from './constants/keyDown';
@@ -23,10 +22,16 @@ interface TextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>
   onChange?: (value: string) => void;
   value?: string;
   schema?: __Schema | null;
+  placeholder?: string;
 }
 
-const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value, schema }) => {
-  const t = useTranslation();
+const TextArea: FC<TextAreaProps> = ({
+  readOnly = false,
+  onChange,
+  value,
+  schema,
+  placeholder,
+}) => {
   const [code, setCode] = useState<string>('');
   const [codeSelectionPoint, setCodeSelectionPoint] = useState<null | number>(null);
 
@@ -138,9 +143,44 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value, schema
             onKeyDown={handleKeyDownEvent}
             onClick={handleCursorPositionEvent}
             className={styles.code_editor}
-            placeholder={!readOnly ? t['Enter code here...'] : ''}
+            placeholder={placeholder}
             readOnly={readOnly}
           />
+          <div className={styles.tools}>
+            {!readOnly && (
+              <button onClick={handleClear}>
+                <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M1 3.5h12m-10.5 0h9v9a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-9h0Zm2 0V3a2.5 2.5 0 0 1 5 0v.5m-4 2V11m3-5.5V11"
+                  />
+                </svg>
+              </button>
+            )}
+            {!readOnly && (
+              <button onClick={() => handleCopy(code)}>
+                <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.5 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V1.5a1 1 0 0 1 1-1h4.5l3 3Z" />
+                    <path d="M9.5 13.5h-7a1 1 0 0 1-1-1v-9" />
+                  </g>
+                </svg>
+              </button>
+            )}
+            {!readOnly && (
+              <button onClick={() => handlePaste(code, setCode, codeEditorRef)}>
+                <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8.5 3.5v-1a1 1 0 0 0-1-1h-1m-2.5 9H1.5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h1" />
+                    <rect width="7" height="8" x="6.5" y="5.5" rx="1" />
+                    <path d="M6.75.5h-4.5l.41 1.62a.49.49 0 0 0 .48.38h2.72a.49.49 0 0 0 .48-.38Zm1.75 8h3m-3 2h3" />
+                  </g>
+                </svg>
+              </button>
+            )}
+          </div>
           {matches.length !== 0 && matches[0] !== '' && (
             <SelectSnippet
               matches={matches}
@@ -160,13 +200,6 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value, schema
           >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${code.length}`}</p>
         )}
       </div>
-      {!readOnly && <button onClick={handleClear}>Clear</button>}
-      <br />
-      {!readOnly && <button onClick={() => handleCopy(code)}>Copy Text</button>}
-      <br />
-      {!readOnly && (
-        <button onClick={() => handlePaste(code, setCode, codeEditorRef)}>Paste Text</button>
-      )}
     </div>
   );
 };

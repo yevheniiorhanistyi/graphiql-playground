@@ -5,6 +5,10 @@
   margin-left: -3.5rem;
 }
 
+.text_editor:focus-within .tools svg {
+  background-color: var(--bg-page);
+}
+
 .line_counter {
   position: relative;
   top: 0.2rem;
@@ -59,4 +63,20 @@
 .info_line {
   font-size: 1.2rem;
   text-align: right;
+  margin-right: 3rem;
+}
+
+.tools {
+  position: relative;
+  top: 0.6rem;
+  right: 3rem;
+  button {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  svg {
+    stroke: var(--font-main-color);
+    background-color: var(--bg-input);
+    vertical-align: middle;
+  }
 }

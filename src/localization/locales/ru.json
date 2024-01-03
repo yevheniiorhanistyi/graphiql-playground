@@ -57,6 +57,8 @@
   "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.": "Евгений — страстный веб-разработчик, стремящийся предоставлять первоклассные решения, в которых приоритет отдается пользовательскому опыту, архитектурной надежности и качеству кода. Его многогранный подход делает его ценным активом для любого проекта или команды.",
   "Send": "Отправить",
   "Enter code here...": "Введите код здесь...",
+  "Enter variables here...": "Введите переменные здесь...",
+  "Enter headers here...": "Введите заголовок здесь...",
   "GraphQL Docs": "Документация GraphQL",
   "No type name found": "Имя типа не найдено",
   "No GraphQL schema": "Схема GraphQL не найдена",
