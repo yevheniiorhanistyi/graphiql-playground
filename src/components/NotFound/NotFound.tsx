@@ -4,6 +4,8 @@ import BasicButton from '../common/BasicButton/BasicButton';
 import { useRouter } from 'next/router';
 import { Routes } from '@/constants/enums';
 import useTranslation from '@/localization/useTranslation';
+import useTheme from '@/theme/useTheme';
+import cn from 'classnames';
 
 const NotFound = () => {
   const router = useRouter();
@@ -14,8 +16,10 @@ const NotFound = () => {
     router.push(Routes.WELCOME_PAGE);
   };
 
+  const { theme } = useTheme();
+
   return (
-    <div className={styles.container}>
+    <div className={cn(styles.container, theme)}>
       <Image
         className={styles.not_found_image}
         width={421}
