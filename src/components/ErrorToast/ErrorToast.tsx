@@ -1,26 +1,39 @@
 import { Dispatch, FC, SetStateAction, useEffect } from 'react';
+import styles from './ErrorToast.module.scss';
+import ErrorIcon from '../UI/ErrorIcon/ErrorIcon';
+import cn from 'classnames';
 
 type ErrorToastType = {
-  errorDescription: string;
+  errorDescription: string | null;
   setErrorMessage: Dispatch<SetStateAction<string | null>>;
+  errorMessage: string | null;
 };
 
-const ErrorToast: FC<ErrorToastType> = ({ errorDescription, setErrorMessage }) => {
+const ErrorToast: FC<ErrorToastType> = ({ errorDescription, setErrorMessage, errorMessage }) => {
   useEffect(() => {
     setTimeout(() => {
       setErrorMessage(null);
     }, 3000);
-  }, [setErrorMessage]);
+  }, [errorMessage, setErrorMessage]);
 
   const handleClose = () => {
     setErrorMessage(null);
   };
 
   return (
-    <div>
-      <button onClick={handleClose}>x</button>
-      <p>Error</p>
-      <p>{errorDescription}</p>
+    <div
+      className={cn(
+        styles.error_toast_container,
+        errorMessage ? styles.show_toast : styles.hide_toast
+      )}
+    >
+      <div className={styles.error_toast_content}>
+        <ErrorIcon />
+        <p className={styles.error_toast_text}>{errorDescription}</p>
+      </div>
+      <button className={styles.close_btn} onClick={handleClose}>
+        &#10005;
+      </button>
     </div>
   );
 };

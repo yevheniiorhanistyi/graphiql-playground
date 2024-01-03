@@ -56,9 +56,13 @@ export default function Playground() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {errorMessage && (
-        <ErrorToast errorDescription={errorMessage} setErrorMessage={setErrorMessage} />
-      )}
+
+      <ErrorToast
+        errorDescription={errorMessage}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
+      />
+
       <div>GraphiQL Playground Page</div>
 
       <InputEndpoint getEndpoint={setEndpoint} error={isEndpointCorrect} />
