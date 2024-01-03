@@ -12,7 +12,7 @@ const setValueInTextArea = (
   if (lines.length > rowToInsert) {
     const line = lines[rowToInsert];
     if (line.length >= columnToInsert) {
-      const start = line.substring(0, columnToInsert - inputValueRef.current.length);
+      const start = line.substring(0, columnToInsert + 1 - inputValueRef.current.length);
 
       const end = line.substring(columnToInsert + inputValueRef.current.length);
       lines[rowToInsert] = start + valueToInsert + ' ' + end;

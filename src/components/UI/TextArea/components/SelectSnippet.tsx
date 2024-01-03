@@ -1,4 +1,12 @@
-import { Dispatch, FC, MutableRefObject, SetStateAction } from 'react';
+import {
+  Dispatch,
+  FC,
+  MutableRefObject,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react';
 import setValueInTextArea from '../utils/setValueInTextArea';
 import styles from './SelectSnippet.module.scss';
 
@@ -16,6 +24,7 @@ interface SelectSnippetProps {
     col: number;
   };
   inputValueRef: MutableRefObject<string>;
+  codeEditorRef: RefObject<HTMLTextAreaElement>;
 }
 
 const SelectSnippet: FC<SelectSnippetProps> = ({
@@ -26,13 +35,51 @@ const SelectSnippet: FC<SelectSnippetProps> = ({
   setCode,
   cursorCount,
   inputValueRef,
+  codeEditorRef,
 }) => {
   const MAX_NUMBER_OF_OPTIONS = 8;
   const MIN_NUMBER_OF_OPTIONS = 2;
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    if (selectRef.current) {
+      selectRef.current.selectedIndex = 0;
+      selectRef.current.focus();
+    }
+  }, [matches]);
+
+  const handleSelection = () => {
+    const selectedValue = selectRef.current?.value;
+    if (selectedValue) {
+      const cursorPos = codeEditorRef.current?.selectionStart ?? 0;
+      setValueInTextArea(
+        code,
+        cursorCount.row - 1,
+        cursorCount.col - inputValueRef.current.length,
+        inputValueRef,
+        selectedValue,
+        setCode
+      );
+      setMatches([]);
+
+      console.log(inputValueRef.current.length);
+
+      if (codeEditorRef.current) {
+        setTimeout(() => {
+          if (codeEditorRef.current) {
+            codeEditorRef.current.focus();
+            codeEditorRef.current.selectionStart = cursorPos + (selectedValue?.length ?? 0) + 1;
+            codeEditorRef.current.selectionEnd = cursorPos + (selectedValue?.length ?? 0) + 1;
+          }
+        }, 0);
+      }
+    }
+  };
 
   return (
     <div>
       <select
+        ref={selectRef}
         multiple
         size={Math.min(Math.max(matches.length, MIN_NUMBER_OF_OPTIONS), MAX_NUMBER_OF_OPTIONS)}
         style={{
@@ -40,16 +87,11 @@ const SelectSnippet: FC<SelectSnippetProps> = ({
           top: cursorPosition.top,
           left: cursorPosition.left,
         }}
-        onChange={(e) => {
-          setValueInTextArea(
-            code,
-            cursorCount.row - 1,
-            cursorCount.col - inputValueRef.current.length,
-            inputValueRef,
-            e.target.value,
-            setCode
-          );
-          setMatches([]);
+        onClick={handleSelection}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSelection();
+          }
         }}
         className={styles.snippetList}
       >

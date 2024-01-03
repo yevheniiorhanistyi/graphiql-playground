@@ -150,6 +150,7 @@ const TextArea: FC<TextAreaProps> = ({ readOnly = false, onChange, value, schema
               setCode={setCode}
               cursorCount={cursorCount}
               inputValueRef={inputValueRef}
+              codeEditorRef={codeEditorRef}
             />
           )}
         </div>
