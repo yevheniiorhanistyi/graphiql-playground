@@ -42,7 +42,7 @@
   text-align: center;
   align-items: center;
 
-  @media screen and (max-width: $mobile-screen) {
+  @media screen and (max-width: $tablet-screen) {
     flex-direction: column;
     gap: 0rem;
   }

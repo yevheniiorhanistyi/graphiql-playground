@@ -11,6 +11,7 @@ const Welcome: FC = () => {
       <Features />
       <About />
       <Team />
+      {/* <ErrorButton /> */}
     </>
   );
 };

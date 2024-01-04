@@ -1,0 +1,48 @@
+.fallback_content {
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img {
+  @media screen and (max-width: $mobile-screen) {
+    width: 27rem;
+    height: 22rem;
+  }
+}
+
+.fallback_container {
+  margin: 0 auto;
+  width: 80%;
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.warning_message {
+  text-align: center;
+  font-size: 3rem;
+
+  @media screen and (max-width: $mobile-screen) {
+    font-size: 2.5rem;
+  }
+}
+
+.back_button {
+  width: 15rem;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+
+  @media screen and (max-width: $mobile-screen) {
+    width: 10rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+  }
+}
