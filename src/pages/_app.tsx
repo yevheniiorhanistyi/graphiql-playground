@@ -5,21 +5,27 @@ import '@/styles/globals.scss';
 import '@/styles/variables.scss';
 import ThemeProvider from '@/theme/ThemeProvider';
 import type { AppProps } from 'next/app';
-import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
-import { Fallback } from '@/components/ErrorBoundary/Fallback/Fallback';
+import { useRouter } from 'next/router';
+import { Routes } from '@/constants/enums';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
-    <ErrorBoundary fallback={<Fallback />}>
-      <ThemeProvider>
-        <LocaleProvider>
-          <AuthContextProvider>
+    <ThemeProvider>
+      <LocaleProvider>
+        <AuthContextProvider>
+          {router.pathname === Routes.WELCOME_PAGE ||
+          router.pathname === `/${Routes.PLAYGROUND_PAGE}` ||
+          router.pathname === `/${Routes.AUTH_PAGE}` ? (
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </AuthContextProvider>
-        </LocaleProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </AuthContextProvider>
+      </LocaleProvider>
+    </ThemeProvider>
   );
 }

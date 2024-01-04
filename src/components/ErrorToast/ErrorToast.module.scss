@@ -30,7 +30,7 @@
 .close_btn {
   color: inherit;
   background: transparent;
-  transition: transform .2s;
+  transition: transform 0.2s;
 
   &:hover {
     transform: scale(1.1);
