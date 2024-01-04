@@ -21,7 +21,7 @@ describe('AuthPage component', () => {
     );
 
     expect(screen.getByText('Enter email and password to Sign In')).toBeInTheDocument();
-    expect(screen.getByText('You are already registered?')).toBeInTheDocument();
+    expect(screen.getByText(`You're not registered yet?`)).toBeInTheDocument();
     expect(screen.getByText('Sign up')).toBeInTheDocument();
   });
 });
