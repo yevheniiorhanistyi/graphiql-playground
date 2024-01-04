@@ -95,7 +95,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active,
 input:-internal-autofill-selected {
-    transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 body {
@@ -183,5 +183,3 @@ main {
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
 }
-
-
