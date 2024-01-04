@@ -1,3 +1,4 @@
+import ErrorToast from '@/components/ErrorToast/ErrorToast';
 import InputEndpoint from '@/components/InputEndpoint/InputEndpoint';
 import { Loader } from '@/components/Loader/Loader';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
@@ -9,9 +10,12 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 export default function Playground() {
   const Docs = lazy(() => import('../../components/Docs/Docs'));
 
-  const [isDocsDispayed, setIsDocsDispayed] = useState<boolean>(false);
-  const [endpoint, setEnpont] = useState<string | null>(null);
+  const [isDocsDisplayed, setIsDocsDisplayed] = useState<boolean>(false);
+  const [endpoint, setEndpoint] = useState<string | null>(null);
   const [schema, setSchema] = useState<__Schema | null>(null);
+  const [disableDocsBtn, setDisableDocsBtn] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isEndpointCorrect, setIsEndpointCorrect] = useState<boolean>(true);
 
   useEffect(() => {
     if (endpoint) {
@@ -19,13 +23,28 @@ export default function Playground() {
     }
   }, [endpoint]);
 
-  const getSchema = async (endpoint: string) => {
-    const response = await getGraphQLSchema(endpoint);
-    setSchema(response);
+  useEffect(() => {
+    schema && endpoint
+      ? setDisableDocsBtn(false)
+      : (setDisableDocsBtn(true), setIsDocsDisplayed(false));
+  }, [schema, endpoint]);
+
+  const getSchema = (endpoint: string) => {
+    getGraphQLSchema(endpoint)
+      .then((response) => {
+        setSchema(response);
+        setIsEndpointCorrect(true);
+        setErrorMessage(null);
+      })
+      .catch((error: Error) => {
+        setSchema(null);
+        setIsEndpointCorrect(false);
+        setErrorMessage(error.message);
+      });
   };
 
-  const toggleDocsDyspalyed = () => {
-    setIsDocsDispayed((prev) => !prev);
+  const toggleDocsDisplayed = () => {
+    setIsDocsDisplayed((prev) => !prev);
   };
 
   return (
@@ -36,15 +55,24 @@ export default function Playground() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <ErrorToast
+        errorDescription={errorMessage}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
+      />
+
       <div>GraphiQL Playground Page</div>
 
-      <InputEndpoint getEndpoint={setEnpont} />
+      <InputEndpoint getEndpoint={setEndpoint} error={isEndpointCorrect} />
 
-      <button onClick={toggleDocsDyspalyed}>Show Docs</button>
+      <button disabled={disableDocsBtn} onClick={toggleDocsDisplayed}>
+        Show Docs
+      </button>
 
-      {isDocsDispayed && schema && (
+      {isDocsDisplayed && schema && (
         <Suspense fallback={<Loader />}>
-          <Docs schema={schema} handleClose={toggleDocsDyspalyed} />
+          <Docs schema={schema} handleClose={toggleDocsDisplayed} />
         </Suspense>
       )}
     </ProtectedRoute>
