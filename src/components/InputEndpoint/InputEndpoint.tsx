@@ -11,7 +11,7 @@ import styles from './InputEndpoint.module.scss';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string | null) => void;
-  error: boolean;
+  error?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
@@ -57,7 +57,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
           fieldClassName={styles.input_field}
           focus={true}
         />
-        <BasicButton className={styles.button}>{t['Send']}</BasicButton>
+        <BasicButton className={styles.button}>{t['Change endpoint']}</BasicButton>
       </form>
 
       <p>

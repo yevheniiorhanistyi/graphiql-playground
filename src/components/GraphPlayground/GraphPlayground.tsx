@@ -1,7 +1,7 @@
 import BasicButton from '@/components/common/BasicButton/BasicButton';
 import styles from './GraphPlayground.module.scss';
 import InputEndpoint from '../InputEndpoint/InputEndpoint';
-
+import ErrorToast from '@/components/ErrorToast/ErrorToast';
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { __Schema } from '@/interfaces/schemaInterface';
 import { getGraphQLSchema } from '@/utils/graphQL_API/getGraphQLRequest';
@@ -25,7 +25,9 @@ const GraphiQLPage = () => {
   const [isDocsDisplayed, setIsDocsDisplayed] = useState<boolean>(false);
   const [endpoint, setEndpoint] = useState<string | null>(null);
   const [schema, setSchema] = useState<__Schema | null>(null);
-
+  const [disableDocsBtn, setDisableDocsBtn] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isEndpointCorrect, setIsEndpointCorrect] = useState<boolean>(true);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
 
@@ -47,9 +49,24 @@ const GraphiQLPage = () => {
     }
   }, [endpoint]);
 
-  const getSchema = async (endpoint: string) => {
-    const response = await getGraphQLSchema(endpoint);
-    setSchema(response);
+  useEffect(() => {
+    schema && endpoint
+      ? setDisableDocsBtn(false)
+      : (setDisableDocsBtn(true), setIsDocsDisplayed(false));
+  }, [schema, endpoint]);
+
+  const getSchema = (endpoint: string) => {
+    getGraphQLSchema(endpoint)
+      .then((response) => {
+        setSchema(response);
+        setIsEndpointCorrect(true);
+        setErrorMessage(null);
+      })
+      .catch((error: Error) => {
+        setSchema(null);
+        setIsEndpointCorrect(false);
+        setErrorMessage(error.message);
+      });
   };
 
   const toggleDocsDisplayed = () => {
@@ -109,7 +126,12 @@ const GraphiQLPage = () => {
 
   return (
     <div>
-      <InputEndpoint getEndpoint={setEndpoint} />
+      <ErrorToast
+        errorDescription={errorMessage}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
+      />
+      <InputEndpoint getEndpoint={setEndpoint} error={isEndpointCorrect} />
 
       {isDocsDisplayed && schema && (
         <Suspense fallback={<Loader />}>
@@ -151,7 +173,9 @@ const GraphiQLPage = () => {
         />
       </div>
       <br />
-      <BasicButton onClick={toggleDocsDisplayed}>Show Docs</BasicButton>
+      <BasicButton disabled={disableDocsBtn} onClick={toggleDocsDisplayed}>
+        {t['Show Docs']}
+      </BasicButton>
     </div>
   );
 };
