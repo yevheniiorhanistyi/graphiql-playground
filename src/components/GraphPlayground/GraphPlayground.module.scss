@@ -1,0 +1,50 @@
+.playgroynd_container {
+  display: grid;
+  padding: 0 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 80px repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.input_part {
+  grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+}
+.textEditor_part {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.variables_part {
+  grid-area: 3 / 1 / 4 / 2;
+}
+.result_part {
+  grid-area: 2 / 2 / 4 / 3;
+}
+.docs_part {
+  grid-area: 1 / 3 / 4 / 4;
+}
+
+.send_button {
+  display: block;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  z-index: 10;
+  margin-left: -3rem;
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+  svg {
+    vertical-align: middle;
+    stroke: var(--font-accent-color);
+  }
+}

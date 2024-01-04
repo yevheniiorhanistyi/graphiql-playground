@@ -10,6 +10,7 @@
   --bg-activated-link: #31363e; //цвет активированной ссылки.кнопки (кроме bg-button)
   --bg-hover: #292d36; //цвет фона при наведении на ссылки.кнопки (кроме bg-button)
   --bg-input: #343944; //цвет фона инпута
+  --bg-input-count: #30343c; //цвет фона инпута
   --bg-button: #a626a4; //используется для бэграунда кнопок
   --bg-button-hover: #b650b5; //используется для бэграунда кнопок при наведении
   --bg-button-disable: #4f4f4f; //используется для бэграунда неактивныхкнопок
@@ -17,11 +18,11 @@
   --font-main-color: #bbbbbb; //цвет основного шрифта
   --font-main-color-hover: #d5d5d5; //цвет основного шрифта при наведении
   --font-accent-color: #ffffff; //цвет для текста кнопок c bg-color
-  --font-key-link-color: #734E85; //цвет для текста свойства в разделе Docs
+  --font-key-link-color: #734e85; //цвет для текста свойства в разделе Docs
   --font-property-link-color: #d4a540; //цвет для текста c ссылкой в разделе Docs
-  --font-key-argument-color: #52A9B5; //цвет для текста ключа для args в разделе Docs
-  --success-color: #0C5703;   //цвет текста при удачном выполнении
-  --error-color: #CB0000;   //цвет текста ошибки
-  --color-link: #04FF04; // цвет ссылок
-  --bg-toast-error: #FF4040; //цвет toast сообщения с ошибкой
+  --font-key-argument-color: #52a9b5; //цвет для текста ключа для args в разделе Docs
+  --success-color: #0c5703; //цвет текста при удачном выполнении
+  --error-color: #cb0000; //цвет текста ошибки
+  --color-link: #04ff04; // цвет ссылок
+  --bg-toast-error: #ff4040; //цвет toast сообщения с ошибкой
 }
