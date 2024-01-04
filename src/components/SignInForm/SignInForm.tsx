@@ -10,13 +10,14 @@ import { useState } from 'react';
 import { Loader } from '../Loader/Loader';
 import BasicButton from '../common/BasicButton/BasicButton';
 import useTranslation from '@/localization/useTranslation';
+import { FirebaseError } from '@firebase/util';
 
 const SignInForm = () => {
   const t = useTranslation();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<string>('');
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -34,8 +35,8 @@ const SignInForm = () => {
     try {
       const { error } = await signIn(data.email, data.password);
 
-      if (error) {
-        setSubmitError(`${error}`);
+      if (error && error instanceof FirebaseError) {
+        setSubmitError(`${error.code}`);
       } else {
         router.push({ pathname: Routes.PLAYGROUND_PAGE });
         reset();
@@ -66,7 +67,9 @@ const SignInForm = () => {
         errors={t[String(errors.password?.message)] || ''}
       />
 
-      {submitError && <p style={{ color: 'red' }}>{submitError}</p>}
+      {submitError && (
+        <p style={{ color: 'var(--error-color)', textAlign: 'center' }}>{t[`${submitError}`]}</p>
+      )}
 
       <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
         {isLoading ? <Loader /> : `${t['Submit']}`}
