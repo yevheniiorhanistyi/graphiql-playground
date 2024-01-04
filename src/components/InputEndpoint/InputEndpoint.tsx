@@ -2,19 +2,21 @@
 import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
-import { INITIAL_ENDPOINT } from '@/constants/stringConstants';
+import { INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
 import { FC, InputHTMLAttributes, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
 import BasicButton from '../common/BasicButton/BasicButton';
+import cn from 'classnames';
 import styles from './InputEndpoint.module.scss';
 
 type InputEndpointType = {
-  getEndpoint: (endpoint: string) => void;
+  getEndpoint: (endpoint: string | null) => void;
+  error: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
+const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
   const storedEndpoint = localStorage.getItem('endpoint') || INITIAL_ENDPOINT;
-  const [endpoint, setEndpoint] = useState<string>(storedEndpoint);
+  const [endpoint, setEndpoint] = useState<string | null>(storedEndpoint);
   const { register, handleSubmit } = useForm<endpointFormType>();
 
   const t = useTranslation();
@@ -25,9 +27,17 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
 
   const handleChangeEnpoint = (data: endpointFormType): void => {
     const newEndpoint = data.endpoint;
-    setEndpoint(newEndpoint);
-    localStorage.setItem('endpoint', newEndpoint);
-    getEndpoint(newEndpoint);
+    const regexp = new RegExp(URL_REGEXP);
+
+    if (regexp.test(newEndpoint)) {
+      setEndpoint(newEndpoint);
+      localStorage.setItem('endpoint', newEndpoint);
+      getEndpoint(newEndpoint);
+    } else {
+      setEndpoint(null);
+      localStorage.removeItem('endpoint');
+      getEndpoint(null);
+    }
   };
 
   return (
@@ -42,7 +52,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
           register={register}
           name="endpoint"
           type="text"
-          defaultValue={endpoint}
+          defaultValue={endpoint ? endpoint : ''}
           containerClassName={styles.input_container}
           fieldClassName={styles.input_field}
           focus={true}
@@ -52,7 +62,14 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint }) => {
 
       <p>
         <span>{t['Endpoint']}: </span>
-        <span>{endpoint}</span>
+        <span
+          className={cn(
+            styles.endpoint_text,
+            endpoint && error ? styles.valid_color : styles.invalid_color
+          )}
+        >
+          {endpoint ? endpoint : t['invalid endpoint']}
+        </span>
       </p>
     </>
   );

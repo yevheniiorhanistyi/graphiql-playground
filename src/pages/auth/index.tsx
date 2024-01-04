@@ -55,7 +55,7 @@ export default function AuthPage() {
               <div className={styles.form_content}>
                 <SignInForm />
                 <p className={styles.description_text}>
-                  <span className={styles.link_text}>{t['You are already registered?']}</span>
+                  <span className={styles.link_text}>{t["You're not registered yet?"]}</span>
                   <span className={styles.link_text}>
                     {t['Please']}&nbsp;
                     <Link

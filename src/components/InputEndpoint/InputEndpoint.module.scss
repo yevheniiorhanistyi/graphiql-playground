@@ -14,3 +14,15 @@
 .input_field {
   height: 2.6rem;
 }
+
+.endpoint_text {
+  font-weight: 500;
+}
+
+.valid_color {
+  color: var(--success-color);
+}
+
+.invalid_color {
+  color: var(--error-color);
+}

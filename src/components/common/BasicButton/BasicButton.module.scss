@@ -4,6 +4,7 @@
   padding: 2px 20px;
   background-color: var(--bg-button);
   transition: background-color 0.2s linear;
+  border-radius: 0.5rem;
 
   &:hover {
     background-color: var(--bg-button-hover);
@@ -21,7 +22,6 @@
   padding: 0.5rem;
   align-self: center;
   background-color: var(--bg-button);
-  border-radius: 0.5rem;
 
   &:hover {
     background-color: var(--bg-button-hover);
