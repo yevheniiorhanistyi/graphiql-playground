@@ -40,6 +40,7 @@
     "vitest": "^1.0.1"
   },
   "lint-staged": {
-    "*.{ts,tsx, js, jsx, scss, css}": "npm run prettier-fix"
+    "*.{ts,tsx, js, jsx, scss}": "eslint --cache --fix",
+    "*.{ts,tsx, js, jsx, scss, css}": "prettier --write"
   }
 }
