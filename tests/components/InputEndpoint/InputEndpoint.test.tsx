@@ -14,7 +14,7 @@ describe('InputEndpoint component', () => {
       </LocaleProvider>
     );
 
-    expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+    expect(screen.getByText('Change endpoint')).toBeInTheDocument();
   });
 
   test('submits the form and updates the endpoint', async () => {
@@ -27,7 +27,7 @@ describe('InputEndpoint component', () => {
     const inputElement = screen.getByRole('textbox') as HTMLInputElement;
 
     await userEvent.type(inputElement, 'john.doe');
-    await userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Change endpoint'));
 
     expect(getEndpointMock).toHaveBeenCalledWith('john.doe');
   });
