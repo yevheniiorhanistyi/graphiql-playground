@@ -1,12 +1,16 @@
 .container {
   display: flex;
-  margin-top: 5rem;
+  margin-top: 20vh;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: $mobile-screen) {
+  @media screen and (max-height: 800px) {
+    margin-top: 10vh;
+  }
+
+  @media screen and (max-height: 650px) {
     margin-top: 2rem;
   }
 }

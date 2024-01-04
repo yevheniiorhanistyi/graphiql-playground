@@ -13,7 +13,7 @@ const NotFound = () => {
   const t = useTranslation();
 
   const handleClick = () => {
-    router.push(Routes.WELCOME_PAGE);
+    router.replace(Routes.WELCOME_PAGE);
   };
 
   const { theme } = useTheme();
@@ -23,6 +23,7 @@ const NotFound = () => {
       <Image
         className={styles.not_found_image}
         width={421}
+        priority
         height={205}
         src="/404_img.svg"
         alt="404 icon image"

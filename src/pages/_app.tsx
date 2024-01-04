@@ -11,31 +11,21 @@ import { Routes } from '@/constants/enums';
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  if (
-    router.pathname === Routes.WELCOME_PAGE ||
-    router.pathname === `/${Routes.PLAYGROUND_PAGE}` ||
-    router.pathname === `/${Routes.AUTH_PAGE}`
-  ) {
-    return (
-      <ThemeProvider>
-        <LocaleProvider>
-          <AuthContextProvider>
+  return (
+    <ThemeProvider>
+      <LocaleProvider>
+        <AuthContextProvider>
+          {router.pathname === Routes.WELCOME_PAGE ||
+          router.pathname === `/${Routes.PLAYGROUND_PAGE}` ||
+          router.pathname === `/${Routes.AUTH_PAGE}` ? (
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </AuthContextProvider>
-        </LocaleProvider>
-      </ThemeProvider>
-    );
-  } else {
-    return (
-      <ThemeProvider>
-        <LocaleProvider>
-          <AuthContextProvider>
+          ) : (
             <Component {...pageProps} />
-          </AuthContextProvider>
-        </LocaleProvider>
-      </ThemeProvider>
-    );
-  }
+          )}
+        </AuthContextProvider>
+      </LocaleProvider>
+    </ThemeProvider>
+  );
 }
