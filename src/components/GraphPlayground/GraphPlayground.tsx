@@ -30,6 +30,7 @@ const GraphiQLPage = () => {
   const [isEndpointCorrect, setIsEndpointCorrect] = useState<boolean>(true);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
+  const [selectedTab, setSelectedTab] = useState<'variables' | 'headers'>('variables');
 
   const handleVariablesChange = (value: string) => {
     setVariables(value);
@@ -125,58 +126,73 @@ const GraphiQLPage = () => {
   };
 
   return (
-    <div>
+    <>
       <ErrorToast
         errorDescription={errorMessage}
         setErrorMessage={setErrorMessage}
         errorMessage={errorMessage}
       />
-      <InputEndpoint getEndpoint={setEndpoint} error={isEndpointCorrect} />
 
       {isDocsDisplayed && schema && (
         <Suspense fallback={<Loader />}>
           <Docs schema={schema} handleClose={toggleDocsDisplayed} />
         </Suspense>
       )}
-      <button onClick={handleExecuteQuery}>
-        <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill="none"
-            stroke="#000000"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M5.82 11L8 13.17a1.1 1.1 0 0 0 1.05.3a1.12 1.12 0 0 0 .81-.74L13.44 2A1.12 1.12 0 0 0 12 .56L1.27 4.14A1.12 1.12 0 0 0 .53 5a1.1 1.1 0 0 0 .3 1l2.74 2.74l-.09 3.47ZM13.12.78L3.57 8.74"
+
+      <div className={styles.playgroynd_container}>
+        <div className={styles.left_part}>
+          <InputEndpoint getEndpoint={setEndpoint} error={isEndpointCorrect} />
+
+          <TextArea
+            value={query}
+            onChange={handleQueryChange}
+            schema={schema}
+            placeholder={t['Enter code here...']}
           />
-        </svg>
-      </button>
-      <div className={styles.flex}>
-        <TextArea
-          value={query}
-          onChange={handleQueryChange}
-          schema={schema}
-          placeholder={t['Enter code here...']}
-        />
 
-        <TextArea value={response} readOnly={true} />
-      </div>
-      <div className={styles.flex}>
-        <TextArea
-          value={variables}
-          onChange={handleVariablesChange}
-          placeholder={t['Enter variables here...']}
-        />
+          <div>
+            <BasicButton onClick={() => setSelectedTab('variables')}>Variables</BasicButton>
+            <BasicButton onClick={() => setSelectedTab('headers')}>Headers</BasicButton>
+            {selectedTab === 'variables' && (
+              <TextArea
+                value={variables}
+                onChange={handleVariablesChange}
+                placeholder={t['Enter variables here...']}
+              />
+            )}
+
+            {selectedTab === 'headers' && (
+              <TextArea
+                value={headers}
+                onChange={handleHeadersChange}
+                placeholder={t['Enter headers here...']}
+              />
+            )}
+          </div>
+        </div>
+
+        <button className={styles.send_button} onClick={handleExecuteQuery}>
+          <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+            <path
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5.82 11L8 13.17a1.1 1.1 0 0 0 1.05.3a1.12 1.12 0 0 0 .81-.74L13.44 2A1.12 1.12 0 0 0 12 .56L1.27 4.14A1.12 1.12 0 0 0 .53 5a1.1 1.1 0 0 0 .3 1l2.74 2.74l-.09 3.47ZM13.12.78L3.57 8.74"
+            />
+          </svg>
+        </button>
 
         <TextArea
-          value={headers}
-          onChange={handleHeadersChange}
-          placeholder={t['Enter headers here...']}
+          value={response}
+          readOnly={true}
+          placeholder={t['Submit a request to get the result in this field...']}
         />
       </div>
-      <br />
+
       <BasicButton disabled={disableDocsBtn} onClick={toggleDocsDisplayed}>
         {t['Show Docs']}
       </BasicButton>
-    </div>
+    </>
   );
 };
 

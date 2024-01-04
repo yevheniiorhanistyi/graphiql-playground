@@ -1,3 +1,3 @@
-const snippets = ['query {}', 'mutation {}', 'subscription {}'];
+const snippets = [''];
 
 export default snippets;

@@ -152,8 +152,8 @@ const TextArea: FC<TextAreaProps> = ({
                 <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M1 3.5h12m-10.5 0h9v9a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-9h0Zm2 0V3a2.5 2.5 0 0 1 5 0v.5m-4 2V11m3-5.5V11"
                   />
                 </svg>
@@ -162,7 +162,7 @@ const TextArea: FC<TextAreaProps> = ({
             {!readOnly && (
               <button onClick={() => handleCopy(code)}>
                 <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12.5 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V1.5a1 1 0 0 1 1-1h4.5l3 3Z" />
                     <path d="M9.5 13.5h-7a1 1 0 0 1-1-1v-9" />
                   </g>
@@ -172,7 +172,7 @@ const TextArea: FC<TextAreaProps> = ({
             {!readOnly && (
               <button onClick={() => handlePaste(code, setCode, codeEditorRef)}>
                 <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M8.5 3.5v-1a1 1 0 0 0-1-1h-1m-2.5 9H1.5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h1" />
                     <rect width="7" height="8" x="6.5" y="5.5" rx="1" />
                     <path d="M6.75.5h-4.5l.41 1.62a.49.49 0 0 0 .48.38h2.72a.49.49 0 0 0 .48-.38Zm1.75 8h3m-3 2h3" />

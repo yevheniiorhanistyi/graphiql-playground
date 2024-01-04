@@ -60,6 +60,7 @@
   "Enter code here...": "Введите код здесь...",
   "Enter variables here...": "Введите переменные здесь...",
   "Enter headers here...": "Введите заголовок здесь...",
+  "Submit a request to get the result in this field...": "Отправьте запрос, чтобы получить результат в этом поле...",
   "GraphQL Docs": "Документация GraphQL",
   "No type name found": "Имя типа не найдено",
   "No GraphQL schema": "Схема GraphQL не найдена",

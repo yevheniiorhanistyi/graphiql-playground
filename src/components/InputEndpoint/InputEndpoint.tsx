@@ -41,7 +41,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
   };
 
   return (
-    <>
+    <div className={styles.inputEndpoint_container}>
       <form
         action="submit"
         onSubmit={handleSubmit(handleChangeEnpoint)}
@@ -71,7 +71,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
           {endpoint ? endpoint : t['invalid endpoint']}
         </span>
       </p>
-    </>
+    </div>
   );
 };
 

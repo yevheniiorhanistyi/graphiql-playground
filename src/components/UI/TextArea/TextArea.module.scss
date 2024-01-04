@@ -1,8 +1,10 @@
 .text_editor {
   display: flex;
-  height: 50vh;
+  min-height: 30rem;
   width: 50vw;
-  margin-left: -3.5rem;
+  min-width: 400px;
+  margin-left: -4rem;
+  resize: both;
 }
 
 .text_editor:focus-within .tools svg {
@@ -26,10 +28,13 @@
   margin-bottom: 0.4rem;
   outline: none;
   resize: none;
+  min-height: 28rem;
 }
 
 .code_editor {
-  width: 100%;
+  width: 50vw;
+  min-width: 400px;
+  min-height: 30rem;
   border: 1px solid var(--border-input);
   background-color: var(--bg-input);
   color: var(--color-link);
@@ -39,6 +44,8 @@
   padding-left: 4.5rem;
   scrollbar-width: thin;
   scrollbar-color: var(--font-main-color) var(--bg-input-count);
+  resize: both;
+  overflow: auto;
   &:focus {
     background-color: inherit;
     border: 2px solid var(--border-input-focus);
@@ -75,8 +82,12 @@
     margin-bottom: 1.5rem;
   }
   svg {
+    margin-top: -1px;
     stroke: var(--font-main-color);
     background-color: var(--bg-input);
     vertical-align: middle;
+    &:hover {
+      scale: 1.1;
+    }
   }
 }

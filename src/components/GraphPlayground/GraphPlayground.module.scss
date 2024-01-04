@@ -1,6 +1,33 @@
-.flex {
+.playgroynd_container {
   display: flex;
+  padding: 2rem;
+}
+
+.left_part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  justify-content: space-between;
-  margin: 0 20px;
+}
+
+.send_button {
+  display: block;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  z-index: 10;
+  margin-left: -3rem;
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+  svg {
+    vertical-align: middle;
+    stroke: var(--font-accent-color);
+  }
 }

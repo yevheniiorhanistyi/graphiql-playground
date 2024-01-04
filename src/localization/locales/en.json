@@ -60,6 +60,7 @@
   "Enter code here...": "Enter code here...",
   "Enter variables here...": "Enter variables here...",
   "Enter headers here...": "Enter headers here...",
+  "Submit a request to get the result in this field...": "Submit a request to get the result in this field...",
   "GraphQL Docs": "GraphQL Docs",
   "No type name found": "No type name found",
   "No GraphQL schema": "No GraphQL schema",
