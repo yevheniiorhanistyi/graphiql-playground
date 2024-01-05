@@ -29,7 +29,6 @@
   flex-direction: column;
   resize: both;
   overflow: hidden;
-  max-width: 1000px;
   width: 100vw;
 }
 
@@ -38,6 +37,7 @@
   min-height: 65vh;
   width: 50vw;
   max-width: 50vw;
+  min-width: 40rem;
 }
 
 .textEditor_part {
