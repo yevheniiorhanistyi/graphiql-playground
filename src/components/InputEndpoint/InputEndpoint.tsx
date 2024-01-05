@@ -22,10 +22,6 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error, setIsEndpoin
 
   const t = useTranslation();
 
-  // useEffect(() => {
-  //   getEndpoint(storedEndpoint);
-  // }, [getEndpoint, storedEndpoint]);
-
   const handleChangeEndpoint = (data: endpointFormType): void => {
     const newEndpoint = data.endpoint;
     const regexp = new RegExp(URL_REGEXP);

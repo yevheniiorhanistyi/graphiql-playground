@@ -62,11 +62,13 @@ const GraphiQLPage = () => {
         setSchema(response);
         setIsEndpointCorrect(true);
         setErrorMessage(null);
+        localStorage.setItem('endpoint', endpoint);
       })
       .catch((error: Error) => {
         setSchema(null);
         setIsEndpointCorrect(false);
         setErrorMessage(error.message);
+        localStorage.removeItem('endpoint');
       });
   };
 
