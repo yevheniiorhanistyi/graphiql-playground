@@ -24,7 +24,6 @@ const GraphiQLPage = () => {
   const [isDocsDisplayed, setIsDocsDisplayed] = useState<boolean>(false);
   const [endpoint, setEndpoint] = useState<string | null>(null);
   const [schema, setSchema] = useState<__Schema | null>(null);
-  const [disableDocsBtn, setDisableDocsBtn] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isEndpointCorrect, setIsEndpointCorrect] = useState<boolean>(true);
   const [variables, setVariables] = useState('');
@@ -47,13 +46,8 @@ const GraphiQLPage = () => {
     if (endpoint) {
       getSchema(endpoint);
     }
+    setIsDocsDisplayed(false);
   }, [endpoint]);
-
-  useEffect(() => {
-    schema && endpoint
-      ? setDisableDocsBtn(false)
-      : (setDisableDocsBtn(true), setIsDocsDisplayed(false));
-  }, [schema, endpoint]);
 
   const getSchema = (endpoint: string) => {
     getGraphQLSchema(endpoint)
@@ -176,39 +170,35 @@ const GraphiQLPage = () => {
             </div>
 
             <div className={styles.variables_part}>
-              <div>
-                <button
-                  className={`${styles.tab_button} ${
-                    selectedTab === 'variables' ? styles.active : ''
-                  }`}
-                  onClick={() => setSelectedTab('variables')}
-                >
-                  {t['Variables']}
-                </button>
-                <button
-                  className={`${styles.tab_button} ${
-                    selectedTab === 'headers' ? styles.active : ''
-                  }`}
-                  onClick={() => setSelectedTab('headers')}
-                >
-                  {t['Headers']}
-                </button>
-                {selectedTab === 'variables' && (
-                  <TextArea
-                    value={variables}
-                    onChange={handleVariablesChange}
-                    placeholder={t['Enter variables here...']}
-                  />
-                )}
+              <button
+                className={`${styles.tab_button} ${
+                  selectedTab === 'variables' ? styles.active : ''
+                }`}
+                onClick={() => setSelectedTab('variables')}
+              >
+                {t['Variables']}
+              </button>
+              <button
+                className={`${styles.tab_button} ${selectedTab === 'headers' ? styles.active : ''}`}
+                onClick={() => setSelectedTab('headers')}
+              >
+                {t['Headers']}
+              </button>
+              {selectedTab === 'variables' && (
+                <TextArea
+                  value={variables}
+                  onChange={handleVariablesChange}
+                  placeholder={t['Enter variables here...']}
+                />
+              )}
 
-                {selectedTab === 'headers' && (
-                  <TextArea
-                    value={headers}
-                    onChange={handleHeadersChange}
-                    placeholder={t['Enter headers here...']}
-                  />
-                )}
-              </div>
+              {selectedTab === 'headers' && (
+                <TextArea
+                  value={headers}
+                  onChange={handleHeadersChange}
+                  placeholder={t['Enter headers here...']}
+                />
+              )}
             </div>
           </div>
 
@@ -224,7 +214,7 @@ const GraphiQLPage = () => {
 
       <button
         className={styles.docs_button}
-        disabled={disableDocsBtn}
+        disabled={!isEndpointCorrect}
         onClick={toggleDocsDisplayed}
       >
         <svg height="24px" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">

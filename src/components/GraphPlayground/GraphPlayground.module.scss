@@ -33,10 +33,11 @@
 }
 
 .column {
+  display: flex;
   max-height: 65vh;
   min-height: 65vh;
   width: 50vw;
-  max-width: 50vw;
+  max-width: 60vw;
   min-width: 40rem;
 }
 
@@ -46,17 +47,17 @@
   height: 50vh;
   min-height: 20rem;
   padding-top: 2px;
+  margin-bottom: -20px;
 }
 
 .variables_part {
-  max-width: 100%;
-  min-width: 100%;
-  height: auto;
-  justify-self: stretch;
+  flex-grow: 1;
+  margin-bottom: 25px;
 }
 
 .result_part {
   grid-area: result_part;
+  flex-grow: 1;
   margin-left: -32px;
   padding-top: 2px;
   padding-right: 2px;
@@ -84,6 +85,10 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   transform: rotate(-90deg);
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
   &:hover {
     background-color: var(--bg-button-hover);
   }
