@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
 import { INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
-import { FC, InputHTMLAttributes, useState } from 'react';
+import { FC, InputHTMLAttributes, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
 import BasicButton from '../common/BasicButton/BasicButton';
 import cn from 'classnames';
@@ -21,6 +21,10 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error, setIsEndpoin
   const { register, handleSubmit } = useForm<endpointFormType>();
 
   const t = useTranslation();
+
+  useEffect(() => {
+    getEndpoint(storedEndpoint);
+  }, []);
 
   const handleChangeEndpoint = (data: endpointFormType): void => {
     const newEndpoint = data.endpoint;

@@ -46,7 +46,6 @@ const GraphiQLPage = () => {
     if (endpoint) {
       getSchema(endpoint);
     }
-    setIsDocsDisplayed(false);
   }, [endpoint]);
 
   const getSchema = (endpoint: string) => {
