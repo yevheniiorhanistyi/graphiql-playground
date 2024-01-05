@@ -61,11 +61,13 @@ const GraphiQLPage = () => {
         setSchema(response);
         setIsEndpointCorrect(true);
         setErrorMessage(null);
+        localStorage.setItem('endpoint', endpoint);
       })
       .catch((error: Error) => {
         setSchema(null);
         setIsEndpointCorrect(false);
         setErrorMessage(error.message);
+        localStorage.removeItem('endpoint');
       });
   };
 
@@ -142,8 +144,16 @@ const GraphiQLPage = () => {
 
       <div className={styles.playground_container}>
         <div className={styles.input_part}>
-          <InputEndpoint getEndpoint={setEndpoint} error={isEndpointCorrect} />{' '}
-          <button className={styles.send_button} onClick={handleExecuteQuery}>
+          <InputEndpoint
+            getEndpoint={setEndpoint}
+            error={isEndpointCorrect}
+            setIsEndpointCorrect={setIsEndpointCorrect}
+          />
+          <button
+            className={styles.send_button}
+            onClick={handleExecuteQuery}
+            disabled={!isEndpointCorrect}
+          >
             <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill="none"
