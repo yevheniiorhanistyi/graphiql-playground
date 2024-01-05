@@ -1,41 +1,132 @@
-.playgroynd_container {
-  display: grid;
-  padding: 0 3rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 80px repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+.playground_container {
+  display: flex;
+  flex-direction: column;
 }
 
 .input_part {
-  grid-area: 1 / 1 / 2 / 3;
   display: flex;
-  justify-content: flex-start;
+  width: 45vw;
+  justify-content: space-between;
   align-items: flex-end;
+  justify-self: flex-start;
+  align-self: flex-start;
   padding-bottom: 1rem;
+  margin-left: 3.5rem;
 }
+
+.row {
+  display: flex;
+  overflow: hidden;
+  max-height: 65vh;
+  min-height: 65vh;
+  padding: 0 30px 0 0;
+  justify-content: stretch;
+}
+
+.textEditor_part,
+.column {
+  display: flex;
+  flex-direction: column;
+  resize: both;
+  overflow: hidden;
+  max-width: 1000px;
+  width: 100vw;
+}
+
+.column {
+  max-height: 65vh;
+  min-height: 65vh;
+  width: 50vw;
+  max-width: 50vw;
+}
+
 .textEditor_part {
-  grid-area: 2 / 1 / 3 / 2;
+  max-width: 100%;
+  min-width: 100%;
+  height: 50vh;
+  min-height: 20rem;
+  padding-top: 2px;
 }
+
 .variables_part {
-  grid-area: 3 / 1 / 4 / 2;
+  max-width: 100%;
+  min-width: 100%;
+  height: auto;
+  justify-self: stretch;
 }
+
 .result_part {
-  grid-area: 2 / 2 / 4 / 3;
+  grid-area: result_part;
+  margin-left: -32px;
+  padding-top: 2px;
+  padding-right: 2px;
+  width: 50vw;
+  height: 72vh;
+  justify-self: stretch;
+  align-self: flex-start;
+  resize: both;
+  overflow: hidden;
 }
-.docs_part {
-  grid-area: 1 / 3 / 4 / 4;
+
+.docs_button {
+  position: absolute;
+  top: 200px;
+  right: -0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+  height: fit-content;
+  padding: 5px 15px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: var(--font-accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(-90deg);
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+  svg {
+    transform: rotate(90deg);
+    vertical-align: middle;
+    stroke: var(--font-accent-color);
+  }
+}
+
+.tab_button {
+  border-radius: 0.5rem 0.5rem 0 0;
+  text-align: center;
+  height: fit-content;
+  padding: 2px 10px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: var(--font-accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:first-child {
+    margin-left: 32px;
+  }
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+}
+
+.active {
+  background-color: var(--bg-button-hover);
 }
 
 .send_button {
   display: block;
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
+  position: relative;
+  bottom: 0;
+  right: 0;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 2rem;
   background-color: var(--bg-button);
   transition: background-color 0.2s linear;
-  z-index: 10;
-  margin-left: -3rem;
   &:hover {
     background-color: var(--bg-button-hover);
   }
