@@ -134,6 +134,7 @@ const TextArea: FC<TextAreaProps> = ({
           />
           <textarea
             id="codeEditor"
+            data-testid="codeEditor"
             ref={codeEditorRef}
             wrap="off"
             value={code}
