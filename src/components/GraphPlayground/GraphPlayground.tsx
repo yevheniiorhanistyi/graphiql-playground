@@ -158,6 +158,7 @@ const GraphiQLPage = () => {
             getEndpoint={setEndpoint}
             error={isEndpointCorrect}
             setIsEndpointCorrect={setIsEndpointCorrect}
+            setErrorMessage={setErrorMessage}
           />
         </div>
 

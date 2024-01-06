@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
 import { ENDPOINT_KEY_LS, INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
-import { FC, InputHTMLAttributes, useEffect, useState } from 'react';
+import { Dispatch, FC, InputHTMLAttributes, SetStateAction, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
 import BasicButton from '../common/BasicButton/BasicButton';
 import cn from 'classnames';
@@ -14,9 +14,15 @@ type InputEndpointType = {
   getEndpoint: (endpoint: string | null) => void;
   error?: boolean;
   setIsEndpointCorrect: (value: boolean) => void;
+  setErrorMessage: Dispatch<SetStateAction<string | null>>;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error, setIsEndpointCorrect }) => {
+const InputEndpoint: FC<InputEndpointType> = ({
+  getEndpoint,
+  error,
+  setIsEndpointCorrect,
+  setErrorMessage,
+}) => {
   const storedEndpoint = localStorage.getItem('endpoint') || INITIAL_ENDPOINT;
   const [endpoint, setEndpoint] = useState<string | null>(storedEndpoint);
   const { register, handleSubmit } = useForm<endpointFormType>();
@@ -41,6 +47,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error, setIsEndpoin
       removeFromLocalStorage(ENDPOINT_KEY_LS);
       getEndpoint(null);
       setIsEndpointCorrect(false);
+      setErrorMessage(`${t['invalid endpoint']}`);
     }
   };
 
