@@ -178,13 +178,19 @@ const GraphiQLPage = () => {
                 className={`${styles.tab_button} ${
                   selectedTab === 'variables' ? styles.active : ''
                 }`}
-                onClick={() => setSelectedTab('variables')}
+                onClick={() => {
+                  setSelectedTab('variables');
+                  setArrow('M1 1L7 7L13 1');
+                }}
               >
                 {t['Variables']}
               </button>
               <button
                 className={`${styles.tab_button} ${selectedTab === 'headers' ? styles.active : ''}`}
-                onClick={() => setSelectedTab('headers')}
+                onClick={() => {
+                  setSelectedTab('headers');
+                  setArrow('M1 1L7 7L13 1');
+                }}
               >
                 {t['Headers']}
               </button>
