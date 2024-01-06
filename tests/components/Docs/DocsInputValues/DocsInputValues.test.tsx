@@ -2,41 +2,11 @@ import { vi, describe, test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DocsInputValues from '@/components/Docs/DocsInputValues/DocsInputValues';
 import LocaleProvider from '@/localization/LocaleProvider';
-import { __Type } from '@/interfaces/schemaInterface';
-
-const mockInputType = {
-  name: 'MockInputType',
-  kind: 'INPUT_OBJECT',
-  description: 'Mock input type description',
-  inputFields: [
-    {
-      name: 'field1',
-      description: 'Field 1 description',
-      type: { kind: 'SCALAR', name: 'String', ofType: null },
-      defaultValue: null,
-    },
-    {
-      name: 'field2',
-      description: 'Field 2 description',
-      type: { kind: 'SCALAR', name: 'Int', ofType: null },
-      defaultValue: null,
-    },
-  ],
-  ofType: null,
-} as unknown as __Type;
-
-const mockInputTypeWithoutFields = {
-  name: 'MockInputType',
-  kind: 'INPUT_OBJECT',
-  description: 'Mock input type description',
-  ofType: null,
-} as unknown as __Type;
-
-const mockInputTypeWithoutDescription = {
-  name: 'MockInputType',
-  kind: 'INPUT_OBJECT',
-  ofType: null,
-} as unknown as __Type;
+import {
+  mockInputType,
+  mockInputTypeWithoutFields,
+  mockInputTypeWithoutDescription,
+} from '../../../mockSchema';
 
 const handleClickKeyMock = vi.fn();
 const handleClickValueMock = vi.fn();

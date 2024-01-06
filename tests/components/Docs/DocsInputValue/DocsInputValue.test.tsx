@@ -1,19 +1,8 @@
 import { vi, describe, test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { __InputValue } from '@/interfaces/schemaInterface';
 import LocaleProvider from '@/localization/LocaleProvider';
 import DocsInputValue from '@/components/Docs/DocsInputValue/DocsInputValue';
-
-const mockInputValue = {
-  name: 'name',
-  description: '',
-  type: {
-    kind: 'SCALAR',
-    name: 'String',
-    ofType: null,
-  },
-  defaultValue: null,
-} as __InputValue;
+import { mockInputValue } from '../../../mockSchema';
 
 const handleClickValueMock = vi.fn();
 

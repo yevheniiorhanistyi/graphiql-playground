@@ -1,54 +1,7 @@
 import { vi, describe, test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DocsArguments from '@/components/Docs/DocsArguments/DocsArguments';
-import { __Field } from '@/interfaces/schemaInterface';
-
-const mockField = {
-  name: 'characters',
-  description: 'Get the list of all characters',
-  args: [
-    {
-      name: 'page',
-      description: '',
-      type: {
-        kind: 'SCALAR',
-        name: 'Int',
-        ofType: null,
-      },
-      defaultValue: null,
-    },
-    {
-      name: 'filter',
-      description: '',
-      type: {
-        kind: 'INPUT_OBJECT',
-        name: 'Filter Character',
-        ofType: null,
-      },
-      defaultValue: null,
-    },
-  ],
-  type: {
-    kind: 'OBJECT',
-    name: 'Characters',
-    ofType: null,
-  },
-  isDeprecated: false,
-  deprecationReason: null,
-} as unknown as __Field;
-
-const mockFieldWithoutArgs = {
-  name: 'characters',
-  description: 'Get the list of all characters',
-  args: [],
-  type: {
-    kind: 'OBJECT',
-    name: 'Characters',
-    ofType: null,
-  },
-  isDeprecated: false,
-  deprecationReason: null,
-} as unknown as __Field;
+import { mockField, mockFieldWithoutArgs } from '../../../mockSchema';
 
 const handleClickValueMock = vi.fn();
 
