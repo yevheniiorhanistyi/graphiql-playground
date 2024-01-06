@@ -11,6 +11,9 @@
   align-self: flex-start;
   padding-bottom: 1rem;
   margin-left: 3.5rem;
+  @media (max-width: 390px) {
+    margin-left: 1.5rem;
+  }
 }
 
 .row {
@@ -20,6 +23,13 @@
   min-height: 68vh;
   padding: 0 30px 0 0;
   justify-content: center;
+  @media (max-width: $laptop-screen) {
+    flex-direction: column;
+    max-height: none;
+    min-height: none;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
 }
 
 .textEditor_part,
@@ -39,6 +49,13 @@
   width: 50vw;
   max-width: 60vw;
   min-width: 40rem;
+  @media (max-width: $laptop-screen) {
+    width: calc(100% + 20px);
+    max-width: none;
+    min-width: none;
+    resize: none;
+    overflow: hidden;
+  }
 }
 
 .textEditor_part {
@@ -56,7 +73,6 @@
 }
 
 .result_part {
-  grid-area: result_part;
   flex-grow: 1;
   margin-left: -32px;
   padding-top: 2px;
@@ -67,6 +83,12 @@
   align-self: flex-start;
   resize: both;
   overflow: hidden;
+  @media (max-width: $laptop-screen) {
+    margin-left: 0px;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+  }
 }
 
 .docs_button {
@@ -97,6 +119,12 @@
     vertical-align: middle;
     stroke: var(--font-accent-color);
   }
+  @media (max-width: $laptop-screen) {
+    top: 280px;
+  }
+  @media (max-width: 390px) {
+    top: 320px;
+  }
 }
 
 .tab_button {
@@ -115,6 +143,16 @@
   }
   &:hover {
     background-color: var(--bg-button-hover);
+  }
+  @media (max-width: $laptop-screen) {
+    &:first-child {
+      margin-left: 52px;
+    }
+  }
+  @media (max-width: 390px) {
+    &:first-child {
+      margin-left: 32px;
+    }
   }
 }
 
@@ -143,5 +181,8 @@
   svg {
     vertical-align: middle;
     stroke: var(--font-accent-color);
+  }
+  @media (max-width: 390px) {
+    left: 85vw;
   }
 }

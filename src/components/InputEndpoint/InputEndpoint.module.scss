@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  margin-right: 30px;
 }
 
 .form_container {
@@ -16,6 +17,9 @@
 .input_container {
   height: 2.6rem;
   width: 39vmax;
+  @media (max-width: $laptop-screen) {
+    width: 60vw;
+  }
 }
 
 .input_field {
