@@ -48,10 +48,11 @@ const GraphiQLPage = () => {
     if (endpoint) {
       getSchema(endpoint);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint]);
 
   const getSchema = (endpoint: string) => {
-    getGraphQLSchema(endpoint, headers)
+    getGraphQLSchema(endpoint, headers, setErrorMessage)
       .then((response) => {
         setSchema(response);
         setIsEndpointCorrect(true);
@@ -73,7 +74,7 @@ const GraphiQLPage = () => {
   const handleExecuteQuery = async () => {
     try {
       if (!endpoint) {
-        console.error('Endpoint is not set');
+        setErrorMessage('Endpoint is not set');
         return;
       }
 
@@ -87,7 +88,11 @@ const GraphiQLPage = () => {
           const variablesObj = JSON.parse(variablesWithDoubleQuotes);
           requestBody.variables = variablesObj;
         } catch (error) {
-          console.error('Error parsing variables JSON:', error);
+          if (error instanceof Error) {
+            setErrorMessage(error.message);
+          } else {
+            setErrorMessage('An unknown error occurred');
+          }
         }
       }
 
@@ -97,7 +102,11 @@ const GraphiQLPage = () => {
           const headersWithDoubleQuotes = prepareQuery(headers);
           headersObj = JSON.parse(headersWithDoubleQuotes);
         } catch (error) {
-          console.error('Error parsing headers JSON:', error);
+          if (error instanceof Error) {
+            setErrorMessage(error.message);
+          } else {
+            setErrorMessage('An unknown error occurred');
+          }
         }
       }
 
@@ -121,7 +130,11 @@ const GraphiQLPage = () => {
       const result = await response.json();
       setResponse(JSON.stringify(result, null, 2));
     } catch (error) {
-      console.error('Error executing query:', error);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('An unknown error occurred');
+      }
     }
   };
 
@@ -214,7 +227,7 @@ const GraphiQLPage = () => {
                   aria-hidden="true"
                 >
                   <title>chevron up icon</title>
-                  <path d={arrow} stroke="currentColor" stroke-width="1.5"></path>
+                  <path d={arrow} stroke="currentColor" strokeWidth="1.5"></path>
                 </svg>
               </button>
               {selectedTab === 'variables' && (

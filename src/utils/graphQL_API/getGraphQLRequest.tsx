@@ -1,15 +1,24 @@
 import { dataInterface } from '@/interfaces/schemaInterface';
 import querySchema from '../../constants/querySchema';
 import { prepareQuery } from '@/components/GraphPlayground/utils/prepareQuery';
+import { Dispatch, SetStateAction } from 'react';
 
-export const getGraphQLSchema = async (endpoint: string, headers: string) => {
+export const getGraphQLSchema = async (
+  endpoint: string,
+  headers: string,
+  setErrorMessage: Dispatch<SetStateAction<string | null>>
+) => {
   let headersObj = {};
   if (headers) {
     try {
       const headersWithDoubleQuotes = prepareQuery(headers);
       headersObj = JSON.parse(headersWithDoubleQuotes);
     } catch (error) {
-      console.error('Error parsing headers JSON:', error);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('An unknown error occurred');
+      }
     }
   }
   try {
