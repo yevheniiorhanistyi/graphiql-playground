@@ -2,12 +2,13 @@
 import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
-import { INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
+import { ENDPOINT_KEY_LS, INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
 import { FC, InputHTMLAttributes, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
 import BasicButton from '../common/BasicButton/BasicButton';
 import cn from 'classnames';
 import styles from './InputEndpoint.module.scss';
+import { removeFromLocalStorage, saveToLocalStorage } from '@/utils/localStorageService';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string | null) => void;
@@ -24,7 +25,7 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error, setIsEndpoin
 
   useEffect(() => {
     getEndpoint(storedEndpoint);
-  }, []);
+  }, [getEndpoint, storedEndpoint]);
 
   const handleChangeEndpoint = (data: endpointFormType): void => {
     const newEndpoint = data.endpoint;
@@ -32,12 +33,12 @@ const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error, setIsEndpoin
 
     if (regexp.test(newEndpoint)) {
       setEndpoint(newEndpoint);
-      localStorage.setItem('endpoint', newEndpoint);
+      saveToLocalStorage(ENDPOINT_KEY_LS, newEndpoint);
       getEndpoint(newEndpoint);
       setIsEndpointCorrect(true);
     } else {
       setEndpoint(null);
-      localStorage.removeItem('endpoint');
+      removeFromLocalStorage(ENDPOINT_KEY_LS);
       getEndpoint(null);
       setIsEndpointCorrect(false);
     }
