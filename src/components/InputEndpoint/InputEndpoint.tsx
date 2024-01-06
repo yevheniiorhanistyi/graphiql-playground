@@ -23,7 +23,7 @@ const InputEndpoint: FC<InputEndpointType> = ({
   setIsEndpointCorrect,
   setErrorMessage,
 }) => {
-  const storedEndpoint = localStorage.getItem('endpoint') || INITIAL_ENDPOINT;
+  const storedEndpoint = localStorage.getItem(ENDPOINT_KEY_LS) || INITIAL_ENDPOINT;
   const [endpoint, setEndpoint] = useState<string | null>(storedEndpoint);
   const { register, handleSubmit } = useForm<endpointFormType>();
 
