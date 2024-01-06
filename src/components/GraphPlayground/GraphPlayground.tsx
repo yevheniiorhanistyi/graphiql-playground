@@ -47,7 +47,7 @@ const GraphiQLPage = () => {
   };
 
   useEffect(() => {
-    if (endpoint) {
+    if (endpoint && !errorMessage) {
       getSchema(endpoint);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
