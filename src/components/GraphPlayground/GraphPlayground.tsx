@@ -28,8 +28,9 @@ const GraphiQLPage = () => {
   const [isEndpointCorrect, setIsEndpointCorrect] = useState<boolean>(true);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
-  const [selectedTab, setSelectedTab] = useState<'variables' | 'headers'>('variables');
+  const [selectedTab, setSelectedTab] = useState<'variables' | 'headers' | ''>('variables');
   const [statusResponse, setStatusResponse] = useState<number>();
+  const [arrow, setArrow] = useState<'M13 8L7 2L1 8' | 'M1 1L7 7L13 1'>('M1 1L7 7L13 1');
 
   const handleVariablesChange = (value: string) => {
     setVariables(value);
@@ -186,6 +187,29 @@ const GraphiQLPage = () => {
                 onClick={() => setSelectedTab('headers')}
               >
                 {t['Headers']}
+              </button>
+              <button
+                className={styles.tab_button}
+                onClick={() => {
+                  if (selectedTab !== '') {
+                    setSelectedTab('');
+                    setArrow('M13 8L7 2L1 8');
+                    return;
+                  }
+                  setSelectedTab('variables');
+                  setArrow('M1 1L7 7L13 1');
+                }}
+              >
+                <svg
+                  height="10px"
+                  viewBox="0 0 14 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <title>chevron up icon</title>
+                  <path d={arrow} stroke="currentColor" stroke-width="1.5"></path>
+                </svg>
               </button>
               {selectedTab === 'variables' && (
                 <TextArea
