@@ -50,7 +50,7 @@ const GraphiQLPage = () => {
   }, [endpoint]);
 
   const getSchema = (endpoint: string) => {
-    getGraphQLSchema(endpoint)
+    getGraphQLSchema(endpoint, headers)
       .then((response) => {
         setSchema(response);
         setIsEndpointCorrect(true);
