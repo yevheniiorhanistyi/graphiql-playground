@@ -8,6 +8,8 @@ import TextArea from '../UI/TextArea/TextArea';
 import useTranslation from '@/localization/useTranslation';
 import { Loader } from '../Loader/Loader';
 import { prepareQuery } from './utils/prepareQuery';
+import { ENDPOINT_KEY_LS } from '@/constants/stringConstants';
+import { removeFromLocalStorage, saveToLocalStorage } from '@/utils/localStorageService';
 
 interface GraphQLRequestBody {
   query: string;
@@ -57,13 +59,13 @@ const GraphiQLPage = () => {
         setSchema(response);
         setIsEndpointCorrect(true);
         setErrorMessage(null);
-        localStorage.setItem('endpoint', endpoint);
+        saveToLocalStorage(ENDPOINT_KEY_LS, endpoint);
       })
       .catch((error: Error) => {
         setSchema(null);
         setIsEndpointCorrect(false);
         setErrorMessage(error.message);
-        localStorage.removeItem('endpoint');
+        removeFromLocalStorage(ENDPOINT_KEY_LS);
       });
   };
 
