@@ -73,6 +73,7 @@
 }
 
 .result_part {
+  position: relative;
   flex-grow: 1;
   margin-left: -32px;
   padding-top: 2px;
@@ -185,4 +186,19 @@
   @media (max-width: 390px) {
     left: 85vw;
   }
+}
+
+.status_response {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 0.5rem;
+  background-color: var(--success-color);
+  z-index: 20;
+}
+
+.incorrect {
+  background-color: var(--error-color);
 }

@@ -29,6 +29,7 @@ const GraphiQLPage = () => {
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
   const [selectedTab, setSelectedTab] = useState<'variables' | 'headers'>('variables');
+  const [statusResponse, setStatusResponse] = useState<number>();
 
   const handleVariablesChange = (value: string) => {
     setVariables(value);
@@ -111,9 +112,11 @@ const GraphiQLPage = () => {
       if (!response.ok) {
         const result = await response.json();
         setResponse(JSON.stringify(result, null, 2));
+        setStatusResponse(response.status);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
+      setStatusResponse(response.status);
       const result = await response.json();
       setResponse(JSON.stringify(result, null, 2));
     } catch (error) {
@@ -203,6 +206,15 @@ const GraphiQLPage = () => {
           </div>
 
           <div className={styles.result_part}>
+            {!!statusResponse && (
+              <p
+                className={`${styles.status_response} ${
+                  statusResponse > 399 ? styles.incorrect : ''
+                }`}
+              >
+                {statusResponse}
+              </p>
+            )}
             <TextArea
               value={response}
               readOnly={true}
