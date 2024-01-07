@@ -174,6 +174,7 @@ const GraphiQLPage = () => {
                 placeholder={t['Enter code here...']}
               />
               <button
+                data-testid="send-button"
                 className={styles.send_button}
                 onClick={handleExecuteQuery}
                 disabled={!isEndpointCorrect}
