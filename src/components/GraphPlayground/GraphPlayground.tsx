@@ -9,7 +9,7 @@ import useTranslation from '@/localization/useTranslation';
 import { Loader } from '../Loader/Loader';
 import { prepareQuery } from './utils/prepareQuery';
 import { ENDPOINT_KEY_LS } from '@/constants/stringConstants';
-import { saveToLocalStorage } from '@/utils/localStorageService';
+import { removeFromLocalStorage, saveToLocalStorage } from '@/utils/localStorageService';
 
 interface GraphQLRequestBody {
   query: string;
@@ -65,7 +65,7 @@ const GraphiQLPage = () => {
         setSchema(null);
         setIsEndpointCorrect(false);
         setErrorMessage(error.message);
-        saveToLocalStorage(ENDPOINT_KEY_LS, endpoint);
+        removeFromLocalStorage(ENDPOINT_KEY_LS);
       });
   };
 
