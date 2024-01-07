@@ -1,7 +1,8 @@
 .playground_container {
+  margin-bottom: -2rem;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
-  margin-bottom: -2rem;
 }
 
 .input_part {
@@ -11,6 +12,11 @@
   align-self: flex-start;
   padding-bottom: 1rem;
   margin-left: 3.5rem;
+
+  @media screen and (max-width: $laptop-screen) {
+    width: 90%;
+  }
+
   @media (max-width: 390px) {
     margin-left: 1.5rem;
   }
@@ -84,6 +90,7 @@
   align-self: flex-start;
   resize: both;
   overflow: hidden;
+
   @media (max-width: $laptop-screen) {
     margin-left: 0px;
     width: 100%;
@@ -121,10 +128,10 @@
     stroke: var(--font-accent-color);
   }
   @media (max-width: $laptop-screen) {
-    top: 280px;
+    top: 28rem;
   }
   @media (max-width: 390px) {
-    top: 320px;
+    top: 35rem;
   }
 }
 

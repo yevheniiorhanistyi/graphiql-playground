@@ -3,6 +3,7 @@ import Home from '@/components/Home/Home';
 import Features from '@/components/Features/Features';
 import About from '@/components/About/About';
 import Team from '@/components/Team/Team';
+import { ErrorButton } from '@/components/ErrorBoundary/ErrorButton/ErrorButton';
 
 const Welcome: FC = () => {
   return (
@@ -11,7 +12,7 @@ const Welcome: FC = () => {
       <Features />
       <About />
       <Team />
-      {/* <ErrorButton /> */}
+      <ErrorButton />
     </>
   );
 };
