@@ -74,7 +74,7 @@ interface __Directive {
   args: [__InputValue];
 }
 
-enum __DirectiveLocation {
+export enum __DirectiveLocation {
   QUERY,
   MUTATION,
   SUBSCRIPTION,

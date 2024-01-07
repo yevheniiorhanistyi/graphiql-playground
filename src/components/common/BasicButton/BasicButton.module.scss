@@ -37,3 +37,7 @@
     color: var(--font-accent-color);
   }
 }
+
+.active {
+  background-color: var(--bg-button-disable);
+}

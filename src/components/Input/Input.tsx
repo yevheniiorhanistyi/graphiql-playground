@@ -41,6 +41,7 @@ const Input = <T extends FieldValues>({
         <input
           {...register(name as Path<T>)}
           className={cn(styles.input_field, fieldClassName)}
+          data-testid="endpoint"
           type={type}
           name={name}
           security={security}

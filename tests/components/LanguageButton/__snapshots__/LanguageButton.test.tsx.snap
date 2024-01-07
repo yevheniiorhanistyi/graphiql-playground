@@ -1,0 +1,56 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LangButton > renders LangButton correctly 1`] = `
+<div>
+  <button
+    class="_langBtn_f843e0"
+    data-testid="language-button"
+    type="button"
+  >
+    <ul
+      class="_langPopover_f843e0"
+    >
+      <li
+        class="_langPopover_item_f843e0"
+      >
+        <img
+          alt="English"
+          class="_flagIcon_f843e0"
+          data-nimg="1"
+          decoding="async"
+          height="20"
+          loading="lazy"
+          src="/en_flag.svg"
+          style="color: transparent;"
+          width="28"
+        />
+        <span
+          class="_languageText_f843e0"
+        >
+          English
+        </span>
+      </li>
+      <li
+        class="_langPopover_item_f843e0"
+      >
+        <img
+          alt="Русский"
+          class="_flagIcon_f843e0"
+          data-nimg="1"
+          decoding="async"
+          height="20"
+          loading="lazy"
+          src="/ru_flag.svg"
+          style="color: transparent;"
+          width="28"
+        />
+        <span
+          class="_languageText_f843e0"
+        >
+          Русский
+        </span>
+      </li>
+    </ul>
+  </button>
+</div>
+`;

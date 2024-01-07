@@ -20,7 +20,7 @@ const Modal: FC<ModalProps> = ({ children, visible, setVisible, top, right, bott
   }
 
   return (
-    <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
+    <div className={rootClasses.join(' ')} onClick={() => setVisible(false)} data-testid="modal">
       <div
         style={{ top, right, bottom, left }}
         className={classes.modalContent}

@@ -133,6 +133,7 @@ const TextArea: FC<TextAreaProps> = ({
         />
         <textarea
           id="codeEditor"
+          data-testid="codeEditor"
           ref={codeEditorRef}
           wrap="off"
           value={code}
@@ -147,7 +148,7 @@ const TextArea: FC<TextAreaProps> = ({
         />
         <div className={styles.tools}>
           {!readOnly && (
-            <button onClick={handleClear}>
+            <button data-testid="clear-button" onClick={handleClear}>
               <svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill="none"
