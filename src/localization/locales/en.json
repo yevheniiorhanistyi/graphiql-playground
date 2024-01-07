@@ -56,6 +56,11 @@
   "Stanislav, an excellent example of a team player, but is also capable of working alone. He is detail-oriented, very hard-working and has extensive technical knowledge, while always being open to learning new tools and technologies.": "Stanislav, an excellent example of a team player, but is also capable of working alone. He is detail-oriented, very hard-working and has extensive technical knowledge, while always being open to learning new tools and technologies.",
   "Uladzimir is web developer with excellent communication skills  shows an outstanding ability to adapt to new technologies, which makes it an ideal candidate for projects that require implementation of new solutions.": "Uladzimir is web developer with excellent communication skills  shows an outstanding ability to adapt to new technologies, which makes it an ideal candidate for projects that require implementation of new solutions.",
   "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.": "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.",
+  "Change endpoint": "Change endpoint",
+  "Enter code here...": "Enter code here...",
+  "Enter variables here...": "Enter variables here...",
+  "Enter headers here...": "Enter headers here...",
+  "Submit a request to get the result in this field...": "Submit a request to get the result in this field...",
   "GraphQL Docs": "GraphQL Docs",
   "No type name found": "No type name found",
   "No GraphQL schema": "No GraphQL schema",
@@ -65,6 +70,9 @@
   "Type": "Type",
   "Arguments": "Arguments",
   "Endpoint": "Endpoint",
+  "Variables": "Variables",
+  "Headers": "Headers",
+  "Show Docs": "Show Docs",
   "Section": "Section",
   "Schema description": "GraphQL Docs is a tool that generates comprehensive documentation for GraphQL APIs. It automatically generates documentation from GraphQL schemas, offering insights into available queries, mutations, types, and their relationships.",
   "Root Types": "Root Types",
@@ -154,5 +162,6 @@
   "auth/user-mismatch": "The supplied credentials do not correspond to the previously signed in user.",
   "auth/user-signed-out": "",
   "auth/weak-password": "The password must be 6 characters long or more.",
-  "auth/web-storage-unsupported": "This browser is not supported or 3rd party cookies and data may be disabled."
+  "auth/web-storage-unsupported": "This browser is not supported or 3rd party cookies and data may be disabled.",
+  "Show Error": "Show Error"
 }

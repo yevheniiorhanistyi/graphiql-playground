@@ -183,3 +183,17 @@ main {
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--font-main-color);
+  border-radius: 4px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-input-count);
+}

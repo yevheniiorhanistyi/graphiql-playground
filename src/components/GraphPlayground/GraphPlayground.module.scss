@@ -1,0 +1,212 @@
+.playground_container {
+  margin-bottom: -2rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input_part {
+  justify-content: space-between;
+  align-items: flex-end;
+  justify-self: flex-start;
+  align-self: flex-start;
+  padding-bottom: 1rem;
+  margin-left: 3.5rem;
+
+  @media screen and (max-width: $laptop-screen) {
+    width: 90%;
+  }
+
+  @media (max-width: 390px) {
+    margin-left: 1.5rem;
+  }
+}
+
+.row {
+  display: flex;
+  overflow: hidden;
+  max-height: 68vh;
+  min-height: 68vh;
+  padding: 0 30px 0 0;
+  justify-content: center;
+  @media (max-width: $laptop-screen) {
+    flex-direction: column;
+    max-height: none;
+    min-height: none;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+}
+
+.textEditor_part,
+.column {
+  display: flex;
+  flex-direction: column;
+  resize: both;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.column {
+  display: flex;
+  position: relative;
+  max-height: 68vh;
+  min-height: 68vh;
+  width: 50vw;
+  max-width: 60vw;
+  min-width: 40rem;
+  @media (max-width: $laptop-screen) {
+    width: calc(100% + 20px);
+    max-width: none;
+    min-width: none;
+    resize: none;
+    overflow: hidden;
+  }
+}
+
+.textEditor_part {
+  max-width: 100%;
+  min-width: 100%;
+  height: 80vh;
+  min-height: 20rem;
+  padding-top: 2px;
+  margin-bottom: -20px;
+}
+
+.variables_part {
+  flex: 1 1;
+  margin-bottom: 25px;
+}
+
+.result_part {
+  position: relative;
+  flex-grow: 1;
+  margin-left: -32px;
+  padding-top: 2px;
+  padding-right: 2px;
+  width: 50vw;
+  height: 75vh;
+  justify-self: stretch;
+  align-self: flex-start;
+  resize: both;
+  overflow: hidden;
+
+  @media (max-width: $laptop-screen) {
+    margin-left: 0px;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+  }
+}
+
+.docs_button {
+  position: absolute;
+  top: 200px;
+  right: -0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+  height: fit-content;
+  padding: 5px 15px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: var(--font-accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(-90deg);
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+  svg {
+    transform: rotate(90deg);
+    vertical-align: middle;
+    stroke: var(--font-accent-color);
+  }
+  @media (max-width: $laptop-screen) {
+    top: 28rem;
+  }
+  @media (max-width: 390px) {
+    top: 35rem;
+  }
+}
+
+.tab_button {
+  border-radius: 0.5rem 0.5rem 0 0;
+  text-align: center;
+  height: fit-content;
+  padding: 2px 10px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: var(--font-accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:first-child {
+    margin-left: 32px;
+  }
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+  @media (max-width: $laptop-screen) {
+    &:first-child {
+      margin-left: 52px;
+    }
+  }
+  @media (max-width: 390px) {
+    &:first-child {
+      margin-left: 32px;
+    }
+  }
+}
+
+.active {
+  background-color: var(--bg-button-hover);
+}
+
+.send_button {
+  display: block;
+  position: absolute;
+  top: 126px;
+  right: 31px;
+  z-index: 20;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 2rem;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+  svg {
+    vertical-align: middle;
+    stroke: var(--font-accent-color);
+  }
+  @media (max-width: 390px) {
+    left: 85vw;
+  }
+}
+
+.status_response {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 0.5rem;
+  background-color: var(--success-color);
+  color: var(--font-accent-color);
+  z-index: 1;
+}
+
+.incorrect {
+  background-color: var(--error-color);
+}

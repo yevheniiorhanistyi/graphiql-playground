@@ -1,0 +1,115 @@
+.text_editor {
+  display: flex;
+  height: 90%;
+  width: 100%;
+  min-width: 300px;
+  resize: both;
+  @media (max-width: 390px) {
+    width: 105vw;
+  }
+}
+
+.text_editor:focus-within .tools svg {
+  background-color: var(--bg-page);
+}
+
+.line_counter {
+  position: relative;
+  top: 0.2rem;
+  left: 3.5rem;
+  text-align: right;
+  border: none;
+  width: 3.5rem;
+  overflow-y: hidden;
+  background-color: var(--bg-input-count);
+  color: var(--font-main-color);
+  font-size: 1.6rem;
+  line-height: 140%;
+  font-family: monospace, sans-serif;
+  outline: none;
+  resize: none;
+}
+
+.code_editor {
+  width: 100%;
+  min-height: 10rem;
+  padding-top: 2px;
+  border: 1px solid var(--border-input);
+  background-color: var(--bg-input);
+  color: var(--color-link);
+  font-size: 1.6rem;
+  line-height: 140%;
+  font-family: monospace, sans-serif;
+  padding-left: 4.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--font-main-color) var(--bg-input-count);
+  resize: none;
+  overflow: auto;
+  &:focus {
+    background-color: inherit;
+    border: 2px solid var(--border-input-focus);
+  }
+}
+
+.code_editor::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.code_editor::-webkit-scrollbar-thumb {
+  background-color: var(--font-main-color);
+  border-radius: 0.4rem;
+  width: 0.6rem;
+}
+
+.code_editor::-webkit-scrollbar-track {
+  background-color: var(--bg-input-count);
+}
+
+.info_line {
+  font-size: 1.2rem;
+  text-align: right;
+  margin-right: 3rem;
+  @media (max-width: 390px) {
+    margin-right: 9rem;
+  }
+
+  @media (max-width: 390px) {
+    margin-right: 4rem;
+  }
+
+  @media (max-width: 370px) {
+    margin-right: 6rem;
+  }
+
+  @media (max-width: 350px) {
+    margin-right: 8rem;
+  }
+
+  @media (max-width: 330px) {
+    margin-right: 10rem;
+  }
+
+  @media (max-width: 315px) {
+    margin-right: 11rem;
+  }
+}
+
+.tools {
+  position: relative;
+  top: 1rem;
+  right: 3.5rem;
+  button {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  svg {
+    margin-top: -1px;
+    stroke: var(--font-main-color);
+    background-color: var(--bg-input);
+    vertical-align: middle;
+    &:hover {
+      scale: 1.1;
+    }
+  }
+}

@@ -2,52 +2,74 @@
 import { useForm } from 'react-hook-form';
 import Input from '../Input/Input';
 import { endpointFormType } from '@/interfaces/formInterfaces';
-import { INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
-import { FC, useEffect, useState } from 'react';
+import { ENDPOINT_KEY_LS, INITIAL_ENDPOINT, URL_REGEXP } from '@/constants/stringConstants';
+import { Dispatch, FC, InputHTMLAttributes, SetStateAction, useEffect, useState } from 'react';
 import useTranslation from '@/localization/useTranslation';
+import BasicButton from '../common/BasicButton/BasicButton';
 import cn from 'classnames';
 import styles from './InputEndpoint.module.scss';
+import { removeFromLocalStorage, saveToLocalStorage } from '@/utils/localStorageService';
 
 type InputEndpointType = {
   getEndpoint: (endpoint: string | null) => void;
-  error: boolean;
-};
+  error?: boolean;
+  setIsEndpointCorrect: (value: boolean) => void;
+  setErrorMessage: Dispatch<SetStateAction<string | null>>;
+} & InputHTMLAttributes<HTMLInputElement>;
 
-const InputEndpoint: FC<InputEndpointType> = ({ getEndpoint, error }) => {
-  const [endpoint, setEndpoint] = useState<string | null>(INITIAL_ENDPOINT);
+const InputEndpoint: FC<InputEndpointType> = ({
+  getEndpoint,
+  error,
+  setIsEndpointCorrect,
+  setErrorMessage,
+}) => {
+  const storedEndpoint = localStorage.getItem(ENDPOINT_KEY_LS) || INITIAL_ENDPOINT;
+  const [endpoint, setEndpoint] = useState<string | null>(storedEndpoint);
   const { register, handleSubmit } = useForm<endpointFormType>();
 
   const t = useTranslation();
 
   useEffect(() => {
-    getEndpoint(INITIAL_ENDPOINT);
-  }, [getEndpoint]);
+    getEndpoint(storedEndpoint);
+  }, [getEndpoint, storedEndpoint]);
 
   const handleChangeEndpoint = (data: endpointFormType): void => {
+    const newEndpoint = data.endpoint;
     const regexp = new RegExp(URL_REGEXP);
-    if (regexp.test(data.endpoint)) {
-      setEndpoint(data.endpoint);
-      getEndpoint(data.endpoint);
+
+    if (regexp.test(newEndpoint)) {
+      setEndpoint(newEndpoint);
+      saveToLocalStorage(ENDPOINT_KEY_LS, newEndpoint);
+      getEndpoint(newEndpoint);
+      setIsEndpointCorrect(true);
     } else {
       setEndpoint(null);
+      removeFromLocalStorage(ENDPOINT_KEY_LS);
       getEndpoint(null);
+      setIsEndpointCorrect(false);
+      setErrorMessage(`${t['invalid endpoint']}`);
     }
   };
 
   return (
-    <div style={{ width: '25rem' }}>
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        <form action="submit" onSubmit={handleSubmit(handleChangeEndpoint)}>
-          <Input<endpointFormType>
-            register={register}
-            label={`${t['Endpoint']}: `}
-            name="endpoint"
-            type="text"
-            defaultValue={endpoint ? endpoint : ''}
-          />
-          <button type="submit">{t['Submit']}</button>
-        </form>
-      </div>
+    <div className={styles.inputEndpoint_container}>
+      <form
+        action="submit"
+        onSubmit={handleSubmit(handleChangeEndpoint)}
+        className={styles.form_container}
+      >
+        <Input<endpointFormType>
+          className={styles.input}
+          register={register}
+          name="endpoint"
+          type="text"
+          defaultValue={endpoint ? endpoint : ''}
+          containerClassName={styles.input_container}
+          fieldClassName={styles.input_field}
+          focus={true}
+        />
+        <BasicButton className={styles.button}>{t['Change endpoint']}</BasicButton>
+      </form>
 
       <p>
         <span>{t['Endpoint']}: </span>

@@ -56,6 +56,11 @@
   "Stanislav, an excellent example of a team player, but is also capable of working alone. He is detail-oriented, very hard-working and has extensive technical knowledge, while always being open to learning new tools and technologies.": "Станислав — отличный пример командного игрока, но способен работать и в одиночку. Он внимателен к деталям, очень трудолюбив и обладает обширными техническими знаниями, но при этом всегда открыт для изучения новых инструментов и технологий.",
   "Uladzimir is web developer with excellent communication skills  shows an outstanding ability to adapt to new technologies, which makes it an ideal candidate for projects that require implementation of new solutions.": "Владимир — веб-разработчик с отличными коммуникативными навыками, демонстрирует выдающуюся способность адаптироваться к новым технологиям, что делает его идеальным кандидатом для проектов, требующих внедрения новых решений.",
   "Yevhenii is a passionate web developer, dedicated to delivering top-notch solutions that prioritize user experience, architectural soundness, and code quality. His multifaceted approach  makes him an asset to any project or team.": "Евгений — страстный веб-разработчик, стремящийся предоставлять первоклассные решения, в которых приоритет отдается пользовательскому опыту, архитектурной надежности и качеству кода. Его многогранный подход делает его ценным активом для любого проекта или команды.",
+  "Change endpoint": "Изменить адрес",
+  "Enter code here...": "Введите код здесь...",
+  "Enter variables here...": "Введите переменные здесь...",
+  "Enter headers here...": "Введите заголовок здесь...",
+  "Submit a request to get the result in this field...": "Отправьте запрос, чтобы получить результат в этом поле...",
   "GraphQL Docs": "Документация GraphQL",
   "No type name found": "Имя типа не найдено",
   "No GraphQL schema": "Схема GraphQL не найдена",
@@ -65,6 +70,9 @@
   "Type": "Тип",
   "Arguments": "Аргументы",
   "Endpoint": "Адрес",
+  "Variables": "Переменные",
+  "Headers": "Заголовки",
+  "Show Docs": "Документация",
   "Section": "Раздел",
   "Schema description": "Документация GraphQL - это инструмент, который генерирует документацию о GraphQL API. Он автоматически генерирует документацию на основе схем GraphQL, предлагая информацию о доступных запросах, мутациях, типах и их взаимосвязях.",
   "Root Types": "Типы запросов",
@@ -151,5 +159,6 @@
   "auth/user-mismatch": "Предоставленные учетные данные не соответствуют ранее зарегистрированному пользователю.",
   "auth/user-signed-out": "",
   "auth/weak-password": "Пароль должен содержать не менее 6 символов.",
-  "auth/web-storage-unsupported": "Этот браузер не поддерживается или сторонние файлы cookie и данные могут быть отключены."
+  "auth/web-storage-unsupported": "Этот браузер не поддерживается или сторонние файлы cookie и данные могут быть отключены.",
+  "Show Error": "Показать ошибку"
 }
