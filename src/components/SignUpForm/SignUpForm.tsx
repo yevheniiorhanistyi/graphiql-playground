@@ -79,7 +79,7 @@ const SignUpForm = () => {
       {submitError && <p style={{ color: 'red', textAlign: 'center' }}>{t[`${submitError}`]}</p>}
 
       <BasicButton type="submit" disabled={!isValid} style={{ marginTop: '8px' }}>
-        {isLoading ? <Loader /> : `${t['Submit']}`}
+        {isLoading ? <Loader style={{ position: 'absolute' }} /> : `${t['Submit']}`}
       </BasicButton>
     </form>
   );

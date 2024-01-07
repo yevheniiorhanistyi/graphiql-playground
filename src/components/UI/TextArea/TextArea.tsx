@@ -193,12 +193,12 @@ const TextArea: FC<TextAreaProps> = ({
             codeEditorRef={codeEditorRef}
           />
         )}
+        {!readOnly && (
+          <p
+            className={styles.info_line}
+          >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${code.length}`}</p>
+        )}
       </div>
-      {!readOnly && (
-        <p
-          className={styles.info_line}
-        >{`Space: ${TAB_SPACES}, Ln ${cursorCount.row}, Col ${cursorCount.col}, Ch ${code.length}`}</p>
-      )}
     </>
   );
 };
