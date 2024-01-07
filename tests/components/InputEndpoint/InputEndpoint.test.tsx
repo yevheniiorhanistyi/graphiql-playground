@@ -5,12 +5,18 @@ import InputEndpoint from '@/components/InputEndpoint/InputEndpoint';
 import LocaleProvider from '@/localization/LocaleProvider';
 
 const getEndpointMock = vi.fn();
+const setIsEndpointCorrectMock = vi.fn();
+const setErrorMessageMock = vi.fn();
 
 describe('InputEndpoint component', () => {
   test('renders InputEndpoint component', () => {
     render(
       <LocaleProvider>
-        <InputEndpoint getEndpoint={getEndpointMock} />
+        <InputEndpoint
+          getEndpoint={getEndpointMock}
+          setIsEndpointCorrect={setIsEndpointCorrectMock}
+          setErrorMessage={setErrorMessageMock}
+        />
       </LocaleProvider>
     );
 
@@ -20,7 +26,11 @@ describe('InputEndpoint component', () => {
   test('submits the form and updates the endpoint', async () => {
     render(
       <LocaleProvider>
-        <InputEndpoint getEndpoint={getEndpointMock} />
+        <InputEndpoint
+          getEndpoint={getEndpointMock}
+          setIsEndpointCorrect={setIsEndpointCorrectMock}
+          setErrorMessage={setErrorMessageMock}
+        />
       </LocaleProvider>
     );
 
