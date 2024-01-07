@@ -70,6 +70,8 @@
   "Type": "Type",
   "Arguments": "Arguments",
   "Endpoint": "Endpoint",
+  "Variables": "Variables",
+  "Headers": "Headers",
   "Show Docs": "Show Docs",
   "Section": "Section",
   "Schema description": "GraphQL Docs is a tool that generates comprehensive documentation for GraphQL APIs. It automatically generates documentation from GraphQL schemas, offering insights into available queries, mutations, types, and their relationships.",
@@ -160,5 +162,6 @@
   "auth/user-mismatch": "The supplied credentials do not correspond to the previously signed in user.",
   "auth/user-signed-out": "",
   "auth/weak-password": "The password must be 6 characters long or more.",
-  "auth/web-storage-unsupported": "This browser is not supported or 3rd party cookies and data may be disabled."
+  "auth/web-storage-unsupported": "This browser is not supported or 3rd party cookies and data may be disabled.",
+  "Show Error": "Show Error"
 }
