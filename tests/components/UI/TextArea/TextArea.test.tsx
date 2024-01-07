@@ -16,4 +16,17 @@ describe('TextArea component', () => {
     fireEvent.change(textarea, { target: { value: 'New value' } });
     expect(handleChange).toHaveBeenCalledWith('New value');
   });
+
+  test('clears content and calls onChange when handleClear is triggered', () => {
+    const { getByTestId } = render(<TextArea onChange={handleChange} />);
+    const textarea = getByTestId('codeEditor') as HTMLInputElement;
+
+    fireEvent.change(textarea, { target: { value: 'Initial value' } });
+
+    const clearButton = getByTestId('clear-button');
+    fireEvent.click(clearButton);
+
+    expect(textarea.value).toBe('');
+    expect(handleChange).toHaveBeenCalledWith('');
+  });
 });
