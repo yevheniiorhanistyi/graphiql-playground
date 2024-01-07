@@ -68,7 +68,9 @@ const InputEndpoint: FC<InputEndpointType> = ({
           fieldClassName={styles.input_field}
           focus={true}
         />
-        <BasicButton className={styles.button}>{t['Change endpoint']}</BasicButton>
+        <BasicButton customStyles={{ whiteSpace: 'nowrap' }} className={styles.button}>
+          {t['Change endpoint']}
+        </BasicButton>
       </form>
 
       <p>

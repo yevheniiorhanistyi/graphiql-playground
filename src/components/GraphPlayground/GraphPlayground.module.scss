@@ -19,8 +19,9 @@
     width: 90%;
   }
 
-  @media (max-width: 390px) {
-    margin-left: 1.5rem;
+  @media (max-width: 430px) {
+    width: 88%;
+    margin-left: 2.5rem;
   }
 }
 
@@ -58,6 +59,7 @@
   width: 50vw;
   max-width: 60vw;
   min-width: 40rem;
+  z-index: 10;
 
   @media (max-width: $laptop-screen) {
     width: calc(100% + 20px);
@@ -119,6 +121,7 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   transform: rotate(-90deg);
+  z-index: 10;
 
   &:hover {
     background-color: var(--bg-button-hover);
@@ -139,8 +142,8 @@
     top: 28rem;
   }
 
-  @media (max-width: 390px) {
-    top: 35rem;
+  @media (max-width: 400px) {
+    top: 33rem;
   }
 }
 
@@ -166,14 +169,9 @@
 
   @media (max-width: $laptop-screen) {
     &:first-child {
-      margin-left: 52px;
-    }
-  }
-
-  @media (max-width: 390px) {
-    &:first-child {
       margin-left: 32px;
     }
+    margin-top: 1.5rem;
   }
 }
 
@@ -207,8 +205,8 @@
     stroke: var(--font-accent-color);
   }
 
-  @media (max-width: 390px) {
-    left: 85vw;
+  @media (max-width: 400px) {
+    left: 78vw;
   }
 }
 

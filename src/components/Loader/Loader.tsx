@@ -1,7 +1,9 @@
-import { FC } from 'react';
+import { FC, HTMLAttributes } from 'react';
 import styles from './Loader.module.scss';
 
-export const Loader: FC = () => {
+interface LoaderProps extends HTMLAttributes<HTMLDivElement> {}
+
+export const Loader: FC<LoaderProps> = () => {
   return (
     <div className={styles.loader_container}>
       <div className={styles.loader}></div>

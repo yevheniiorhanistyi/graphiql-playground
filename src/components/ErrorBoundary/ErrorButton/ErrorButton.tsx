@@ -1,4 +1,3 @@
-import BasicButton from '@/components/common/BasicButton/BasicButton';
 import { SMTH_WENT_WRONG } from '@/constants/stringConstants';
 import useTranslation from '@/localization/useTranslation';
 import { FC, useEffect, useState } from 'react';
@@ -20,9 +19,9 @@ export const ErrorButton: FC = () => {
 
   return (
     <div className="wrapper">
-      <BasicButton onClick={handleThrowError} customStyles={{ marginTop: '2rem' }}>
+      <button style={{ display: 'none' }} onClick={handleThrowError}>
         {t['Show Error']}
-      </BasicButton>
+      </button>
     </div>
   );
 };

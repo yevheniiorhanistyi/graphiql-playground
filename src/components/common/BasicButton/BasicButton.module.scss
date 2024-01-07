@@ -5,6 +5,8 @@
   transition: background-color 0.2s linear;
   border-radius: 0.5rem;
   text-wrap: nowrap;
+  overflow: visible;
+  white-space: normal;
 
   &:hover {
     background-color: var(--bg-button-hover);

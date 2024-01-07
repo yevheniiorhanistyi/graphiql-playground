@@ -25,7 +25,7 @@ const Home: FC = () => {
             ]
           }
         </p>
-        <BasicButton customStyles={{ width: '20rem', height: '5rem', borderRadius: '0.5rem' }}>
+        <BasicButton customStyles={{ width: '21rem', height: '5rem', borderRadius: '0.5rem' }}>
           <Link
             className={styles.home_link}
             href={authUser ? Routes.PLAYGROUND_PAGE : Routes.AUTH_PAGE}
