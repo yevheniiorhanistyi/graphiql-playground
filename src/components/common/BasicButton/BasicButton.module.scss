@@ -1,0 +1,45 @@
+.button {
+  text-align: center;
+  padding: 2px 20px;
+  background-color: var(--bg-button);
+  transition: background-color 0.2s linear;
+  border-radius: 0.5rem;
+  text-wrap: nowrap;
+  overflow: visible;
+  white-space: normal;
+
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+
+  &_label {
+    font-size: 1.4rem;
+    color: var(--font-accent-color);
+  }
+}
+
+.button_submit {
+  width: 50%;
+  height: 4rem;
+  padding: 0.5rem;
+  align-self: center;
+  background-color: var(--bg-button);
+
+  &:hover {
+    background-color: var(--bg-button-hover);
+  }
+
+  &:disabled {
+    cursor: initial;
+    background-color: var(--bg-button-disable);
+  }
+
+  &_text {
+    font-size: 1.8rem;
+    color: var(--font-accent-color);
+  }
+}
+
+.active {
+  background-color: var(--bg-button-disable);
+}

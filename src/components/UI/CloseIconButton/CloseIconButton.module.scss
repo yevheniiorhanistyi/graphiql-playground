@@ -1,0 +1,16 @@
+.close_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: var(--font-main-color);
+
+  &:hover {
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    fill: var(--font-main-color-hover);
+    transition: 0.3s width ease-in-out;
+    animation: jerking 0.8s ease;
+    animation-iteration-count: 1;
+  }
+}
