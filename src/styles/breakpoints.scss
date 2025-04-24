@@ -1,0 +1,14 @@
+//Breakpoints variables
+$extra-large-screen: 1200px; // For Mobile Devices – 320px — 480px
+$large-screen: 1024px; // iPads and Tablets – 481px — 768px
+$laptop-screen: 768px; // Laptops and small screen – 769px — 1024px
+$tablet-screen: 580px; // Large screens and Desktops – 1025px — 1200px
+$mobile-screen: 480px; // TV and Extra Large Screens – 1201px and more
+
+:export {
+  extraLargeScreen: $extra-large-screen;
+  largeScreen: $large-screen;
+  laptopScreen: $laptop-screen;
+  tabletScreen: $tablet-screen;
+  mobileScreen: $mobile-screen;
+}

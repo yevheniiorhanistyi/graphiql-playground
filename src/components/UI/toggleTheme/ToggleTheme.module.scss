@@ -1,0 +1,18 @@
+.toggleTheme {
+  margin: auto, 0;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0;
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--font-main-color);
+
+  svg {
+    display: block;
+    margin: auto;
+  }
+
+  &:hover {
+    color: var(--font-main-color-hover);
+  }
+}

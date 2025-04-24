@@ -1,0 +1,12 @@
+.logo {
+  fill: var(--font-main-color);
+  display: flex;
+  justify-content: center;
+  width: 10rem;
+  height: 4rem;
+  margin: 1rem 0;
+  &:hover {
+    animation: jerking 0.8s ease;
+    animation-iteration-count: 1;
+  }
+}

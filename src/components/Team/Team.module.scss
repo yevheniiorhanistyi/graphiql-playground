@@ -1,0 +1,73 @@
+@import '../../styles/breakpoints.scss';
+
+.section {
+  text-align: center;
+  position: relative;
+  margin-bottom: -2rem;
+}
+
+.team {
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+  position: relative;
+  z-index: 1;
+
+  &_title {
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: capitalize;
+    color: var(--font-main-color);
+    margin-bottom: 4.8rem;
+
+    @media (max-width: $laptop-screen) {
+      font-size: 3.6rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &_list {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+}
+
+.member {
+  &_item {
+    width: 100%;
+    max-width: 33.2rem;
+    padding: 2rem 1.5rem;
+    margin: 0 5px 2rem;
+    background-color: var(--bg-page);
+    box-shadow:
+      rgba(6, 10, 13, 0.1) 0px 4px 16px,
+      rgba(6, 10, 13, 0.2) 0px 1px 4px;
+
+    @media (max-width: $mobile-screen) {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  &_photo {
+    margin-bottom: 2rem;
+    border-radius: 50%;
+  }
+
+  &_role {
+    margin: 5px;
+    opacity: 0.7;
+  }
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url('/shape.svg') no-repeat center;
+  background-size: cover;
+  z-index: 0;
+}

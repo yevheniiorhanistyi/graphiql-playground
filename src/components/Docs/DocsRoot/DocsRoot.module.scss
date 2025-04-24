@@ -1,0 +1,32 @@
+.root_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sections_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section_title {
+  display: flex;
+  gap: 1rem;
+}
+
+.title {
+  font-weight: 500;
+
+  &_main {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
+
+.list_container {
+  overflow: hidden;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}

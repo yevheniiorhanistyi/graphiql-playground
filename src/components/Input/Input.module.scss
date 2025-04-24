@@ -1,0 +1,51 @@
+@import '../../styles/breakpoints.scss';
+
+.input_container {
+  height: 10.5rem;
+
+  @media screen and (max-width: $tablet-screen) {
+    height: 10rem;
+  }
+}
+
+.input_content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input_label {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.input_field {
+  height: 4rem;
+  width: 100%;
+  padding: 0.5rem;
+  color: var(--font-main-color);
+  border: 1px solid var(--border-input);
+  border-radius: 0.5rem;
+  background-color: var(--bg-input);
+  -webkit-text-fill-color: var(--font-main-color);
+
+  &:focus {
+    background-color: inherit;
+    border: 2px solid var(--border-input-focus);
+  }
+}
+
+.input_error {
+  text-align: center;
+  color: var(--error-color);
+  font-size: 1.4rem;
+
+  &:before {
+    content: '⚠ ';
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    font-size: 1.1rem;
+  }
+}
